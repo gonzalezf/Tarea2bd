@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="XEModelStoreContainer" CdmEntityContainer="XEEntities">
+    <EntitySetMapping Name="buzon_entrada">
+      <EntityTypeMapping TypeName="XEModel.buzon_entrada">
+        <MappingFragment StoreEntitySet="buzon_entrada">
+          <ScalarProperty Name="id_buzon" ColumnName="id_buzon" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="mensajes" ColumnName="mensajes" />
+          <ScalarProperty Name="mensajes_sin_leer" ColumnName="mensajes_sin_leer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categoria">
+      <EntityTypeMapping TypeName="XEModel.categoria">
+        <MappingFragment StoreEntitySet="categoria">
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="publico" ColumnName="publico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comentario">
+      <EntityTypeMapping TypeName="XEModel.comentario">
+        <MappingFragment StoreEntitySet="comentario">
+          <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
+          <ScalarProperty Name="id_tema" ColumnName="id_tema" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grupo_usuario">
+      <EntityTypeMapping TypeName="XEModel.grupo_usuario">
+        <MappingFragment StoreEntitySet="grupo_usuario">
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+          <ScalarProperty Name="nombre_grupo" ColumnName="nombre_grupo" />
+          <ScalarProperty Name="creacion_categoria" ColumnName="creacion_categoria" />
+          <ScalarProperty Name="publicar_comentario" ColumnName="publicar_comentario" />
+          <ScalarProperty Name="eliminar_categoria" ColumnName="eliminar_categoria" />
+          <ScalarProperty Name="eliminar_tema" ColumnName="eliminar_tema" />
+          <ScalarProperty Name="eliminar_mensaje" ColumnName="eliminar_mensaje" />
+          <ScalarProperty Name="editar_mensaje" ColumnName="editar_mensaje" />
+          <ScalarProperty Name="editar_usuario" ColumnName="editar_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mensaje_privado">
+      <EntityTypeMapping TypeName="XEModel.mensaje_privado">
+        <MappingFragment StoreEntitySet="mensaje_privado">
+          <ScalarProperty Name="id_mensaje" ColumnName="id_mensaje" />
+          <ScalarProperty Name="id_remitente" ColumnName="id_remitente" />
+          <ScalarProperty Name="id_buzon" ColumnName="id_buzon" />
+          <ScalarProperty Name="leido" ColumnName="leido" />
+          <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+          <ScalarProperty Name="fecha_de_envio" ColumnName="fecha_de_envio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prueba">
+      <EntityTypeMapping TypeName="XEModel.prueba">
+        <MappingFragment StoreEntitySet="prueba">
+          <ScalarProperty Name="id_prueba" ColumnName="id_prueba" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="contrasenna" ColumnName="contrasenna" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tema">
+      <EntityTypeMapping TypeName="XEModel.tema">
+        <MappingFragment StoreEntitySet="tema">
+          <ScalarProperty Name="id_tema" ColumnName="id_tema" />
+          <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+          <ScalarProperty Name="publico" ColumnName="publico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="XEModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="contrasenna" ColumnName="contrasenna" />
+          <ScalarProperty Name="cantidad_comentarios" ColumnName="cantidad_comentarios" />
+          <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

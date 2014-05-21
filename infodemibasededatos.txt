@@ -4,3 +4,11 @@ modo de autentificacion mixto (windows y sql server authentication).. usuario:fe
 
 base de datos 
 nombre: XE
+
+
+
+
+ejemplo de url
+<a href="..&clientes/index.aspx">
+
+servername FELIPE\SQLEXPRESS

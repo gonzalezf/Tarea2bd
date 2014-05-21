@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="XEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="buzon_entrada">
+    <Key>
+      <PropertyRef Name="id_buzon" />
+    </Key>
+    <Property Name="id_buzon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="mensajes" Type="Int32" />
+    <Property Name="mensajes_sin_leer" Type="Int32" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__buzon_ent__id_us__173876EA" FromRole="buzon_entrada" ToRole="usuario" />
+    <NavigationProperty Name="mensaje_privado" Relationship="Self.FK__mensaje_p__id_bu__1B0907CE" FromRole="buzon_entrada" ToRole="mensaje_privado" />
+  </EntityType>
+  <EntityType Name="categoria">
+    <Key>
+      <PropertyRef Name="id_categoria" />
+    </Key>
+    <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="publico" Type="Boolean" />
+    <NavigationProperty Name="tema" Relationship="Self.FK__tema__id_categor__1DE57479" FromRole="categoria" ToRole="tema" />
+  </EntityType>
+  <EntityType Name="comentario">
+    <Key>
+      <PropertyRef Name="id_comentario" />
+    </Key>
+    <Property Name="id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tema" Type="Int32" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tema" Relationship="Self.FK__comentari__id_te__21B6055D" FromRole="comentario" ToRole="tema" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__comentari__id_us__22AA2996" FromRole="comentario" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="grupo_usuario">
+    <Key>
+      <PropertyRef Name="id_grupo" />
+    </Key>
+    <Property Name="id_grupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_grupo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="creacion_categoria" Type="Boolean" />
+    <Property Name="publicar_comentario" Type="Boolean" />
+    <Property Name="eliminar_categoria" Type="Boolean" />
+    <Property Name="eliminar_tema" Type="Boolean" />
+    <Property Name="eliminar_mensaje" Type="Boolean" />
+    <Property Name="editar_mensaje" Type="Boolean" />
+    <Property Name="editar_usuario" Type="Boolean" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__id_grup__145C0A3F" FromRole="grupo_usuario" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="mensaje_privado">
+    <Key>
+      <PropertyRef Name="id_mensaje" />
+    </Key>
+    <Property Name="id_mensaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_remitente" Type="Int32" />
+    <Property Name="id_buzon" Type="Int32" />
+    <Property Name="leido" Type="Boolean" />
+    <Property Name="mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_de_envio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="buzon_entrada" Relationship="Self.FK__mensaje_p__id_bu__1B0907CE" FromRole="mensaje_privado" ToRole="buzon_entrada" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__mensaje_p__id_re__1A14E395" FromRole="mensaje_privado" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="prueba">
+    <Key>
+      <PropertyRef Name="id_prueba" />
+    </Key>
+    <Property Name="id_prueba" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="contrasenna" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tema">
+    <Key>
+      <PropertyRef Name="id_tema" />
+    </Key>
+    <Property Name="id_tema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_categoria" Type="Int32" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="publico" Type="Boolean" />
+    <NavigationProperty Name="categoria" Relationship="Self.FK__tema__id_categor__1DE57479" FromRole="tema" ToRole="categoria" />
+    <NavigationProperty Name="comentario" Relationship="Self.FK__comentari__id_te__21B6055D" FromRole="tema" ToRole="comentario" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__tema__id_usuario__1ED998B2" FromRole="tema" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_grupo" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="contrasenna" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cantidad_comentarios" Type="Int32" />
+    <Property Name="avatar_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_nacimiento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="sexo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_registro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="buzon_entrada" Relationship="Self.FK__buzon_ent__id_us__173876EA" FromRole="usuario" ToRole="buzon_entrada" />
+    <NavigationProperty Name="comentario" Relationship="Self.FK__comentari__id_us__22AA2996" FromRole="usuario" ToRole="comentario" />
+    <NavigationProperty Name="grupo_usuario" Relationship="Self.FK__usuario__id_grup__145C0A3F" FromRole="usuario" ToRole="grupo_usuario" />
+    <NavigationProperty Name="mensaje_privado" Relationship="Self.FK__mensaje_p__id_re__1A14E395" FromRole="usuario" ToRole="mensaje_privado" />
+    <NavigationProperty Name="tema" Relationship="Self.FK__tema__id_usuario__1ED998B2" FromRole="usuario" ToRole="tema" />
+  </EntityType>
+  <Association Name="FK__buzon_ent__id_us__173876EA">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="buzon_entrada" Type="Self.buzon_entrada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="buzon_entrada">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__mensaje_p__id_bu__1B0907CE">
+    <End Role="buzon_entrada" Type="Self.buzon_entrada" Multiplicity="0..1" />
+    <End Role="mensaje_privado" Type="Self.mensaje_privado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="buzon_entrada">
+        <PropertyRef Name="id_buzon" />
+      </Principal>
+      <Dependent Role="mensaje_privado">
+        <PropertyRef Name="id_buzon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tema__id_categor__1DE57479">
+    <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+    <End Role="tema" Type="Self.tema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoria">
+        <PropertyRef Name="id_categoria" />
+      </Principal>
+      <Dependent Role="tema">
+        <PropertyRef Name="id_categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comentari__id_te__21B6055D">
+    <End Role="tema" Type="Self.tema" Multiplicity="0..1" />
+    <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tema">
+        <PropertyRef Name="id_tema" />
+      </Principal>
+      <Dependent Role="comentario">
+        <PropertyRef Name="id_tema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comentari__id_us__22AA2996">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="comentario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario__id_grup__145C0A3F">
+    <End Role="grupo_usuario" Type="Self.grupo_usuario" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo_usuario">
+        <PropertyRef Name="id_grupo" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__mensaje_p__id_re__1A14E395">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="mensaje_privado" Type="Self.mensaje_privado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="mensaje_privado">
+        <PropertyRef Name="id_remitente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tema__id_usuario__1ED998B2">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="tema" Type="Self.tema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tema">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="XEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="buzon_entrada" EntityType="Self.buzon_entrada" />
+    <EntitySet Name="categoria" EntityType="Self.categoria" />
+    <EntitySet Name="comentario" EntityType="Self.comentario" />
+    <EntitySet Name="grupo_usuario" EntityType="Self.grupo_usuario" />
+    <EntitySet Name="mensaje_privado" EntityType="Self.mensaje_privado" />
+    <EntitySet Name="prueba" EntityType="Self.prueba" />
+    <EntitySet Name="tema" EntityType="Self.tema" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="FK__buzon_ent__id_us__173876EA" Association="Self.FK__buzon_ent__id_us__173876EA">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="buzon_entrada" EntitySet="buzon_entrada" />
+    </AssociationSet>
+    <AssociationSet Name="FK__mensaje_p__id_bu__1B0907CE" Association="Self.FK__mensaje_p__id_bu__1B0907CE">
+      <End Role="buzon_entrada" EntitySet="buzon_entrada" />
+      <End Role="mensaje_privado" EntitySet="mensaje_privado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tema__id_categor__1DE57479" Association="Self.FK__tema__id_categor__1DE57479">
+      <End Role="categoria" EntitySet="categoria" />
+      <End Role="tema" EntitySet="tema" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comentari__id_te__21B6055D" Association="Self.FK__comentari__id_te__21B6055D">
+      <End Role="tema" EntitySet="tema" />
+      <End Role="comentario" EntitySet="comentario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comentari__id_us__22AA2996" Association="Self.FK__comentari__id_us__22AA2996">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="comentario" EntitySet="comentario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario__id_grup__145C0A3F" Association="Self.FK__usuario__id_grup__145C0A3F">
+      <End Role="grupo_usuario" EntitySet="grupo_usuario" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__mensaje_p__id_re__1A14E395" Association="Self.FK__mensaje_p__id_re__1A14E395">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="mensaje_privado" EntitySet="mensaje_privado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tema__id_usuario__1ED998B2" Association="Self.FK__tema__id_usuario__1ED998B2">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="tema" EntitySet="tema" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

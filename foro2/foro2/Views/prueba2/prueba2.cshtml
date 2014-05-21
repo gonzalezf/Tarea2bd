@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "prueba2";
+}
+
+@model foro2.Models.Usuario
+<h2>Nuevo usuario</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="error">@ViewBag.Error</div>
+}
+<form method="POST">
+    <label for="login">login:</label>
+    <input type="text" name="login" value="@(Model!=null ? Model.login : string.Empty)" />
+    <br />
+    <label for="password">clave:</label>
+    <input type="text" name="password" />
+    <br />
+    <input type="submit" value="enviar" />
+</form>
