@@ -1,0 +1,6 @@
+Named instance : SQLEXPRESS
+Instance ID: SQLEXPRESS (esta en programfile/microsoftsqlserver/
+modo de autentificacion mixto (windows y sql server authentication).. usuario:felipegonzalez clave: pelife18
+
+base de datos 
+nombre: XE
