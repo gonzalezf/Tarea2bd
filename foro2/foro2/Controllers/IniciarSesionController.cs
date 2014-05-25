@@ -50,7 +50,7 @@ namespace foro2.Controllers
                 Session["LoggedIn"] = "Yes";
                 Session["UserId"] = valor.ToString();
                 Session["UserName"] = usuario.nombre;
-                return View(usuario); //USUARIO LOGUEADO, REDIRECCIONAR DONDE CORRESPONDA.
+                return Redirect("/Inicio/Index");
             }
 
         }

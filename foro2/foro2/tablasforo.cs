@@ -102,9 +102,9 @@ namespace foro2
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
             if(sqlreader.Read())
             {
-                list.Add(sqlreader.GetString(0));
-                list.Add(sqlreader.GetString(1));
-                list.Add(sqlreader.GetString(2));
+                list.Add(sqlreader.GetInt32(0).ToString());
+                list.Add(sqlreader.GetInt32(1).ToString());
+                list.Add(sqlreader.GetInt32(2).ToString());
             }
             sqlreader.Close();
             sqlCnn.Close();
@@ -121,7 +121,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "SELECT * FROM mensaje_privado WHERE inboxid = '"+inboxid+"'";
+            sql = "SELECT * FROM mensaje_privado WHERE id_buzon = '"+inboxid+"'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
