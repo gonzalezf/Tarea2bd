@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Responder";
+}
+
+<h2>Comentar</h2>
+
+
+
+<h2>   @ViewBag.Comentar</h2> <!--Aqui se indican los errores que existieron-->
+
+
+
+
+
+<form method="POST">
+   
+    TEMA MODELO: @ViewBag.TemaModelo;
+
+    <input type="text" name="id_tema_string" value="@ViewBag.temaseleccionado" />
+
+    <label for="comentario">Comentario </label>
+    
+
+    <textarea name="comentario" cols="100" rows="4"></textarea>
+    <br />
+    <br />
+    <br />
+ 
+        <input type="submit" value=" Enviar Comentario" />
+</form>

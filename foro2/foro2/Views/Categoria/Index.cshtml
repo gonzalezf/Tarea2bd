@@ -1,0 +1,32 @@
+﻿
+
+@{
+    ViewBag.Title = @ViewBag.TemaSeleccionado;
+}
+
+<h3> Tema: @ViewBag.TemaSeleccionado </h3>
+
+<a href="/CrearTema/Index/@ViewBag.TemaSeleccionado"> Crear Nuevo Tema </a>
+<div class="ListaTemas">
+
+    Nombre Tema | Autor | Descripcion  | Cantidad Comentarios | ¿Eliminar?
+   
+   
+        
+   
+    <ul>
+        @foreach (var tema in ViewBag.ListaTemas)
+        {
+
+            <li>
+               <a href="/Comentar/Index/@tema.nombre">@tema.nombre </a>
+                @tema.id_usuario
+                @tema.descripcion
+
+            </li>
+
+
+        }
+    </ul>
+
+</div>

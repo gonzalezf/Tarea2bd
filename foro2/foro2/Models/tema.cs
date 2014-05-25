@@ -16,7 +16,7 @@ namespace foro2.Models
     {
         public tema()
         {
-            this.comentario = new HashSet<comentario>();
+        //    this.comentario = new HashSet<comentario>();
         }
     
         public int id_tema { get; set; }
@@ -28,7 +28,7 @@ namespace foro2.Models
         public Nullable<bool> publico { get; set; }
     
         public virtual categoria categoria { get; set; }
-        public virtual ICollection<comentario> comentario { get; set; }
-        public virtual usuario usuario { get; set; }
+     //   public virtual ICollection<comentario> comentario { get; set; }
+   //     public virtual usuario usuario { get; set; }
     }
 }

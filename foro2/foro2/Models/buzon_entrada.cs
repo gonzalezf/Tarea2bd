@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+/*
 namespace foro2.Models
 {
     using System;
@@ -28,3 +28,4 @@ namespace foro2.Models
         public virtual ICollection<mensaje_privado> mensaje_privado { get; set; }
     }
 }
+*/

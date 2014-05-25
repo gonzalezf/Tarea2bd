@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+/*
 namespace foro2.Models
 {
     using System;
@@ -37,3 +37,4 @@ namespace foro2.Models
         public System.Data.Entity.DbSet<foro2.Models.LoginViewModel> LoginViewModels { get; set; }
     }
 }
+*/

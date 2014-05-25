@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<h2> @ViewBag.ErrorIniciarSesion</h2> <!--Aqui se indican los errores que existieron-->
+
+
+<form method="post">
+
+    <label for="nombre">Nickname: </label>
+    <input type="text" name="nombre" value="" /> <!--En value debe ir el VIEW DATA-->
+    <br />
+    <label for="contrasenna">Contraseña </label>
+    <input type="password" name="contrasenna" />
+    <br />
+    <input type="submit" value="Enviar" />
+
+
+</form>
+

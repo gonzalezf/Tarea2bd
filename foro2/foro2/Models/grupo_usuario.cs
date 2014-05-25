@@ -16,7 +16,7 @@ namespace foro2.Models
     {
         public grupo_usuario()
         {
-            this.usuario = new HashSet<usuario>();
+         //   this.usuario = new HashSet<usuario>();
         }
     
         public int id_grupo { get; set; }
@@ -29,6 +29,6 @@ namespace foro2.Models
         public Nullable<bool> editar_mensaje { get; set; }
         public Nullable<bool> editar_usuario { get; set; }
     
-        public virtual ICollection<usuario> usuario { get; set; }
+   //     public virtual ICollection<usuario> usuario { get; set; }
     }
 }

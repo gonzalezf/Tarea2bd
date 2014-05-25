@@ -1,0 +1,23 @@
+﻿@model foro2.Models.Usuario2
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Nuevo usuario</h2>
+
+
+<h2>Hola!! @ViewBag.Error4</h2>
+
+<form method="POST" action="/prueba4/Index">
+    <label for="contrasenna">login:</label>
+    <input type="text" name="name" value="" />
+    <br />
+    <label for="contrasenna">clave:</label>
+    <input type="text" name="contrasenna" />
+    <br />
+    <input type="submit" value="enviar" />
+</form>
+
+
+
