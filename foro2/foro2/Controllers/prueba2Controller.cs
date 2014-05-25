@@ -4,16 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using foro2.Models;
-
+/*
 
 namespace foro2.Controllers
 {
     public class prueba2Controller : Controller
     {
-
-        [HttpGet]
-        public ActionResult Nuevo(Usuario usuario)
+        /*
+        [HttpPost]
+        public ActionResult Nuevo(User usuario)
         {
+            ViewBag.Error2 = "Alo? ";
             if (string.IsNullOrEmpty(usuario.login) ||
             string.IsNullOrEmpty(usuario.password))
             {
@@ -108,5 +109,6 @@ namespace foro2.Controllers
                 return View();
             }
         }
-    }
-}
+    }*/
+/*}
+*/

@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Registrarse";
+}
+
+<h2>Registrate</h2>
+
+<h2> @ViewBag.ErrorRegistro</h2> <!--Aqui se indican los errores que existieron-->
+
+<form method="POST">
+
+    <label for="nombre">Nombre: </label>
+    <input type="text" name="nombre" value="" /> <!--En value debe ir el VIEW DATA-->
+    <br />
+    <label for="contrasenna">Contraseña </label>
+    <input type="password" name="contrasenna" />
+    <br />
+    <label for="repetircontrasenna">Repetir Contraseña </label>
+    <input type="password" name="repetircontrasenna" />  
+    <br />
+    <label for="fechadenacimiento">Fecha de Nacimiento </label> <!-- Arreglar esto, debe ser un calendario o algo-->
+    <input type="text" name="fechadenacimiento" />
+    <br />
+    <label for="sexo">Sexo </label>
+    <input type="text" name="sexo" />
+    <br />
+    <label for="avatarurl">Avatar Url </label>
+    <input type="text" name="avatarurl" />
+    <br />
+    <input type="submit" value="Enviar" />
+</form>
+

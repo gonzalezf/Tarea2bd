@@ -1,0 +1,17 @@
+@model foro2.Models.Persona
+
+@{
+    ViewBag.Title = "VistaPrueba3";
+}
+
+<h2>@ViewBag.Error</h2> <!-- escribira lo q aparezca en el controlador-->
+<h2>VistaPrueba3</h2>
+@using (Html.BeginForm())
+{
+    @Html.Label(Model.Saludo)
+    <br />
+    @Html.Label(Model.Nombre)
+    
+    @Html.TextBoxFor(persona => persona.Nombre)  //espacio asignado para ingresar nombre
+    <input type="submit" name="submit" />
+}

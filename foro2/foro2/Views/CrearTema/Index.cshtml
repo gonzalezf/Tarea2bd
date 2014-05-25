@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Nuevo Tema";
+}
+
+<h2>Crear Nuevo Tema</h2>
+
+nombre, descripcion, publico, mensaje...
+
+
+<h2> CREAR TEMA:  @ViewBag.ErrorCrearTema</h2> <!--Aqui se indican los errores que existieron-->
+<h2>Mensaje:  @ViewBag.CategoriaMensaje </h2>
+
+<h2>Categoria Seleccionada : @ViewBag.seleccion</h2>
+<form method="POST">
+
+    <label for="nombre">Nombre Tema : </label>
+    <input type="text" name="nombre" value="" /> <!--En value debe ir el VIEW DATA-->
+    <br />
+    <br />
+    <br />
+    <label for="descripcion"> Descripcion: </label>
+    <textarea name="descripcion" cols="60" rows="2">Escribe una breve descripcion</textarea>
+    <br />
+    <br />
+    <br />
+    <label for="temapublico">Publico? </label>
+    <input type="checkbox" name="temapublico" value="1"> Tema Publico
+     <br />
+    <br />
+    <br />
+    <label for="mensaje"> Mensaje: </label>
+    <textarea name="mensaje" cols="60" rows="6">Escribe aqui tu mensaje !</textarea>
+    <br />
+    <br />
+    <br />
+
+
+ 
+    <input type="submit" value=" Crear Tema" />
+</form>
