@@ -1,5 +1,6 @@
 SERVER FELIPE\SQLEXPRESS
 NOMBRE BASE DE DATOS: XE
+EL PROYECTO SE LLAMA FORO2
 
 // Insertar en grupo usuario, tiene opciones de tipo bit por lo tanto
 insert into grupo_usuario VALUES ('ADMINISTRADOR','TRUE','TRUE','TRUE','TRUE','TRUE','TRUE','TRUE')
