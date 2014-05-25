@@ -1,32 +1,56 @@
 ﻿
 
-@{
-    ViewBag.Title = @ViewBag.TemaSeleccionado;
-}
+    @{
+        ViewBag.Title = @ViewBag.TemaSeleccionado;
+    }
 
-<h3> Tema: @ViewBag.TemaSeleccionado </h3>
 
-<a href="/CrearTema/Index/@ViewBag.TemaSeleccionado"> Crear Nuevo Tema </a>
-<div class="ListaTemas">
-
-    Nombre Tema | Autor | Descripcion  | Cantidad Comentarios | ¿Eliminar?
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    
-   
-        
-   
-    <ul>
-        @foreach (var tema in ViewBag.ListaTemas)
-        {
 
-            <li>
-               <a href="/Comentar/Index/@tema.nombre">@tema.nombre </a>
-                @tema.id_usuario
-                @tema.descripcion
-
-            </li>
+ <script type="text/javascript">
+        $(function () {
+            $('.confirmareliminacion').click(function (e) {
+                e.preventDefault();
+                if (window.confirm("Esta seguro que desea eliminar el tema ?")) {
+                    location.href = this.href;
+                }
+            });
+        });
 
 
-        }
-    </ul>
+    </script>
 
-</div>
+
+
+
+    <h3> Tema: @ViewBag.TemaSeleccionado </h3>
+
+    <a href="/CrearTema/Index/@ViewBag.TemaSeleccionado"> Crear Nuevo Tema </a>
+    <div class="ListaTemas">
+
+        Nombre Tema | Autor | Descripcion  | Cantidad Comentarios | ¿Eliminar?
+
+
+
+        <ul>
+            @foreach (var tema in ViewBag.ListaTemas)
+            {
+
+                <li>
+<!--                      <a href="/Comentar/Index/@tema.nombre">@tema.nombre </a>-->
+                    <a href="/MostrarComentarios/Index/@tema.nombre">@tema.nombre </a>
+                    @tema.id_usuario
+                    @tema.descripcion
+                    <a class="confirmareliminacion " href="/EliminarTema/Index/@tema.nombre/@ViewBag.TemaSeleccionado"> Eliminar </a>
+
+                </li>
+
+
+            }
+        </ul>
+
+    </div>
+
+
+

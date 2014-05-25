@@ -30,7 +30,7 @@ namespace foro2.Controllers
             string fecha_registro = DateTime.Now.ToString("dd/MM/yyyy");
             if (String.Compare(usuario.contrasenna, usuario.repetircontrasenna) == 0)
             {
-                ManipularDatos.EjecutarSql("INSERT INTO usuario VALUES(" + 3 + ",'" + usuario.nombre + "','" + usuario.contrasenna + "','" + cantidadcomentarios + "','" + usuario.avatarurl + "','" + usuario.fechadenacimiento + "','" + usuario.sexo + "','" + fecha_registro + "')");
+                ManipularDatos.EjecutarSql("INSERT INTO usuario VALUES(" + 1 + ",'" + usuario.nombre + "','" + usuario.contrasenna + "','" + cantidadcomentarios + "','" + usuario.avatarurl + "','" + usuario.fechadenacimiento + "','" + usuario.sexo + "','" + fecha_registro + "')");
 
                 ManipularDatos.Desconectar();
                 //return RedirectToAction("/Inicio/Index");

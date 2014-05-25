@@ -1,0 +1,64 @@
+﻿
+@{
+    @ViewBag.TemadelComentario 
+}
+
+<h2>            @ViewBag.TemadelComentario </h2>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareditarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea editar el comentario ?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareliminarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea eliminar el comentario?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
+
+<div class="MostrarComentarios">
+    <!--OJO! Hacer que solo se vean las publicas-->
+    Id_usuario (debe ir su foto) | Mensaje  |Eliminar  (solo valido para algunos)
+    <ul>
+        @foreach (var comentario in ViewBag.ListaComentarios)
+        {
+
+            <li>
+                <a href=""> @comentario.id_usuario </a>
+                @comentario.mensaje
+
+                <a class="confirmareliminarcomentario" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
+                <a class="confirmareditarcomentario" href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
+
+            </li>
+
+
+        }
+
+        <li> <a href="/Comentar/Index/@ViewBag.TemadelComentario">Responder Tema </a></li>
+    </ul>
+
+
+</div>

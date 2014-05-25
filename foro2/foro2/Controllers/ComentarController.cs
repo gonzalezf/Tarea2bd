@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using foro2.Models;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading;
+
 namespace foro2.Controllers
 {
     public class ComentarController : Controller
@@ -17,8 +20,8 @@ namespace foro2.Controllers
 
             
 
-            ModeloComentario coment = new ModeloComentario();
-            ViewBag.temaseleccionado= id;
+            var coment = new ModeloComentario();
+            ViewBag.temaenseleccion= id;
             return View(coment);
         }
 
@@ -35,14 +38,16 @@ namespace foro2.Controllers
             string connectionString = null;
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            ViewBag.TemaModelo = coment.comentario;
+            ViewBag.TemaModelo = coment.id_tema_string;
+            ViewBag.Comentario = coment.comentario;
+
      //       sql0 = "use XE select id_tema from tema where nombre ='" + comentario.id_tema_string+ "'";
-            sql0 = "use XE select id_tema from tema where nombre ='iirfji'";
+            sql0 = "use XE select id_tema from tema where nombre ='"+coment.id_tema_string+"'";
             sqlCnn0 = new SqlConnection(connectionString);
             sqlCnn0.Open();
             sqlCmd0 = new SqlCommand(sql0, sqlCnn0);
             var id_tema = sqlCmd0.ExecuteScalar();
-            string string_id_tema = "1";
+            string string_id_tema = "1"; // por defecto
 
             if (id_tema != null) //esto siempre debiese cumplirse a menos de un error extraño
             {

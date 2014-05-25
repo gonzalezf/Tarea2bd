@@ -4,6 +4,7 @@ EL PROYECTO SE LLAMA FORO2
 
 // Insertar en grupo usuario, tiene opciones de tipo bit por lo tanto
 insert into grupo_usuario VALUES ('ADMINISTRADOR','TRUE','TRUE','TRUE','TRUE','TRUE','TRUE','TRUE')
+INSERT INTO usuario VALUES(1,'gonzalez_f','pelife18',0,'url','18/08/1993','m','hoy')
 // en mi caso, el administrador quedo con id_grupo = 3. haz que sea asi insertando cosas q no sirvan ante.s..
 
 // el modelo de usuario quedo metido dentro de Model1 (sorry).
