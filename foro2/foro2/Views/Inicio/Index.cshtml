@@ -8,7 +8,17 @@
     <a href="/Registro/Index">Registrarse</a>
     <a href="/IniciarSesion/Index">Iniciar Sesion </a>
 
-    <a href="/CrearTema/Index ">Crear Tema (este link no debe ir aqui)</a>
+    @{
+        var print = "";
+        if(String.Compare((String)Session["LoggedIn"], "Yes") == 0)
+        {
+            print = "<a href=\"/CrearTema/Index \">Crear Tema (este link no debe ir aqui)</a>";
+        }
+        
+    }
+    @Html.Raw(print)
+    
+    
 
 
 </div>

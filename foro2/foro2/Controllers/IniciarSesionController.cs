@@ -13,6 +13,10 @@ namespace foro2.Controllers
         // GET: /IniciarSesion/
         public ActionResult Index()
         {
+            if (String.Compare((String)Session["LoggedIn"], "Yes") == 0)
+            {
+                return Redirect("/");
+            }
             Usuario usuario = new Usuario();
             return View(usuario);
 
@@ -27,21 +31,25 @@ namespace foro2.Controllers
             tablasforo ManipularDatos = new tablasforo();
             ManipularDatos.Conectar();
 
-            int valor = ManipularDatos.EjecutarSql("SELECT id_usuario from usuario WHERE nombre='" + usuario.nombre + "' and contrasenna ='" + usuario.contrasenna + "'");
+            int valor = ManipularDatos.LogIn(usuario.nombre, usuario.contrasenna);
             //si valor recibe un valor mayor a 1, significa que existe un usuario con ese nombre y esa contrasenna. ejecutarsql retorna el numero de filas afectadas por la query.
             
             
             
-            if (valor == 0)
+            if (valor == -1)
             {
                 ViewBag.ErrorIniciarSesion = "Nickname o contrasenna incorrecta";
                 ManipularDatos.Desconectar();
+                Session["LoggedIn"] = "No";
                 return View(usuario);
             }
             else
             {
                 ViewBag.ErrorIniciarSesion = "Ha iniciado sesion";
                 ManipularDatos.Desconectar();
+                Session["LoggedIn"] = "Yes";
+                Session["UserId"] = valor.ToString();
+                Session["UserName"] = usuario.nombre;
                 return View(usuario); //USUARIO LOGUEADO, REDIRECCIONAR DONDE CORRESPONDA.
             }
 

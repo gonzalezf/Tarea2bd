@@ -219,3 +219,10 @@ C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\es\Microsoft.Owin.Secur
 C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\obj\Debug\foro2.csprojResolveAssemblyReference.cache
 C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\obj\Debug\foro2.dll
 C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\obj\Debug\foro2.pdb
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\foro2.dll.config
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\System.Net.Http.Formatting.dll
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\System.Web.Http.dll
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\System.Web.Http.WebHost.dll
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\System.Net.Http.Formatting.xml
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\System.Web.Http.xml
+C:\Users\Felipe\Documents\repos\Tarea2bd\foro2\foro2\bin\System.Web.Http.WebHost.xml

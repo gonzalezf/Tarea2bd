@@ -14,6 +14,10 @@ namespace foro2.Controllers
         // GET: /CrearTema/
         public ActionResult Index(string id)
         {
+            if (String.Compare((String)Session["LoggedIn"], "Yes") != 0)
+            {
+                return Redirect("/");
+            }
             ModeloTema tema = new ModeloTema();
             ViewBag.seleccion = id;
    
