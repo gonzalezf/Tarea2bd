@@ -28,3 +28,6 @@ INSERT INTO tema VALUES(1,1,'pokemon 5', 'descripcion pokemon5','jsiferijiefrw',
 INSERT INTO tema VALUES(1,1,'pokemon 6', 'descripcion pokemon6','jsiewjiwefirirejiswjsw','True');
 
 (ojo, mi usuario es id_usuario = 1, y la categoria pokemon tambien tiene id_categoria = 1
+
+//OJO! EN CREAR TEMA, el id_categoria se toma como un string y de todas formas funciona. Hasta el momento no hay
+problemas.

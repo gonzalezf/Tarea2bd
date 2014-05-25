@@ -162,12 +162,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\ComentarController.cs" />
     <Compile Include="Controllers\CrearTemaController.cs" />
     <Compile Include="Controllers\IniciarSesionController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\prueba3Controller.cs" />
     <Compile Include="Controllers\prueba4Controller.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Models\ModeloComentario.cs" />
     <Compile Include="Models\ModeloTema.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Usuario2.cs" />
@@ -310,6 +312,7 @@
     <Content Include="Views\IniciarSesion\Index.cshtml" />
     <Content Include="Views\CrearTema\Index.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Comentar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\mModels\" />
