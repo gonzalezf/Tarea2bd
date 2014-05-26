@@ -15,20 +15,26 @@ namespace foro2.Controllers
         // GET: /EnviarMensaje/
         public ActionResult Index()
         {
-            EnviarMensaje mensaje = new EnviarMensaje();
-            return View(mensaje);
+            var m = new EnviarMensaje();
+            return View(m);
         }
 
         [HttpPost] //este metodo recibe informacion, por eso va el httppost
-        public ActionResult Index(EnviarMensaje mensaje)
+        public ActionResult Index(EnviarMensaje m)
         {
+            ViewBag.holi = "holaaa";
+            ViewBag.probandopara = m.para;
+            ViewBag.probandoasunto = m.asunto;
+            ViewBag.probandomensaje = m.mensaje;
+
             tablasforo tf = new tablasforo();
-            int id_usuario = tf.ObtenerIdUsuario(mensaje.para);
+            
+            int id_usuario = tf.ObtenerIdUsuario(m.para);
             if(id_usuario == -1)
             {
                 //No existe el usuario espeficiado, morir!
-                ViewBag.Error = "No existe tal usuario ("+mensaje.para+")!";
-                return View(mensaje);
+                ViewBag.Error = "No existe tal usuario ("+m.para+")!";
+                return View(m);
             }
 
             List<String> inbox_info = tf.RetornarInboxInfo(id_usuario.ToString());
@@ -37,19 +43,19 @@ namespace foro2.Controllers
             {
                 //Morir, no existe tal buzon!
                  ViewBag.Error = "No encontre el buzon de ese usuario";
-                 return View(mensaje);
+                 return View(m);
             }
             else if(int.Parse(inbox_info[0]) == -1)
             {
                  ViewBag.Error = "No encontre el buzon de ese usuario";
                 //Morir, no existe tal buzon!
-                 return View(mensaje);
+                 return View(m);
             }
             int id_buzon = int.Parse(inbox_info[0]);
 
             string fecha_envio = DateTime.Now.ToString("dd/MM/yyyy");
             tf.Conectar();
-            if(tf.EjecutarSql("INSERT INTO mensaje_privado VALUES('"+int.Parse((String) Session["UserId"])+"', '"+id_buzon.ToString()+"', 'False', '"+mensaje.mensaje+"', '"+fecha_envio+"')") <= 0)
+            if(tf.EjecutarSql("INSERT INTO mensaje_privado VALUES('"+int.Parse((String) Session["UserId"])+"', '"+id_buzon.ToString()+"', 'False', '"+m.mensaje+"', '"+fecha_envio+"')") <= 0)
             {
                 ViewBag.Error = "Error al ejecutar query!";
             }
@@ -58,7 +64,7 @@ namespace foro2.Controllers
                 ViewBag.Error = "";
             }
             tf.Desconectar();
-            return View(mensaje);
+            return View(m);
         }
 	}
 }
