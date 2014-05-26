@@ -15,8 +15,8 @@ namespace foro2
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}/{id2}",
-                defaults: new { controller = "Inicio", action = "Index", id = UrlParameter.Optional,id2= UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{id2}/{id3}",
+                defaults: new { controller = "Inicio", action = "Index", id = UrlParameter.Optional, id2 = UrlParameter.Optional, id3 = UrlParameter.Optional }
             );
         }
     }

@@ -14,6 +14,8 @@ namespace foro2.Models
         public int id_usuario {get;set;}
         public string comentario { get; set; }
         public string id_tema_string {get;set;}
+        public string id_comentario_string { get; set; }
+        public string comentarioeditado { get; set; }
 
         public ModeloComentario()
         {
