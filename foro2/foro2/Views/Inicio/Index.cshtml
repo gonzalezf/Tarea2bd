@@ -8,13 +8,34 @@
     <a href="/Registro/Index">Registrarse</a>
     <a href="/IniciarSesion/Index">Iniciar Sesion </a>
 
-    <a href="/CrearTema/Index ">Crear Tema (este link no debe ir aqui)</a>
+
 
 
 </div>
 
 <!-- Si no ha iniciado sesion se muestran las categorias publicas solamentes, en caso contrario se realiza la misma tabla pero llamando
     al ViewBag.ListaCategoriasPublicasYPrivadas. HACER!!-->
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareliminarcategoria').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea eliminar la categoria ?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
+
 <div class="ListadoCategoriasPublicas"> <!--OJO! Hacer que solo se vean las publicas-->
 
 
@@ -28,7 +49,7 @@ Nombre Categoria | Descripcion | Cantidad de temas | Total de mensajes | Ultimo 
         <li>
         <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>  
             @categoria.descripcion
-           
+        <a class="confirmareliminarcategoria" href ="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a>        
         </li>
         
         

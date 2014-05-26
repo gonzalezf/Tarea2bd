@@ -107,7 +107,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -164,8 +163,12 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ComentarController.cs" />
     <Compile Include="Controllers\CrearTemaController.cs" />
+    <Compile Include="Controllers\EliminarCategoriaController.cs" />
+    <Compile Include="Controllers\EliminarComentarioController.cs" />
+    <Compile Include="Controllers\EliminarTemaController.cs" />
     <Compile Include="Controllers\IniciarSesionController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\MostrarComentariosController.cs" />
     <Compile Include="Controllers\prueba3Controller.cs" />
     <Compile Include="Controllers\prueba4Controller.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
@@ -237,7 +240,6 @@
     <Content Include="App_Data\Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\WebMatrix.Data.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -313,8 +315,12 @@
     <Content Include="Views\CrearTema\Index.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
     <Content Include="Views\Comentar\Index.cshtml" />
+    <Content Include="Views\MostrarComentarios\Index.cshtml" />
+    <Content Include="Views\EliminarComentario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\EliminarCategoria\" />
+    <Folder Include="Views\EliminarTema\" />
     <Folder Include="Views\mModels\" />
     <Folder Include="Views\prueba\" />
   </ItemGroup>

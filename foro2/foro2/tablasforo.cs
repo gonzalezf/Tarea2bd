@@ -28,6 +28,12 @@ namespace foro2
             public string descripcion;
        
         }
+
+        public class ColumnaComentarios
+        {
+            public string id_usuario; //ojo! parece q debe ser int!
+            public string mensaje; 
+        }
         /*
         public void RetornarCategorias()
         {
@@ -102,6 +108,7 @@ namespace foro2
 
         }
 
+
         public SqlDataReader RetornarTemas(string nombrecategoria)
         {
 
@@ -142,6 +149,50 @@ namespace foro2
 
 
         }
+
+
+        public SqlDataReader RetornarComentarios(string nombretema)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+            SqlConnection sqlCnn0;
+
+            SqlCommand sqlCmd;
+            SqlCommand sqlCmd0;
+            string sql0 = null;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql0 = "select id_tema from tema where nombre ='" + nombretema + "'";
+            sqlCnn0 = new SqlConnection(connectionString);
+            sqlCnn0.Open();
+            sqlCmd0 = new SqlCommand(sql0, sqlCnn0);
+            var id_tema = sqlCmd0.ExecuteScalar();
+            string string_id_tema = "";
+            if (id_tema != null) //esto siempre debiese cumplirse a menos de un error extraño
+            {
+                string_id_tema = id_tema.ToString();
+            } //ya obtuvimos la id tema... ahora obtener lo demas
+
+           
+
+            sql = "select  id_usuario, mensaje, id_comentario from comentario where id_tema = '" + string_id_tema + "'"; 
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+
+
+            return sqlreader;
+
+
+        }
+
+
         public int EjecutarSql(String Query) // funcion para ejecutar todas nuestras querys...
         {
             SqlCommand MiComando = new SqlCommand(Query,this.MiConexion); //recibe cadena de texto
