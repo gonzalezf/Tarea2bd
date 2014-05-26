@@ -15,7 +15,7 @@
         {
                 if(int.Parse( (String) Session["GroupId"]) == 1 || int.Parse(@usuario.id_usuario) == int.Parse( (String) Session["UserId"]))
                 {
-                    <a href="/EditarPerfil/Index/@usuario.id_usuario/@usuario.avatar_url/@usuario.fecha_nacimiento/@usuario.id_grupo" > Editar Perfil</a>
+                    <a href="/EditarPerfil/Index/@usuario.id_usuario/@usuario.avatar_url/@usuario.fecha_nacimiento" > Editar Perfil</a>
                 }
                         <li>
                      Grupo Usuario:  @usuario.id_grupo
