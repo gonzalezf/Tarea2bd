@@ -31,11 +31,11 @@ namespace foro2.Controllers
             tablasforo ManipularDatos = new tablasforo();
             ManipularDatos.Conectar();
 
-            int valor = ManipularDatos.LogIn(usuario.nombre, usuario.contrasenna);
+            List<String> l = ManipularDatos.LogIn(usuario.nombre, usuario.contrasenna);
             //si valor recibe un valor mayor a 1, significa que existe un usuario con ese nombre y esa contrasenna. ejecutarsql retorna el numero de filas afectadas por la query.
             
             
-            
+            int valor = int.Parse(l[0]);
             if (valor == -1)
             {
                 ViewBag.ErrorIniciarSesion = "Nickname o contrasenna incorrecta";
@@ -50,6 +50,7 @@ namespace foro2.Controllers
                 Session["LoggedIn"] = "Yes";
                 Session["UserId"] = valor.ToString();
                 Session["UserName"] = usuario.nombre;
+                Session["ImageURL"] = l[1];
                 return Redirect("/Inicio/Index");
             }
 
