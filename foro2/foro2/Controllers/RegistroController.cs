@@ -43,16 +43,6 @@ namespace foro2.Controllers
                 ViewBag.ErrorRegistro = "Las contrasennas no coinciden";
                 return View(usuario);
             }
-
-
-
-
-
-          
-      
-        
- 
-       
         }
 	}
 }

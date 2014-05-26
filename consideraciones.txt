@@ -1,0 +1,8 @@
+//General
+-Verificar errores en las formas (tales como enteros invalidos, etc)
+
+//Mensajes privados
+-Un usuario no puede enviarse un mensaje a si mismo
+-Deberia existir un limite de caracteres por mensaje
+-El usuario espefica un nombre el cual debe ser chequeado de que exista
+-El asunto no esta en la base de datos!!

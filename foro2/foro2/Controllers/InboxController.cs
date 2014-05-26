@@ -30,6 +30,7 @@ namespace foro2.Controllers
             List<ModeloPM> ret2 = tf.RetornarMensajesPrivados((String)Session["UserId"]);
             ModeloPM[] mensajes = ret2.ToArray();
             ViewBag.Mensajes = mensajes;
+            ViewBag.Error = "";
             return View();
         }
 	}
