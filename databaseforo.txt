@@ -1,7 +1,3 @@
-
-
-
-
 CREATE TABLE categoria
 (id_categoria integer IDENTITY(1,1) PRIMARY KEY NOT NULL,
 nombre varchar(20),
@@ -22,8 +18,7 @@ editar_usuario bit);
 CREATE TABLE usuario
 (id_usuario integer IDENTITY(1,1) PRIMARY KEY NOT NULL,
 id_grupo integer REFERENCES grupo_usuario(id_grupo)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
 nombre varchar(20),
 contrasenna varchar(20),
 cantidad_comentarios integer,
@@ -35,19 +30,16 @@ fecha_registro varchar(20));
 CREATE TABLE buzon_entrada
 (id_buzon integer IDENTITY(1,1) PRIMARY KEY NOT NULL,
 id_usuario integer REFERENCES usuario(id_usuario)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
 mensajes int,
 mensajes_sin_leer int);
 
 CREATE TABLE mensaje_privado
 (id_mensaje integer IDENTITY(1,1) PRIMARY KEY NOT NULL,
 id_remitente integer REFERENCES usuario(id_usuario)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
 id_buzon integer REFERENCES buzon_entrada(id_buzon)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
 leido bit,
 mensaje text,
 fecha_de_envio varchar(20));
@@ -55,11 +47,9 @@ fecha_de_envio varchar(20));
 CREATE TABLE tema
 (id_tema integer IDENTITY(1,1) PRIMARY KEY NOT NULL,
 id_categoria integer REFERENCES categoria(id_categoria)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
 id_usuario integer REFERENCES usuario(id_usuario)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
 nombre varchar(20),
 descripcion text,
 mensaje text,
@@ -68,14 +58,11 @@ publico bit);
 CREATE TABLE comentario
 (id_comentario integer IDENTITY(1,1) PRIMARY KEY NOT NULL,
 id_tema integer REFERENCES tema(id_tema)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-id_usuario integer REFERENCES usuario(id_usuario)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
+	ON DELETE CASCADE,
+id_usuario integer REFERENCES usuario(id_usuario),
 mensaje text);
 
 
 
-
+INSERT INTO grupo_usuario (nombre_grupo, creacion_categoria, publicar_comentario, eliminar_categoria, eliminar_tema, eliminar_mensaje, editar_mensaje, editar_usuario) VALUES('Admins', 'True', 'True', 'True', 'True', 'True', 'True', 'True');
 

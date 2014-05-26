@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using foro2.Models;
 
 namespace foro2
 {
@@ -83,6 +84,57 @@ namespace foro2
 
         }
 
+        public List<String> RetornarInboxInfo(String userid)
+        {
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+            SqlCommand sqlCmd;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "SELECT id_buzon, mensajes, mensajes_sin_leer FROM buzon_entrada WHERE id_usuario ='" + userid + "'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+            List<String> list = new List<String>();
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            if(sqlreader.Read())
+            {
+                list.Add(sqlreader.GetString(0));
+                list.Add(sqlreader.GetString(1));
+                list.Add(sqlreader.GetString(2));
+            }
+            sqlreader.Close();
+            sqlCnn.Close();
+            return list;
+        }
+
+        public List<ModeloPM> RetornarMensajesPrivados(String inboxid)
+        {
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+            SqlCommand sqlCmd;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "SELECT * FROM mensaje_privado WHERE inboxid = '"+inboxid+"'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+            var list = new List<ModeloPM>();
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            while (sqlreader.Read())
+            {
+                list.Add(new ModeloPM(sqlreader.GetInt32(0), sqlreader.GetInt32(1), sqlreader.GetInt32(2), sqlreader.GetBoolean(3), sqlreader.GetString(4), sqlreader.GetString(5)));
+            }
+
+            return list;
+        }
+
         public SqlDataReader RetornarTodasLasCategorias()
         {
 
@@ -149,6 +201,28 @@ namespace foro2
 
 
         }
+        public int LogIn(String usuario, String password)
+        {
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+            SqlCommand sqlCmd;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "SELECT id_usuario FROM usuario WHERE nombre ='"+ usuario +"' AND contrasenna = '"+ password + "'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            if(sqlreader.Read())
+            {
+                return sqlreader.GetInt32(0);
+            }
+            return -1;
+        }
+
 
 
         public SqlDataReader RetornarComentarios(string nombretema)
