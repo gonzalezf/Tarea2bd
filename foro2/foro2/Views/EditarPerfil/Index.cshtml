@@ -13,12 +13,12 @@
     <br />
     <br />
     <br />
-    <label for="editarcontrasenna">Nueva Contrasenna </label>
+    <label for="editarcontrasenna">Nueva Contraseña </label>
     <input type="password" name="editarcontrasenna" value="" />
     <br />
     <br />
     <br />
-    <label for="editarrepetircontrasenna">Repetir  Contrasenna </label>
+    <label for="editarrepetircontrasenna">Repetir  Contraseña </label>
     <input type="password" name="editarrepetircontrasenna" value="" />
     <br />
     <br />
@@ -35,5 +35,10 @@
     <br />
     <br />
 
+    <label for="group_id">Grupo</label>
+    @if(int.Parse( (String)Session["GroupId"] ) == 1)
+    {
+        <input type="text" name="group_id" value="@ViewBag.group_id" />
+    }
     <input type="submit" value=" Editar Perfil" />
 </form>

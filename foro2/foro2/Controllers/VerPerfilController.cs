@@ -48,12 +48,6 @@ namespace foro2.Controllers
 
             registros = list.ToArray();
             ViewBag.InfoUsuario = registros; // Este viewbag toma un arreglo el cual es imprimido 
-
-
-
-
-
-
             return View();
         }
 	}

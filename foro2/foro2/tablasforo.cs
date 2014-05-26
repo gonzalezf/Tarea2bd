@@ -293,7 +293,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "SELECT id_usuario, avatar_url FROM usuario WHERE nombre ='" + usuario + "' AND contrasenna = '" + password + "'";
+            sql = "SELECT id_usuario, avatar_url, id_grupo FROM usuario WHERE nombre ='" + usuario + "' AND contrasenna = '" + password + "'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -303,6 +303,7 @@ namespace foro2
             {
                 l.Add(sqlreader.GetInt32(0).ToString());
                 l.Add(sqlreader.GetString(1));
+                l.Add(sqlreader.GetInt32(2).ToString());
             }
             return l;
         }
