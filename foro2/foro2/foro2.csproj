@@ -163,6 +163,7 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ComentarController.cs" />
     <Compile Include="Controllers\CrearTemaController.cs" />
+    <Compile Include="Controllers\EditarComentarioController.cs" />
     <Compile Include="Controllers\EliminarCategoriaController.cs" />
     <Compile Include="Controllers\EliminarComentarioController.cs" />
     <Compile Include="Controllers\EliminarTemaController.cs" />
@@ -317,6 +318,7 @@
     <Content Include="Views\Comentar\Index.cshtml" />
     <Content Include="Views\MostrarComentarios\Index.cshtml" />
     <Content Include="Views\EliminarComentario\Index.cshtml" />
+    <Content Include="Views\EditarComentario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EliminarCategoria\" />
