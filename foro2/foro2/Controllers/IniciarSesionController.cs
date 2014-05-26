@@ -51,6 +51,7 @@ namespace foro2.Controllers
                 Session["UserId"] = valor.ToString();
                 Session["UserName"] = usuario.nombre;
                 Session["ImageURL"] = l[1];
+                Session["GroupId"] = l[2];
                 return Redirect("/Inicio/Index");
             }
 

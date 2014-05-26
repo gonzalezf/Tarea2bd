@@ -14,11 +14,12 @@ namespace foro2.Models
         public string editarfechanacimiento { get; set; }
          public string editaravatarurl { get; set; }
          public string id_usuario_string { get; set; }
+         public string id_grupo { get; set; }
 
 
         public ModeloEditarUsuario() //constructor...
         {
-   
+            id_grupo = "-1";
         }
 
     }
