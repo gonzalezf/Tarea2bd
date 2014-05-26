@@ -163,29 +163,23 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ComentarController.cs" />
     <Compile Include="Controllers\CrearTemaController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\EnviarMensajeController.cs" />
     <Compile Include="Controllers\InboxController.cs" />
-=======
     <Compile Include="Controllers\EditarComentarioController.cs" />
     <Compile Include="Controllers\EditarPerfilController.cs" />
     <Compile Include="Controllers\EliminarCategoriaController.cs" />
     <Compile Include="Controllers\EliminarComentarioController.cs" />
     <Compile Include="Controllers\EliminarTemaController.cs" />
->>>>>>> a84d96d22d2b92564891d3aeaa49a4a8a8e63c80
     <Compile Include="Controllers\IniciarSesionController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MostrarComentariosController.cs" />
     <Compile Include="Controllers\prueba3Controller.cs" />
     <Compile Include="Controllers\prueba4Controller.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\VerMensajeController.cs" />
     <Compile Include="Models\EnviarMensaje.cs" />
     <Compile Include="Models\ModeloPM.cs" />
-=======
     <Compile Include="Controllers\VerPerfilController.cs" />
->>>>>>> a84d96d22d2b92564891d3aeaa49a4a8a8e63c80
     <Compile Include="Models\ModeloComentario.cs" />
     <Compile Include="Models\ModeloEditarUsuario.cs" />
     <Compile Include="Models\ModeloTema.cs" />
@@ -330,17 +324,14 @@
     <Content Include="Views\CrearTema\Index.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
     <Content Include="Views\Comentar\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Inbox\Index.cshtml" />
     <Content Include="Views\EnviarMensaje\Index.cshtml" />
     <Content Include="Views\VerMensaje\Index.cshtml" />
-=======
     <Content Include="Views\MostrarComentarios\Index.cshtml" />
     <Content Include="Views\EliminarComentario\Index.cshtml" />
     <Content Include="Views\EditarComentario\Index.cshtml" />
     <Content Include="Views\VerPerfil\Index.cshtml" />
     <Content Include="Views\EditarPerfil\Index.cshtml" />
->>>>>>> a84d96d22d2b92564891d3aeaa49a4a8a8e63c80
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EliminarCategoria\" />
