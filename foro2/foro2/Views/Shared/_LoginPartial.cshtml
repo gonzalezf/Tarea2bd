@@ -18,16 +18,19 @@ else
     <ul class="nav navbar-nav navbar-right">
         @if(Session["LoggedIn"].Equals("Yes"))
         {
+            <li>@Html.ActionLink((String)Session["UserName"], "Index", "VerPerfil", new { id = Session["UserId"] }, null)</li>
             <li>@Html.ActionLink("Cerrar Sesión", "Index", "CerrarSesion", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         }
         else
         {
-            
             <li>@Html.ActionLink("Registrarse", "Index", "Registro", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li>@Html.ActionLink("Iniciar sesión", "Index", "IniciarSesion", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         }
         
             
     </ul>
-    <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/c0.19.50.50/p50x50/10264591_10154046051400363_2991850220147340935_t.jpg" style="height:40px;width:40px;float:right;margin-top:5px;border-radius:6px"/>
+    if(Session["LoggedIn"].Equals("Yes"))
+    {
+        <a href=@Url.Action("Index", "VerPerfil", new { id = Session["UserId"] })><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/c0.19.50.50/p50x50/10264591_10154046051400363_2991850220147340935_t.jpg" style="height:40px;width:40px;float:right;margin-top:5px;border-radius:6px"/></a>
+    }
 }

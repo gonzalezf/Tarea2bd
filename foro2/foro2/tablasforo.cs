@@ -283,7 +283,7 @@ namespace foro2
 
         }
 
-        public int LogIn(String usuario, String password)
+        public List<String> LogIn(String usuario, String password)
         {
             string connectionString = null;
             SqlConnection sqlCnn;
@@ -293,16 +293,18 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "SELECT id_usuario FROM usuario WHERE nombre ='"+ usuario +"' AND contrasenna = '"+ password + "'";
+            sql = "SELECT id_usuario, avatar_url FROM usuario WHERE nombre ='" + usuario + "' AND contrasenna = '" + password + "'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            List<String> l = new List<String>();
             if(sqlreader.Read())
             {
-                return sqlreader.GetInt32(0);
+                l.Add(sqlreader.GetInt32(0).ToString());
+                l.Add(sqlreader.GetString(1));
             }
-            return -1;
+            return l;
         }
 
 
