@@ -13,6 +13,10 @@
 <p>Mensajes: @ViewBag.TotalMessages</p>
 <p>No Leidos: @ViewBag.TotalUnreadMessages</p>
 
+@Html.ActionLink("Redactar Mensaje", "Index", "EnviarMensaje");
+
+@if(ViewBag.Mensajes.Length > 0)
+{
 <table>
     <tr>
         <th>Autor</th>
@@ -20,6 +24,20 @@
         <th>Leido</th>
     </tr>
 
+    @foreach(var msg in ViewBag.Mensajes)
+    {
+        <tr>
+            <td>@Html.ActionLink((String)@msg.nombre_remitente, "Index", "VerPerfil", new { msg.id_remitente }, null)</td>
+            <td>@Html.ActionLink((String) msg.fecha_envio, "Index", "VerMensaje", new {msg.id_mensaje}, null)</td>
+            <td>@msg.leido</td>
+        </tr>
+    }
+
 </table>
+}
+else
+{
+    <h1>No hay mensajes</h1>
+}
 
 

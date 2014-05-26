@@ -84,6 +84,36 @@ namespace foro2
 
         }
 
+        public List<String> GetMessageInfo(String message_id)
+        {
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+            SqlCommand sqlCmd;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "SELECT u.nombre as nombre_remitente, m.* FROM mensaje_privado m, (SELECT us.id_usuario, us.nombre FROM usuario us) u WHERE m.id_mensaje = '" + message_id + "' AND u.id_usuario = m.id_remitente";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+            var list = new List<String>();
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            if (sqlreader.Read())
+            {
+                list.Add(sqlreader.GetString(0));
+                list.Add(sqlreader.GetInt32(1).ToString());
+                list.Add(sqlreader.GetInt32(2).ToString());
+                list.Add(sqlreader.GetInt32(3).ToString());
+                list.Add(sqlreader.GetBoolean(4).ToString());
+                list.Add(sqlreader.GetString(5));
+                list.Add(sqlreader.GetString(6));
+            }
+
+            return list;
+        }
+
         public List<String> RetornarInboxInfo(String userid)
         {
             string connectionString = null;
@@ -121,7 +151,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "SELECT * FROM mensaje_privado WHERE id_buzon = '"+inboxid+"'";
+            sql = "SELECT u.nombre as nombre_remitente, m.* FROM mensaje_privado m, (SELECT us.id_usuario, us.nombre FROM usuario us) u WHERE m.id_buzon = 2 AND u.id_usuario = m.id_remitente ORDER BY id_mensaje DESC";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -129,7 +159,7 @@ namespace foro2
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
             while (sqlreader.Read())
             {
-                list.Add(new ModeloPM(sqlreader.GetInt32(0), sqlreader.GetInt32(1), sqlreader.GetInt32(2), sqlreader.GetBoolean(3), sqlreader.GetString(4), sqlreader.GetString(5)));
+                list.Add(new ModeloPM(sqlreader.GetString(0), sqlreader.GetInt32(1), sqlreader.GetInt32(2), sqlreader.GetInt32(3), sqlreader.GetBoolean(4), sqlreader.GetString(5), sqlreader.GetString(6)));
             }
 
             return list;
@@ -201,6 +231,29 @@ namespace foro2
 
 
         }
+
+        public int ObtenerIdUsuario(String usuario)
+        {
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+            SqlCommand sqlCmd;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "SELECT id_usuario FROM usuario WHERE nombre ='" + usuario +"'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            if (sqlreader.Read())
+            {
+                return sqlreader.GetInt32(0);
+            }
+            return -1;
+        }
+
 
         public SqlDataReader RetornarInfoUsuario(string idusuario)
         {
