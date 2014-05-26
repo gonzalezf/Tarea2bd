@@ -140,7 +140,7 @@ namespace foro2
             sqlCnn.Close();
             return list;
         }
-        /*
+        
         public List<ModeloPM> RetornarMensajesPrivados(String inboxid)
         {
             string connectionString = null;
@@ -163,7 +163,7 @@ namespace foro2
             }
 
             return list;
-        }*/
+        }
 
         public SqlDataReader RetornarTodasLasCategorias()
         {
