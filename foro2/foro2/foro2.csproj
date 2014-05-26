@@ -164,6 +164,7 @@
     <Compile Include="Controllers\ComentarController.cs" />
     <Compile Include="Controllers\CrearTemaController.cs" />
     <Compile Include="Controllers\EditarComentarioController.cs" />
+    <Compile Include="Controllers\EditarPerfilController.cs" />
     <Compile Include="Controllers\EliminarCategoriaController.cs" />
     <Compile Include="Controllers\EliminarComentarioController.cs" />
     <Compile Include="Controllers\EliminarTemaController.cs" />
@@ -173,7 +174,9 @@
     <Compile Include="Controllers\prueba3Controller.cs" />
     <Compile Include="Controllers\prueba4Controller.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Controllers\VerPerfilController.cs" />
     <Compile Include="Models\ModeloComentario.cs" />
+    <Compile Include="Models\ModeloEditarUsuario.cs" />
     <Compile Include="Models\ModeloTema.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Usuario2.cs" />
@@ -319,6 +322,8 @@
     <Content Include="Views\MostrarComentarios\Index.cshtml" />
     <Content Include="Views\EliminarComentario\Index.cshtml" />
     <Content Include="Views\EditarComentario\Index.cshtml" />
+    <Content Include="Views\VerPerfil\Index.cshtml" />
+    <Content Include="Views\EditarPerfil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EliminarCategoria\" />

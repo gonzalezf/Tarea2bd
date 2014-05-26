@@ -1,0 +1,39 @@
+﻿
+<h2>Editar Usuario</h2>
+
+
+<h2>@ViewBag.EditarUsuarioError</h2>
+
+<form method="POST">
+
+
+
+
+    <input type="hidden" name="id_usuario_string" value="@ViewBag.id_usuario_editar" />
+    <br />
+    <br />
+    <br />
+    <label for="editarcontrasenna">Nueva Contrasenna </label>
+    <input type="password" name="editarcontrasenna" value="" />
+    <br />
+    <br />
+    <br />
+    <label for="editarrepetircontrasenna">Repetir  Contrasenna </label>
+    <input type="password" name="editarrepetircontrasenna" value="" />
+    <br />
+    <br />
+    <br />
+
+    <label for="editarfechanacimiento">Fecha Nacimiento: </label>
+    <input type="text" name="editarfechanacimiento" value="@ViewBag.fecha_nacimiento_editar" />
+    <br />
+    <br />
+    <br />
+    <label for="editaravatarurl">Nuevo Avatar Url </label>
+    <input type="text" name="editaravatarurl" value="@ViewBag.avatar_url_editar" />
+    <br />
+    <br />
+    <br />
+
+    <input type="submit" value=" Editar Perfil" />
+</form>

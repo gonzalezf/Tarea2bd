@@ -110,7 +110,7 @@ namespace foro2
             sqlCnn.Close();
             return list;
         }
-
+        /*
         public List<ModeloPM> RetornarMensajesPrivados(String inboxid)
         {
             string connectionString = null;
@@ -133,7 +133,7 @@ namespace foro2
             }
 
             return list;
-        }
+        }*/
 
         public SqlDataReader RetornarTodasLasCategorias()
         {
@@ -201,6 +201,35 @@ namespace foro2
 
 
         }
+
+        public SqlDataReader RetornarInfoUsuario(string idusuario)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+ 
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select id_grupo , nombre, cantidad_comentarios,avatar_url,fecha_nacimiento,sexo,fecha_registro  from usuario where id_usuario = '" + idusuario + "'"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+
+
+            return sqlreader;
+
+
+        }
+
         public int LogIn(String usuario, String password)
         {
             string connectionString = null;

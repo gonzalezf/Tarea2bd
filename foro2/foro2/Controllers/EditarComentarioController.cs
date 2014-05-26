@@ -12,6 +12,8 @@ namespace foro2.Controllers
     {
         public ActionResult Index(string id, string id2) // recibo el id_comentario
         {
+      
+
 
 
             ViewBag.TemaAModificar = id2;
