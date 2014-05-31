@@ -32,3 +32,12 @@ INSERT INTO tema VALUES(1,1,'pokemon 6', 'descripcion pokemon6','jsiewjiwefirire
 
 //OJO! EN CREAR TEMA, el id_categoria se toma como un string y de todas formas funciona. Hasta el momento no hay
 problemas.
+
+
+//
+SELECT c.id_comentario, t.*
+FROM (SELECT co.* FROM comentario co) c,
+	(SELECT cat.* FROM categoria cat) ca,
+	tema t
+WHERE c.id_tema = t.id_tema AND t.id_categoria = ca.id_categoria AND ca.id_categoria = '1'
+ORDER BY c.id_comentario DESC;

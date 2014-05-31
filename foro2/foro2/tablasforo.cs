@@ -218,7 +218,7 @@ namespace foro2
 
             //OJO! CON EL USUARIO! Hay que retornar el nombre usuario, no el id_usuario.
 
-            sql = "select nombre, id_usuario, descripcion from tema where id_categoria = '"+string_id_categoria+"'"; //queremos obtener el id de la categoria
+            sql = "select nombre, id_usuario, descripcion, id_tema from tema where id_categoria = '"+string_id_categoria+"'"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -345,7 +345,42 @@ namespace foro2
         }
 
 
-        public int RetornarCantidadMensajes(int id_categoria) //TERMINAR
+        public int RetornarCantidadMensajesPorTema(int id_tema) //TERMINAR
+        {
+
+
+            string connectionString = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+           SqlConnection sqlCnn2;
+
+
+                SqlCommand sqlCmd2;
+
+                string sql2 = null;
+
+
+
+                sql2 = "select COUNT(id_comentario) from comentario  where id_tema = '" + id_tema+"'"; //queremos obtener el id de la categoria
+                sqlCnn2 = new SqlConnection(connectionString);
+                sqlCnn2.Open();
+                sqlCmd2 = new SqlCommand(sql2, sqlCnn2);
+                int suma = 0;
+                SqlDataReader  sqlreader2 = sqlCmd2.ExecuteReader();
+
+                while (sqlreader2.Read())
+                {
+                    suma += sqlreader2.GetInt32(0);
+                }
+
+                return suma;    
+        }
+
+
+
+        public int RetornarCantidadMensajes(int id_categoria)  //por categoria
         {
 
 
