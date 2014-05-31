@@ -31,7 +31,7 @@ namespace foro2.Controllers
 
             tablasforo infousuario = new tablasforo();
 
-            SqlDataReader sqlreader = infousuario.RetornarInfoUsuario(id); //tenemos listado de comentarios
+            SqlDataReader sqlreader = infousuario.RetornarInfoUsuario2(id); //tenemos listado de comentarios
 
 
             var list = new List<ColumnaInfoUsuario>();

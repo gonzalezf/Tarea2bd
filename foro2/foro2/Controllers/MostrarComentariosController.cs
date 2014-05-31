@@ -12,6 +12,8 @@ public class ColumnaComentarios
     public int id_comentario;
     public int id_usuario; //ojo! parece q debe ser int!
     public string mensaje;
+    public string nombre_usuario;
+    public string avatar_url;
 }
 
 namespace foro2.Controllers
@@ -37,11 +39,14 @@ namespace foro2.Controllers
             while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
                 ViewBag.Categoria = sqlreader.GetValue(0);
-                list.Add(new ColumnaComentarios { id_usuario = sqlreader.GetInt32(0), mensaje = sqlreader.GetString(1), id_comentario = sqlreader.GetInt32(2) }); //revisar si funciona el Get String
+                string nombre_usuario_obtenido = listadecomentarios.RetornarNombreUsuario2(sqlreader.GetInt32(0));
+                string avatar_url_obtenido = listadecomentarios.RetornarAvatarUrlUsuario(sqlreader.GetInt32(0));
+                list.Add(new ColumnaComentarios { id_usuario = sqlreader.GetInt32(0), mensaje = sqlreader.GetString(1), id_comentario = sqlreader.GetInt32(2),nombre_usuario = nombre_usuario_obtenido, avatar_url = avatar_url_obtenido}); //revisar si funciona el Get String
 
 
             }
                 
+
             registros = list.ToArray();    
             ViewBag.ListaComentarios = registros; // Este viewbag toma un arreglo el cual es imprimido 
             return View();

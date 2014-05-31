@@ -42,16 +42,22 @@
     <ul>
         @foreach (var comentario in ViewBag.ListaComentarios)
         {
-
+            <br />
             <li>
-                <a href="/VerPerfil/Index/@comentario.id_usuario"> @comentario.id_usuario </a>
+             
+              
+                <img src="@comentario.avatar_url" alt="@comentario.nombre_usuario" width="82" height="82">
+             
+                <a href="/VerPerfil/Index/@comentario.id_usuario"> @comentario.nombre_usuario </a>
+           
+
                 @comentario.mensaje
 
                 <a class="confirmareliminarcomentario" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
                 <a class="confirmareditarcomentario" href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
 
             </li>
-
+            <br />
 
         }
 

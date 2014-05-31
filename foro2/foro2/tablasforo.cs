@@ -282,6 +282,99 @@ namespace foro2
 
 
         }
+
+
+        public string RetornarNombreUsuario2(int idusuario)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select  nombre  from usuario where id_usuario = '" + idusuario + "'"; 
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            string nombre_obtenido = null;
+            while (sqlreader.Read())
+            {
+                nombre_obtenido = sqlreader.GetString(0);
+            }
+            
+            return nombre_obtenido;
+
+
+        }
+
+        public string RetornarAvatarUrlUsuario(int idusuario)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select  avatar_url  from usuario where id_usuario = '" + idusuario + "'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            string nombre_obtenido = null;
+            while (sqlreader.Read())
+            {
+                nombre_obtenido = sqlreader.GetString(0);
+            }
+
+            return nombre_obtenido;
+
+
+        }
+
+
+        public SqlDataReader RetornarInfoUsuario2(string idusuario)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select id_grupo , nombre, cantidad_comentarios,avatar_url,fecha_nacimiento,sexo,fecha_registro  from usuario where id_usuario = '" + idusuario + "'"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+
+
+            return sqlreader;
+
+
+        }
+
         public SqlDataReader RetornarCantidadTemas(int id_categoria)
         {
 
@@ -314,7 +407,7 @@ namespace foro2
 
 
 
-        public SqlDataReader RetornarUltimoMensaje(int id_categoria) //TERMINAR!
+        public SqlDataReader RetornarUltimoMensaje(int id_categoria) 
         {
 
             string connectionString = null;
@@ -330,7 +423,7 @@ namespace foro2
 
 
 
-            sql = "select COUNT(id_tema) from tema  where id_categoria = '" + id_categoria + "'"; //queremos obtener el id de la categoria
+            sql = "SELECT TOP 1 c.id_comentario, t.* FROM (SELECT co.id_comentario, co.id_tema FROM comentario co) c,(SELECT cat.id_categoria FROM categoria cat) ca,tema t WHERE c.id_tema = t.id_tema AND t.id_categoria = ca.id_categoria AND ca.id_categoria = '"+id_categoria+"'  ORDER BY c.id_comentario DESC;"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);

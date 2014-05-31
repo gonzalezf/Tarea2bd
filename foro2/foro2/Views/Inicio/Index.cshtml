@@ -61,6 +61,8 @@ Nombre Categoria | Descripcion | Cantidad de temas | Total de mensajes | Ultimo 
             @categoria.descripcion
             @categoria.cantidad_temas
             @categoria.cantidad_mensajes
+
+            @categoria.ultimo_tema - @categoria.ultimo_mensaje - by: @categoria.id_ultimo_usuario
         <a class="confirmareliminarcategoria" href ="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a>        
         </li>
         

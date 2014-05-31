@@ -14,6 +14,9 @@ public class ColumnaCategorias /* Clase hecha para la funcion retornar categoria
     public int id_categoria;
     public int cantidad_temas;
     public int cantidad_mensajes;
+    public int id_ultimo_usuario;
+    public string ultimo_mensaje;
+    public string ultimo_tema;
 }
 
 namespace foro2.Controllers
@@ -43,12 +46,23 @@ namespace foro2.Controllers
                 int valor2 = listadecategorias.RetornarCantidadMensajes(numero);
 
                 SqlDataReader sqlreader3 = listadecategorias.RetornarCantidadTemas(numero);
+                SqlDataReader sqlreader4 = listadecategorias.RetornarUltimoMensaje(sqlreader.GetInt32(2));
+
+                string ultimo_mensaje_obtenido = null;
+                string ultimo_tema_obtenido = null;
+                int id_ultimo_usuario_obtenido = -1;
+                while (sqlreader4.Read())
+                {
+                    id_ultimo_usuario_obtenido = sqlreader4.GetInt32(3);
+                    ultimo_tema_obtenido = sqlreader4.GetString(4);
+                    ultimo_mensaje_obtenido = sqlreader4.GetString(6);
+                }
                 while (sqlreader3.Read())
                 {
                     valor = sqlreader3.GetInt32(0);
                 }
 
-                list.Add(new ColumnaCategorias { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor, cantidad_mensajes = valor2}); //revisar si funciona el Get String
+                list.Add(new ColumnaCategorias { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido}); //revisar si funciona el Get String
 
             }
             //hacemos lo mismo que en el caso anterior , pero ahora para TODAS las categorias (publicas y privadas)
@@ -58,12 +72,24 @@ namespace foro2.Controllers
                 SqlDataReader sqlreader3 = listadecategorias.RetornarCantidadTemas(numero);
                 int valor2 = listadecategorias.RetornarCantidadMensajes(numero);
                 int valor = -1;
+                SqlDataReader sqlreader4 = listadecategorias.RetornarUltimoMensaje(sqlreader2.GetInt32(2));
+                string ultimo_mensaje_obtenido = null;
+                string ultimo_tema_obtenido = null;
+                int id_ultimo_usuario_obtenido = -1;
+                while (sqlreader4.Read())
+                {
+                    id_ultimo_usuario_obtenido = sqlreader4.GetInt32(3);
+                    ultimo_tema_obtenido = sqlreader4.GetString(4);
+                    ultimo_mensaje_obtenido = sqlreader4.GetString(6);
+                }
+         
+
                 while (sqlreader3.Read())
                 {
                     valor = sqlreader3.GetInt32(0);
                 }
 
-                list2.Add(new ColumnaCategorias { nombre = sqlreader2.GetString(0), descripcion = sqlreader2.GetString(1), id_categoria = sqlreader2.GetInt32(2), cantidad_temas = valor,cantidad_mensajes = valor2 }); //revisar si funciona el Get String
+                list2.Add(new ColumnaCategorias { nombre = sqlreader2.GetString(0), descripcion = sqlreader2.GetString(1), id_categoria = sqlreader2.GetInt32(2), cantidad_temas = valor,cantidad_mensajes = valor2,ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido, id_ultimo_usuario = id_ultimo_usuario_obtenido }); //revisar si funciona el Get String
 
             }
 
@@ -72,6 +98,10 @@ namespace foro2.Controllers
 
             ViewBag.ListaCategoriasPublicas = registros; // Este viewbag toma un arreglo el cual es imprimido 
             ViewBag.ListaCategoriasPublicasYPrivadas = registrosdetodaslascategorias; //se ocupara al iniciar sesion! //INVOCAR SI SE INICIA SESION!
+            //
+           
+            sqlreader.Close();
+            sqlreader2.Close();
             return View();
             
 
