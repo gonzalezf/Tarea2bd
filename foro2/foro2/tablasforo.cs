@@ -66,7 +66,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
            
-            sql = "select nombre, descripcion from categoria where publico = 'True'";
+            sql = "select nombre, descripcion, id_categoria from categoria where publico = 'True'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -176,7 +176,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "select nombre, descripcion from categoria";
+            sql = "select nombre, descripcion, id_categoria from categoria";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -282,6 +282,132 @@ namespace foro2
 
 
         }
+        public SqlDataReader RetornarCantidadTemas(int id_categoria)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+           
+
+            SqlCommand sqlCmd;
+           
+            string sql = null;
+           
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+    
+
+            sql = "select COUNT(id_tema) from tema  where id_categoria = '" + id_categoria + "'"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+
+
+            return sqlreader;
+
+
+        }
+
+
+
+        public SqlDataReader RetornarUltimoMensaje(int id_categoria) //TERMINAR!
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+
+
+            sql = "select COUNT(id_tema) from tema  where id_categoria = '" + id_categoria + "'"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+
+
+            return sqlreader;
+
+
+        }
+
+
+        public int RetornarCantidadMensajes(int id_categoria) //TERMINAR
+        {
+
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+
+
+            sql = "select id_tema from tema  where id_categoria = '" + id_categoria + "'"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            SqlDataReader sqlreader2 = null;
+            int suma = 0;
+            while (sqlreader.Read())
+            {
+                SqlConnection sqlCnn2;
+
+
+                SqlCommand sqlCmd2;
+
+                string sql2 = null;
+
+
+
+                sql2 = "select COUNT(id_comentario) from comentario  where id_tema = '" + sqlreader.GetValue(0)+ "'"; //queremos obtener el id de la categoria
+                sqlCnn2 = new SqlConnection(connectionString);
+                sqlCnn2.Open();
+                sqlCmd2 = new SqlCommand(sql2, sqlCnn2);
+
+                sqlreader2= sqlCmd2.ExecuteReader();
+                while(sqlreader2.Read())
+                {
+                    suma += sqlreader2.GetInt32(0);
+                }
+
+
+
+            }
+
+            return suma;
+
+
+
+         
+
+        }
+
+
+
+
+
 
         public List<String> LogIn(String usuario, String password)
         {

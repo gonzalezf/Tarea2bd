@@ -10,8 +10,8 @@
         var print = "";
         if(String.Compare((String)Session["LoggedIn"], "Yes") == 0)
         {
-            @Html.Raw("<a href=\"/CrearTema/Index \">Crear Tema (este link no debe ir aqui)</a>");
-            @Html.Raw("<a href=\"/Inbox/Index \">Buzon de Entrada</a>");
+       
+         
         }
         
     }
@@ -19,7 +19,7 @@
     
     
 
-
+    <!--    Eso iba en el if de arriba pero lo comente aqui    Html.Raw("<a href=\"/Inbox/Index \">Buzon de Entrada</a>");-->
 
 </div>
 
@@ -59,6 +59,8 @@ Nombre Categoria | Descripcion | Cantidad de temas | Total de mensajes | Ultimo 
         <li>
         <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>  
             @categoria.descripcion
+            @categoria.cantidad_temas
+            @categoria.cantidad_mensajes
         <a class="confirmareliminarcategoria" href ="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a>        
         </li>
         

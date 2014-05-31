@@ -11,7 +11,9 @@ public class ColumnaCategorias /* Clase hecha para la funcion retornar categoria
 {
     public string nombre;
     public string descripcion;
-
+    public int id_categoria;
+    public int cantidad_temas;
+    public int cantidad_mensajes;
 }
 
 namespace foro2.Controllers
@@ -36,15 +38,33 @@ namespace foro2.Controllers
             while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
                 ViewBag.Categoria =  sqlreader.GetValue(0);
-                list.Add(new ColumnaCategorias { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1) }); //revisar si funciona el Get String
-   
+                int numero = sqlreader.GetInt32(2);
+                int valor = -1;
+                int valor2 = listadecategorias.RetornarCantidadMensajes(numero);
+
+                SqlDataReader sqlreader3 = listadecategorias.RetornarCantidadTemas(numero);
+                while (sqlreader3.Read())
+                {
+                    valor = sqlreader3.GetInt32(0);
+                }
+
+                list.Add(new ColumnaCategorias { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor, cantidad_mensajes = valor2}); //revisar si funciona el Get String
 
             }
             //hacemos lo mismo que en el caso anterior , pero ahora para TODAS las categorias (publicas y privadas)
             while (sqlreader2.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
-                list2.Add(new ColumnaCategorias { nombre = sqlreader2.GetString(0), descripcion = sqlreader2.GetString(1) }); //revisar si funciona el Get String
-                
+                int numero = sqlreader2.GetInt32(2);
+                SqlDataReader sqlreader3 = listadecategorias.RetornarCantidadTemas(numero);
+                int valor2 = listadecategorias.RetornarCantidadMensajes(numero);
+                int valor = -1;
+                while (sqlreader3.Read())
+                {
+                    valor = sqlreader3.GetInt32(0);
+                }
+
+                list2.Add(new ColumnaCategorias { nombre = sqlreader2.GetString(0), descripcion = sqlreader2.GetString(1), id_categoria = sqlreader2.GetInt32(2), cantidad_temas = valor,cantidad_mensajes = valor2 }); //revisar si funciona el Get String
+
             }
 
             registros = list.ToArray();
