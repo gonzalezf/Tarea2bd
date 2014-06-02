@@ -9,7 +9,7 @@ namespace foro2.Controllers
 {
     public class IniciarSesionController : Controller
     {
-        //
+        //REVISADO
         // GET: /IniciarSesion/
         public ActionResult Index()
         {
@@ -41,6 +41,7 @@ namespace foro2.Controllers
                 ViewBag.ErrorIniciarSesion = "Nickname o contrasenna incorrecta";
                 ManipularDatos.Desconectar();
                 Session["LoggedIn"] = "No";
+                ManipularDatos.Desconectar(); //AGREGUE ESTA LINEA
                 return View(usuario);
             }
             else
@@ -52,6 +53,7 @@ namespace foro2.Controllers
                 Session["UserName"] = usuario.nombre;
                 Session["ImageURL"] = l[1];
                 Session["GroupId"] = l[2];
+                ManipularDatos.Desconectar(); //Agregue esta linea
                 return Redirect("/Inicio/Index");
             }
 

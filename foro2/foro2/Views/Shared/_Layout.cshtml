@@ -33,7 +33,7 @@
                         <li>@Html.ActionLink("Foro", "Index", "Categoria")</li>
                         if(Session["LoggedIn"].Equals("Yes"))
                         { 
-                            <li>@Html.ActionLink("Mi Perfil", "Index", "Perfil")</li>
+                            <!--<li>Html.ActionLink("Mi Perfil", "Index", "Perfil")</li>  -->
                             <li>@Html.ActionLink("Bandeja de Entrada", "Index", "Inbox")</li>
                         }
                     }

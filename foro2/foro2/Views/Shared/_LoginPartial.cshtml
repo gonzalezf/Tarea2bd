@@ -31,6 +31,7 @@ else
     </ul>
     if(Session["LoggedIn"].Equals("Yes"))
     {
-        <a href=@Url.Action("Index", "VerPerfil", new { id = Session["UserId"] })><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/t1.0-1/c0.19.50.50/p50x50/10264591_10154046051400363_2991850220147340935_t.jpg" style="height:40px;width:40px;float:right;margin-top:5px;border-radius:6px"/></a>
+        string url_usuario = Session["ImageUrl"].ToString();
+        <a href=@Url.Action("Index", "VerPerfil", new { id = Session["UserId"] })><img src=@url_usuario style="height:40px;width:40px;float:right;margin-top:5px;border-radius:6px"/></a>
     }
 }

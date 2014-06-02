@@ -30,6 +30,16 @@ namespace foro2
        
         }
 
+
+        public class UltimoMensaje /* Clase hecha para la funcion retornar categorias. ATENCION! CREO QUE ESTA CLASE NO LA LEE, LA LEE DESDE EL MODELO */
+        {
+
+            public int id_ultimo_usuario;
+            public string ultimo_mensaje;
+            public string ultimo_tema;
+        }
+
+
         public class ColumnaComentarios
         {
             public string id_usuario; //ojo! parece q debe ser int!
@@ -53,11 +63,23 @@ namespace foro2
 
 
         }*/
+        public class ColumnaCategorias2 /* Clase hecha para la funcion retornar categorias. ATENCION! CREO QUE ESTA CLASE NO LA LEE, LA LEE DESDE EL MODELO */
+        {
+            public string nombre;
+            public string descripcion;
+            public int id_categoria;
+            public int cantidad_temas;
+            public int cantidad_mensajes;
+            public int id_ultimo_usuario;
+            public string ultimo_mensaje;
+            public string ultimo_tema;
+        }
 
         
-        public SqlDataReader RetornarCategoriasPublicas()
+        public ColumnaCategorias2[] RetornarCategoriasPublicas()
         {
-
+            ColumnaCategorias2[] registros = null; // solo categorias publicas
+            var list = new List<ColumnaCategorias2>();
             string connectionString = null;
             SqlConnection sqlCnn;
            
@@ -73,13 +95,36 @@ namespace foro2
     
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
-            /*
-             * 
+
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
+
+                int numero = sqlreader.GetInt32(2);
+        
+                int valor2 = RetornarCantidadMensajes(numero);
+
+                int valor_cantidad_temas = RetornarCantidadTemas(numero);
+                List<UltimoMensaje> registros2 = RetornarUltimoMensaje(sqlreader.GetInt32(2));
+
+                int id_ultimo_usuario_obtenido = registros2[0].id_ultimo_usuario;
+                string ultimo_tema_obtenido = registros2[0].ultimo_tema;
+                string ultimo_mensaje_obtenido = registros2[0].ultimo_mensaje;
+            
+     
+
+                list.Add(new ColumnaCategorias2 { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor_cantidad_temas, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido }); //revisar si funciona el Get String
+
+
+            }
+
+            registros = list.ToArray();
+            
+             
              sqlreader.Close();
-             * sqlCmd.Dispose();
-             * sqlCnn.Close();
-            */
-            return sqlreader;
+             sqlCmd.Dispose();
+             sqlCnn.Close();
+          
+            return registros;
 
 
         }
@@ -138,6 +183,9 @@ namespace foro2
             }
             sqlreader.Close();
             sqlCnn.Close();
+            /*Agregue esta linea */
+            sqlCmd.Dispose();
+
             return list;
         }
         
@@ -165,15 +213,15 @@ namespace foro2
             return list;
         }
 
-        public SqlDataReader RetornarTodasLasCategorias()
+        public ColumnaCategorias2[] RetornarTodasLasCategorias()
         {
-
+            ColumnaCategorias2[] registros = null;
             string connectionString = null;
             SqlConnection sqlCnn;
 
             SqlCommand sqlCmd;
             string sql = null;
-
+            var list = new List<ColumnaCategorias2>();
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
             sql = "select nombre, descripcion, id_categoria from categoria";
@@ -183,21 +231,45 @@ namespace foro2
 
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
-            
-   
-            return sqlreader;
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
+
+                int numero = sqlreader.GetInt32(2);
+
+                int valor2 = RetornarCantidadMensajes(numero);
+
+                int valor_cantidad_temas = RetornarCantidadTemas(numero);
+                List<UltimoMensaje> registros2 = RetornarUltimoMensaje(sqlreader.GetInt32(2));
+
+                int id_ultimo_usuario_obtenido = registros2[0].id_ultimo_usuario;
+                string ultimo_tema_obtenido = registros2[0].ultimo_tema;
+                string ultimo_mensaje_obtenido = registros2[0].ultimo_mensaje;
+
+
+
+                list.Add(new ColumnaCategorias2 { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor_cantidad_temas, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido }); //revisar si funciona el Get String
+
+
+            }
+
+            registros = list.ToArray();
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+          
+            return registros;
 
 
         }
 
 
-        public SqlDataReader RetornarTemas(string nombrecategoria)
+        public ModeloTema[] RetornarTemas(string nombrecategoria)
         {
-
+            ModeloTema[] registros = null;
             string connectionString = null;
             SqlConnection sqlCnn;
             SqlConnection sqlCnn0;
-
+            var list = new List<ModeloTema>();
             SqlCommand sqlCmd;
             SqlCommand sqlCmd0;
             string sql0 = null; 
@@ -226,8 +298,26 @@ namespace foro2
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
 
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
 
-            return sqlreader;
+                int valor_id_tema = sqlreader.GetInt32(3);
+                //                list.Add(new ModeloTema { nombre = sqlreader.GetString(0), id_usuario_string = sqlreader.GetString(1), descripcion = sqlreader.GetString(2) }); //revisar si funciona el Get String
+
+                int cantidad_mensajes_por_tema = RetornarCantidadMensajesPorTema(valor_id_tema);
+
+                list.Add(new ModeloTema { nombre = sqlreader.GetString(0), id_usuario = sqlreader.GetInt32(1), descripcion = sqlreader.GetString(2), id_tema = sqlreader.GetInt32(3), cantidad_mensajes = cantidad_mensajes_por_tema });
+
+
+            }
+            registros = list.ToArray();
+            sqlreader.Close();
+            sqlCnn.Close();
+            sqlCnn0.Close();
+            sqlCmd.Dispose();
+            sqlCmd0.Dispose();
+
+            return registros;
 
 
         }
@@ -309,12 +399,47 @@ namespace foro2
             {
                 nombre_obtenido = sqlreader.GetString(0);
             }
-            
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
             return nombre_obtenido;
 
 
         }
 
+        public int RetornarIdUsuario(string nombre)
+        {
+
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+
+            SqlCommand sqlCmd;
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select  id_usuario  from usuario where nombre = '" + nombre + "'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            int id_usuario_obtenido = -1;
+            while (sqlreader.Read())
+            {
+                id_usuario_obtenido = sqlreader.GetInt32(0);
+            }
+
+            sqlreader.Close();
+            sqlCnn.Close();
+            sqlCmd.Dispose();
+            return id_usuario_obtenido;
+
+
+        }
         public string RetornarAvatarUrlUsuario(int idusuario)
         {
 
@@ -346,9 +471,22 @@ namespace foro2
 
         }
 
-
-        public SqlDataReader RetornarInfoUsuario2(string idusuario)
+        public class ColumnaInfoUsuario2
         {
+            public int id_grupo;
+            public string nombre; //ojo! parece q debe ser int!
+            public int cantidad_comentarios;
+            public string avatar_url;
+            public string fecha_nacimiento;
+            public string sexo;
+            public string fecha_registro;
+            public string id_usuario;
+        }
+
+        public ColumnaInfoUsuario2[] RetornarInfoUsuario2(string idusuario)
+        {
+
+            ColumnaInfoUsuario2[] registros = null; // solo categorias publicas
 
             string connectionString = null;
             SqlConnection sqlCnn;
@@ -368,14 +506,28 @@ namespace foro2
 
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
+            var list = new List<ColumnaInfoUsuario2>();
 
 
-            return sqlreader;
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
+            //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
+                list.Add(new ColumnaInfoUsuario2 { id_grupo = sqlreader.GetInt32(0), nombre = sqlreader.GetString(1), cantidad_comentarios = sqlreader.GetInt32(2), avatar_url = sqlreader.GetString(3), fecha_nacimiento = sqlreader.GetString(4), sexo = sqlreader.GetString(5), fecha_registro = sqlreader.GetString(6), id_usuario = idusuario }); //revisar si funciona el Get String
+
+
+            }
+
+            registros = list.ToArray();
+
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            return registros;
 
 
         }
 
-        public SqlDataReader RetornarCantidadTemas(int id_categoria)
+        public int RetornarCantidadTemas(int id_categoria) //modificada
         {
 
             string connectionString = null;
@@ -398,18 +550,22 @@ namespace foro2
 
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
+            int numero = -1;
+            while(sqlreader.Read())
+            {
+                numero =sqlreader.GetInt32(0); 
+            }
 
-
-            return sqlreader;
+            return numero;
 
 
         }
 
-
-
-        public SqlDataReader RetornarUltimoMensaje(int id_categoria) 
+       
+        public List<UltimoMensaje> RetornarUltimoMensaje(int id_categoria) 
         {
-
+            UltimoMensaje[] registros = null; // solo categorias publicas
+            var list = new List<UltimoMensaje>();
             string connectionString = null;
             SqlConnection sqlCnn;
 
@@ -429,10 +585,22 @@ namespace foro2
             sqlCmd = new SqlCommand(sql, sqlCnn);
 
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            int id_ultimo_usuario_obtenido = -1;
+            string ultimo_tema_obtenido = null;
+            string ultimo_mensaje_obtenido = null;
 
-
-
-            return sqlreader;
+             while (sqlreader.Read())
+                {
+                    id_ultimo_usuario_obtenido = sqlreader.GetInt32(3);
+                    ultimo_tema_obtenido = sqlreader.GetString(4);
+                    ultimo_mensaje_obtenido = sqlreader.GetString(6);
+                }
+            list.Add(new UltimoMensaje{id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema=ultimo_tema_obtenido,ultimo_mensaje = ultimo_mensaje_obtenido});
+            registros = list.ToArray();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            sqlreader.Close();
+            return list;
 
 
         }
@@ -523,7 +691,12 @@ namespace foro2
 
 
             }
-
+            sqlreader.Close();
+            sqlreader2.Close();
+            sqlCnn.Close();
+            sqlCnn.Close();
+            sqlCmd.Dispose();
+            sqlCmd.Dispose();
             return suma;
 
 
@@ -562,11 +735,18 @@ namespace foro2
             return l;
         }
 
-
-
-        public SqlDataReader RetornarComentarios(string nombretema)
+        public class ColumnaComentarios2
         {
+            public int id_comentario;
+            public int id_usuario; //ojo! parece q debe ser int!
+            public string mensaje;
+            public string nombre_usuario;
+            public string avatar_url;
+        }
 
+        public ColumnaComentarios2[] RetornarComentarios(string nombretema)
+        {
+            ColumnaComentarios2[] registros = null;
             string connectionString = null;
             SqlConnection sqlCnn;
             SqlConnection sqlCnn0;
@@ -597,10 +777,27 @@ namespace foro2
             sqlCmd = new SqlCommand(sql, sqlCnn);
 
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            var list = new List<ColumnaComentarios2>();
+
+            //No estoy seguro si va a funcionar que tome como string el id_usuario en vez de int.
+
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
+               // ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
+                string nombre_usuario_obtenido = RetornarNombreUsuario2(sqlreader.GetInt32(0));
+                string avatar_url_obtenido = RetornarAvatarUrlUsuario(sqlreader.GetInt32(0));
+                list.Add(new ColumnaComentarios2 { id_usuario = sqlreader.GetInt32(0), mensaje = sqlreader.GetString(1), id_comentario = sqlreader.GetInt32(2), nombre_usuario = nombre_usuario_obtenido, avatar_url = avatar_url_obtenido }); //revisar si funciona el Get String
 
 
+            }
 
-            return sqlreader;
+            registros = list.ToArray();
+            sqlreader.Close();
+            sqlCnn0.Close();
+            sqlCnn.Close();
+            sqlCmd0.Dispose();
+            sqlCmd.Dispose();
+            return registros;
 
 
         }

@@ -11,7 +11,7 @@ namespace foro2.Controllers
 {
     public class RegistroController : Controller
     {
-        //
+        //REVISADO
         // GET: /Registro/
         public ActionResult Index() //se utiliza al principio cuando aun no se ha enviado alguna informacion
         {
@@ -32,15 +32,22 @@ namespace foro2.Controllers
             {
                 ManipularDatos.EjecutarSql("INSERT INTO usuario VALUES(" + 1 + ",'" + usuario.nombre + "','" + usuario.contrasenna + "','" + cantidadcomentarios + "','" + usuario.avatarurl + "','" + usuario.fechadenacimiento + "','" + usuario.sexo + "','" + fecha_registro + "')");
 
+
+
+                int id_usuario = ManipularDatos.RetornarIdUsuario(usuario.nombre);
+                ManipularDatos.EjecutarSql("INSERT INTO buzon_entrada VALUES(" + id_usuario+ ","+0+","+0+ ")");
+
                 ManipularDatos.Desconectar();
                 //return RedirectToAction("/Inicio/Index");
                 //return RedirectToRoute("/Inicio/Index");  <!ARREEGLAR ESTO! Lograr que redireccione bien!
+                ManipularDatos.Desconectar();
                 return View(usuario);
 
             }
             else
             {
                 ViewBag.ErrorRegistro = "Las contrasennas no coinciden";
+                ManipularDatos.Desconectar();
                 return View(usuario);
             }
         }

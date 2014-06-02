@@ -10,7 +10,7 @@ namespace foro2.Controllers
 {
     public class CrearTemaController : Controller
     {
-        //
+        //REVISADO
         // GET: /CrearTema/
         public ActionResult Index(string id)
         {
@@ -75,7 +75,11 @@ namespace foro2.Controllers
 
             ManipularDatos.EjecutarSql("INSERT INTO tema VALUES('"+string_id_categoria+ "'," + id_usuario + ",'" + tema.nombre + "','" + tema.descripcion + "','" + tema.mensaje + "','" + booleanopublico + "')");
             ManipularDatos.Desconectar();
-
+          
+            
+            sqlCmd0.Dispose();
+            sqlCnn0.Close();
+          
             return View( tema);
         }
 

@@ -39,30 +39,44 @@
 <div class="MostrarComentarios">
     <!--OJO! Hacer que solo se vean las publicas-->
     Id_usuario (debe ir su foto) | Mensaje  |Eliminar  (solo valido para algunos)
-    <ul>
+    <table >
+
         @foreach (var comentario in ViewBag.ListaComentarios)
         {
-            <br />
-            <li>
-             
-              
-                <img src="@comentario.avatar_url" alt="@comentario.nombre_usuario" width="82" height="82">
-             
-                <a href="/VerPerfil/Index/@comentario.id_usuario"> @comentario.nombre_usuario </a>
-           
+            
+            <tr>
 
-                @comentario.mensaje
+                <td>
 
-                <a class="confirmareliminarcomentario" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
-                <a class="confirmareditarcomentario" href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
+                    <img src="@comentario.avatar_url" alt="@comentario.nombre_usuario" width="82" height="82">
 
-            </li>
-            <br />
+                    <a href="/VerPerfil/Index/@comentario.id_usuario"> @comentario.nombre_usuario </a>
+
+                </td>
+
+                <td>
+                    @comentario.mensaje
+                </td>
+
+                <td>
+
+                    <a class="confirmareliminarcomentario" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
+
+                </td>
+                <td>
+
+                    <a class="confirmareditarcomentario" href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
+
+                </td>
+            </tr>
 
         }
 
-        <li> <a href="/Comentar/Index/@ViewBag.TemadelComentario">Responder Tema </a></li>
-    </ul>
+        <tr> <a href="/Comentar/Index/@ViewBag.TemadelComentario">Responder Tema </a></tr>
+   
 
+
+    </table>
+   
 
 </div>

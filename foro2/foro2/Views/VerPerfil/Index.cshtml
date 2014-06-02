@@ -19,9 +19,11 @@
                 }
                 
                 
-                
-                
-                <img src="@usuario.avatar_url" alt="@usuario.nombre" width="120" height="120">
+                @ViewBag.UrlUsuario
+                <li>
+                    <img src="@usuario.avatar_url" alt="@usuario.nombre" width="120" height="120">
+                </li>
+         
                         <li>
                      Grupo Usuario:  @usuario.id_grupo
                         </li>

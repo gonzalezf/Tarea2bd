@@ -14,7 +14,7 @@ namespace foro2.Controllers
     {
 
 
-
+        //REVISADO!
         public ActionResult Index(string id)
         {
 
@@ -59,11 +59,11 @@ namespace foro2.Controllers
             tablasforo ManipularDatos = new tablasforo();
             ManipularDatos.Conectar();
                  
-        
+
             
             //ESTOS DATOS DEBEN SER REEMPLAZADOS!!!
- 
-            string id_usuario ="1";
+
+            string id_usuario = Session["UserId"].ToString();
            
             //FIN DE DATOS QUE DEBEN SER REEMPLAZADOS
 
@@ -71,7 +71,8 @@ namespace foro2.Controllers
             ManipularDatos.EjecutarSql("INSERT INTO comentario VALUES('"+string_id_tema +"'," + id_usuario + ",'" + coment.comentario + "')");
 
             ManipularDatos.Desconectar();
-
+            sqlCmd0.Dispose();
+            sqlCnn0.Close();
             return View(coment);
         }
 

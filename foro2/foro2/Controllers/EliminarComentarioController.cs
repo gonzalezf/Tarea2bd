@@ -9,7 +9,7 @@ namespace foro2.Controllers
 {
     public class EliminarComentarioController : Controller
     {
-        //
+        //REVISADO
         // GET: /EliminarComentario/
         public ActionResult Index(string id,string id2)
         {

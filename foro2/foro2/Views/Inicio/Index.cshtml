@@ -25,10 +25,17 @@
 
 <!-- Si no ha iniciado sesion se muestran las categorias publicas solamentes, en caso contrario se realiza la misma tabla pero llamando
     al ViewBag.ListaCategoriasPublicasYPrivadas. HACER!!-->
+<!-- Versión compilada y comprimida del CSS de Bootstrap -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Tema opcional -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<!-- Versión compilada y comprimida del JavaScript de Bootstrap -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 
-
-
+<link href="/scripts/bootstrap.min.js" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
@@ -52,22 +59,37 @@
    
     
 Nombre Categoria | Descripcion | Cantidad de temas | Total de mensajes | Ultimo Comentado
-<ul>
+
     @foreach (var categoria in ViewBag.ListaCategoriasPublicas)
     {
-   
-        <li>
-        <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>  
-            @categoria.descripcion
+        <table class="table table-striped">
+    
+        <tr>
+            <td>
+                <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>
+            </td>
+            <td>
+                @categoria.descripcion
+            </td>
+        <td>
             @categoria.cantidad_temas
-            @categoria.cantidad_mensajes
+        </td>
+         <td>
+             @categoria.cantidad_mensajes
+         </td>
 
-            @categoria.ultimo_tema - @categoria.ultimo_mensaje - by: @categoria.id_ultimo_usuario
-        <a class="confirmareliminarcategoria" href ="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a>        
-        </li>
-        
+             <td>
+                 @categoria.ultimo_tema - @categoria.ultimo_mensaje - by: @categoria.id_ultimo_usuario
+                 <a class="confirmareliminarcategoria" href="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a> 
+        </td>
+ 
+
+        </tr>
+       
+     
+        </table>       
         
     } 
-</ul>
+
 
 </div>

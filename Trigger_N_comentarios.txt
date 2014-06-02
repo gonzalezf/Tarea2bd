@@ -1,0 +1,20 @@
+use XE
+IF OBJECT_ID('Trigger_N_comentarios','TR') IS NOT NULL
+BEGIN
+	DROP TRIGGER Trigger_N_comentarios;
+END;
+GO
+
+
+CREATE TRIGGER Trigger_N_comentarios
+ON comentario
+
+AFTER INSERT AS
+	BEGIN
+	DECLARE	@nueva_cantidad INT
+	DECLARE @id_usuario INT
+	SELECT @id_usuario = id_usuario FROM comentario
+	SELECT @nueva_cantidad = cantidad_comentarios  FROM usuario WHERE id_usuario = @id_usuario
+	
+	UPDATE usuario SET cantidad_comentarios = @nueva_cantidad +1  WHERE id_usuario = @id_usuario
+END;

@@ -11,7 +11,7 @@ namespace foro2.Controllers
     public class EditarPerfilController : Controller
     {
 
-
+        //REVISADO
         public ActionResult Index(string id, string id2, string id3)
         {
 
@@ -44,7 +44,8 @@ namespace foro2.Controllers
             ViewBag.id_usuario_editar = id;
             ViewBag.avatar_url_editar = id2;
             ViewBag.fecha_nacimiento_editar = id3;
-   
+            sqlCmd0.Dispose();
+            sqlCnn0.Close();
             return View(editarusuario);
         }
         [HttpPost]
