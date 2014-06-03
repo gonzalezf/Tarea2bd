@@ -1,0 +1,9 @@
+IF OBJECT_ID('View_temas_creados') IS NOT NULL
+BEGIN
+	DROP VIEW View_temas_creados;
+END;
+GO
+
+CREATE VIEW View_temas_creados
+AS
+select TOP 5 * from tema where id_usuario = '1' order by id_tema DESC

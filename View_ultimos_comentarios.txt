@@ -1,0 +1,9 @@
+IF OBJECT_ID('View_ultimos_comentarios') IS NOT NULL
+BEGIN
+	DROP VIEW View_ultimos_comentarios;
+END;
+GO
+
+CREATE VIEW View_ultimos_comentarios
+AS
+select TOP 5 * from comentario where id_usuario = '1' order by id_comentario DESC

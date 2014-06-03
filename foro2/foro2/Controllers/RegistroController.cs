@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using foro2.Models;
 using System.Globalization;
 using System.Threading;
+using System.Web.Routing;
 
 namespace foro2.Controllers
 {
@@ -41,7 +42,8 @@ namespace foro2.Controllers
                 //return RedirectToAction("/Inicio/Index");
                 //return RedirectToRoute("/Inicio/Index");  <!ARREEGLAR ESTO! Lograr que redireccione bien!
                 ManipularDatos.Desconectar();
-                return View(usuario);
+              //  return View(usuario);
+                return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Inicio", action = "Index" }));
 
             }
             else

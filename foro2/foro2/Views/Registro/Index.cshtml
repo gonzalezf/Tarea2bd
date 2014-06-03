@@ -6,6 +6,8 @@
 <h2>Registrate</h2>
 
 <h2> @ViewBag.ErrorRegistro</h2> <!--Aqui se indican los errores que existieron-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 <form method="POST">
 
@@ -27,6 +29,6 @@
     <label for="avatarurl">Avatar Url </label>
     <input type="text" name="avatarurl" />
     <br />
-    <input type="submit" value="Enviar" />
+    <input type="submit" value="Enviar" onclick="alert('Se ha registrado con exito')" />
 </form>
 
