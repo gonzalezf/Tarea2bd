@@ -1,0 +1,9 @@
+CREATE TRIGGER trigger_decrease_read ON mensaje_privado
+AFTER INSERT
+AS
+BEGIN
+DECLARE
+@ID int
+set @ID = (select id_buzon from inserted);
+UPDATE buzon_entrada SET mensajes_sin_leer = mensajes_sin_leer + 1;
+END;
