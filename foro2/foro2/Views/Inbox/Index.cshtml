@@ -20,6 +20,7 @@
 <table>
     <tr>
         <th>Autor</th>
+        <th>Asunto</th>
         <th>Fecha</th>
         <th>Leido</th>
     </tr>
@@ -28,7 +29,8 @@
     {
         <tr>
             <td>@Html.ActionLink((String)@msg.nombre_remitente, "Index", "VerPerfil", new { msg.id_remitente }, null)</td>
-            <td>@Html.ActionLink((String) msg.fecha_envio, "Index", "VerMensaje", new {msg.id_mensaje}, null)</td>
+            <td>@Html.ActionLink((String)msg.asunto, "Index", "VerMensaje", new { msg.id_mensaje }, null)</td>
+            <td>@msg.fecha_envio</td>
             <td>@msg.leido</td>
         </tr>
     }

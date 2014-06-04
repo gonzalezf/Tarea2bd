@@ -203,7 +203,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "SELECT u.nombre as nombre_remitente, m.* FROM mensaje_privado m, (SELECT us.id_usuario, us.nombre FROM usuario us) u WHERE m.id_buzon = 2 AND u.id_usuario = m.id_remitente ORDER BY id_mensaje DESC";
+            sql = "SELECT u.nombre as nombre_remitente, m.* FROM mensaje_privado m, (SELECT us.id_usuario, us.nombre FROM usuario us) u WHERE m.id_buzon = '"+inboxid+"' AND u.id_usuario = m.id_remitente ORDER BY id_mensaje DESC";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -211,7 +211,7 @@ namespace foro2
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
             while (sqlreader.Read())
             {
-                list.Add(new ModeloPM(sqlreader.GetString(0), sqlreader.GetInt32(1), sqlreader.GetInt32(2), sqlreader.GetInt32(3), sqlreader.GetBoolean(4), sqlreader.GetString(5), sqlreader.GetString(6)));
+                list.Add(new ModeloPM(sqlreader.GetString(0), sqlreader.GetInt32(1), sqlreader.GetInt32(2), sqlreader.GetInt32(3), sqlreader.GetBoolean(4), sqlreader.GetString(5), sqlreader.GetString(6), sqlreader.GetString(7)));
             }
             //agregue estas lineas
             sqlCmd.Dispose();

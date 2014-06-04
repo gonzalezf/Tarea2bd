@@ -14,8 +14,9 @@ namespace foro2.Models
         public bool leido;
         public String mensaje;
         public String fecha_envio;
+        public String asunto;
         
-        public ModeloPM(string name, int idm, int idr, int idb, bool l, string m, string f)
+        public ModeloPM(string name, int idm, int idr, int idb, bool l, string m, string f, string a)
         {
             nombre_remitente = name;
             id_mensaje = idm;
@@ -24,6 +25,7 @@ namespace foro2.Models
             leido = l;
             mensaje = m;
             fecha_envio = f;
+            asunto = a;
         }
 
     }
