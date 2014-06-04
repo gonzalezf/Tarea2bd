@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Web.Routing;
 namespace foro2.Controllers
 {
+    //REVISADO!
     public class EditarComentarioController : Controller
     {
         public ActionResult Index(string id, string id2) // recibo el id_comentario
@@ -47,6 +48,8 @@ namespace foro2.Controllers
 
 
             ViewBag.id_comentario_seleccionado = id;
+            sqlCmd0.Dispose();
+            sqlCnn0.Close();
             return View(coment);
         }
 

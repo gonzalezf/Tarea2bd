@@ -10,8 +10,8 @@
         var print = "";
         if(String.Compare((String)Session["LoggedIn"], "Yes") == 0)
         {
-            @Html.Raw("<a href=\"/CrearTema/Index \">Crear Tema (este link no debe ir aqui)</a>");
-            @Html.Raw("<a href=\"/Inbox/Index \">Buzon de Entrada</a>");
+       
+         
         }
         
     }
@@ -19,16 +19,23 @@
     
     
 
-
+    <!--    Eso iba en el if de arriba pero lo comente aqui    Html.Raw("<a href=\"/Inbox/Index \">Buzon de Entrada</a>");-->
 
 </div>
 
 <!-- Si no ha iniciado sesion se muestran las categorias publicas solamentes, en caso contrario se realiza la misma tabla pero llamando
     al ViewBag.ListaCategoriasPublicasYPrivadas. HACER!!-->
+<!-- Versión compilada y comprimida del CSS de Bootstrap -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Tema opcional -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<!-- Versión compilada y comprimida del JavaScript de Bootstrap -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 
-
-
+<link href="/scripts/bootstrap.min.js" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
@@ -52,18 +59,37 @@
    
     
 Nombre Categoria | Descripcion | Cantidad de temas | Total de mensajes | Ultimo Comentado
-<ul>
+
     @foreach (var categoria in ViewBag.ListaCategoriasPublicas)
     {
-   
-        <li>
-        <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>  
-            @categoria.descripcion
-        <a class="confirmareliminarcategoria" href ="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a>        
-        </li>
-        
+        <table class="table table-striped">
+    
+        <tr>
+            <td>
+                <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>
+            </td>
+            <td>
+                @categoria.descripcion
+            </td>
+        <td>
+            @categoria.cantidad_temas
+        </td>
+         <td>
+             @categoria.cantidad_mensajes
+         </td>
+
+             <td>
+                 @categoria.ultimo_tema - @categoria.ultimo_mensaje - by: @categoria.id_ultimo_usuario
+                 <a class="confirmareliminarcategoria" href="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a> 
+        </td>
+ 
+
+        </tr>
+       
+     
+        </table>       
         
     } 
-</ul>
+
 
 </div>

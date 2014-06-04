@@ -1,0 +1,25 @@
+use XE
+IF OBJECT_ID('Trigger_N_mensajes','TR') IS NOT NULL
+BEGIN
+	DROP TRIGGER Trigger_N_mensajes;
+END;
+GO
+
+
+CREATE TRIGGER Trigger_N_mensajes
+ON mensaje_privado
+
+AFTER INSERT AS
+	BEGIN
+	DECLARE	@mensajes INT
+	DECLARE @mensajes_sin_leer INT
+	DECLARE @id_buzon INT
+	SELECT @id_buzon = id_buzon FROM mensaje_privado
+	SELECT @mensajes = mensajes  FROM buzon_entrada WHERE id_buzon = @id_buzon
+	SELECT @mensajes_sin_leer = mensajes_sin_leer  FROM buzon_entrada WHERE id_buzon = @id_buzon
+
+	
+	UPDATE buzon_entrada SET mensajes = @mensajes+1  WHERE id_buzon = @id_buzon
+	UPDATE buzon_entrada SET mensajes_sin_leer = @mensajes_sin_leer+1  WHERE id_buzon = @id_buzon
+
+END;

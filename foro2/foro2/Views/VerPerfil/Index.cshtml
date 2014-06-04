@@ -15,8 +15,15 @@
         {
                 if(int.Parse( (String) Session["GroupId"]) == 1 || int.Parse(@usuario.id_usuario) == int.Parse( (String) Session["UserId"]))
                 {
-                    <a href="/EditarPerfil/Index/@usuario.id_usuario/@usuario.avatar_url/@usuario.fecha_nacimiento/@usuario.id_grupo" > Editar Perfil</a>
+                    <a href="/EditarPerfil/Index/@usuario.id_usuario/@usuario.avatar_url/@usuario.fecha_nacimiento" > Editar Perfil</a>
                 }
+                
+                
+                @ViewBag.UrlUsuario
+                <li>
+                    <img src="@usuario.avatar_url" alt="@usuario.nombre" width="120" height="120">
+                </li>
+         
                         <li>
                      Grupo Usuario:  @usuario.id_grupo
                         </li>
@@ -47,6 +54,55 @@
 
    
     </ul>
+
+
+    <ul>
+
+        @foreach (var tema in ViewBag.Ultimos5TemasCreados)
+        {
+
+            <li>
+                Ultimos 5 Temas Creados
+            </li>
+
+
+            <li>
+                Nombre:  @tema.nombre
+            </li>
+
+            <li>
+                Descripcion:  @tema.descripcion
+            </li>
+            <li>
+                Mensaje:    @tema.mensaje
+            </li>
+
+        }
+
+
+    </ul>
+
+
+    <ul>
+
+        @foreach (var comentario in ViewBag.Ultimos5Comentarios)
+        {
+
+            <li>
+                Ultimos 5 Comentarios
+            </li>
+
+
+            <li>
+                Mensaje:  @comentario.mensaje
+            </li>
+
+        }
+
+
+    </ul>
+
+
 
 
 </div>
