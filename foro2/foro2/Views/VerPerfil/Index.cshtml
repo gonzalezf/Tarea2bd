@@ -56,4 +56,53 @@
     </ul>
 
 
+    <ul>
+
+        @foreach (var tema in ViewBag.Ultimos5TemasCreados)
+        {
+
+            <li>
+                Ultimos 5 Temas Creados
+            </li>
+
+
+            <li>
+                Nombre:  @tema.nombre
+            </li>
+
+            <li>
+                Descripcion:  @tema.descripcion
+            </li>
+            <li>
+                Mensaje:    @tema.mensaje
+            </li>
+
+        }
+
+
+    </ul>
+
+
+    <ul>
+
+        @foreach (var comentario in ViewBag.Ultimos5Comentarios)
+        {
+
+            <li>
+                Ultimos 5 Comentarios
+            </li>
+
+
+            <li>
+                Mensaje:  @comentario.mensaje
+            </li>
+
+        }
+
+
+    </ul>
+
+
+
+
 </div>

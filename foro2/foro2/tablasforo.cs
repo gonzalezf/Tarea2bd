@@ -156,6 +156,10 @@ namespace foro2
                 list.Add(sqlreader.GetString(6));
             }
 
+            //agregue estas lineas de cierre
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            sqlreader.Close();
             return list;
         }
 
@@ -209,7 +213,10 @@ namespace foro2
             {
                 list.Add(new ModeloPM(sqlreader.GetString(0), sqlreader.GetInt32(1), sqlreader.GetInt32(2), sqlreader.GetInt32(3), sqlreader.GetBoolean(4), sqlreader.GetString(5), sqlreader.GetString(6)));
             }
-
+            //agregue estas lineas
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            sqlreader.Close();
             return list;
         }
 
@@ -337,11 +344,18 @@ namespace foro2
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            int entero = -1;
             if (sqlreader.Read())
             {
-                return sqlreader.GetInt32(0);
+                //agregue algunas lineas
+                entero = sqlreader.GetInt32(0);
+
             }
-            return -1;
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            return entero;
+     
         }
 
 
@@ -466,6 +480,10 @@ namespace foro2
                 nombre_obtenido = sqlreader.GetString(0);
             }
 
+            //agregue estas lineas
+            sqlreader.Close();
+            sqlCnn.Close();
+            sqlCmd.Dispose();
             return nombre_obtenido;
 
 
@@ -527,6 +545,114 @@ namespace foro2
 
         }
 
+
+
+        public class ColumnaUltimos5Temas
+        {
+            public int id_tema;
+            public int id_categoria;
+            public int id_usuario;
+            public string nombre; //ojo! parece q debe ser int!
+            public string descripcion;
+            public string mensaje;
+    
+        }
+
+        public ColumnaUltimos5Temas[] RetornarUltimos5TemasCreados(string idusuario)
+        {
+            
+            ColumnaUltimos5Temas[] registros = null; // solo categorias publicas
+            string connectionString = null;
+            SqlConnection sqlCnn;
+            SqlCommand sqlCmd;
+
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select TOP 5 * from tema where id_usuario = '"+idusuario+"' order by id_tema DESC"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+            var list = new List<ColumnaUltimos5Temas>();
+
+
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
+                //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
+                list.Add(new ColumnaUltimos5Temas { id_tema = sqlreader.GetInt32(0), id_categoria = sqlreader.GetInt32(1), id_usuario = Int32.Parse(idusuario),nombre= sqlreader.GetString(3),descripcion= sqlreader.GetString(4),mensaje=sqlreader.GetString(5)}); //revisar si funciona el Get String
+
+
+            }
+
+            registros = list.ToArray();
+
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            return registros;
+
+
+        }
+
+
+        public class ColumnaUltimos5Comentarios
+        {
+            public int id_comentario;
+            public int id_tema;
+            public int id_usuario;
+            public string mensaje;
+ 
+        }
+
+
+        public ColumnaUltimos5Comentarios[] RetornarUltimos5Comentarios(string idusuario)
+        {
+
+            ColumnaUltimos5Comentarios[] registros = null; // solo categorias publicas
+            string connectionString = null;
+            SqlConnection sqlCnn;
+            SqlCommand sqlCmd;
+
+
+            string sql = null;
+
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "select TOP 5 * from comentario where id_usuario = '"+idusuario+"' order by id_comentario DESC"; //queremos obtener el id de la categoria
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+
+            var list = new List<ColumnaUltimos5Comentarios>();
+
+
+            while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
+            {
+                //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
+                list.Add(new ColumnaUltimos5Comentarios { id_comentario = sqlreader.GetInt32(0),id_tema = sqlreader.GetInt32(1), id_usuario = Int32.Parse(idusuario), mensaje = sqlreader.GetString(3) }); //revisar si funciona el Get String
+
+
+            }
+
+            registros = list.ToArray();
+
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            return registros;
+
+
+        }
+
         public int RetornarCantidadTemas(int id_categoria) //modificada
         {
 
@@ -555,6 +681,10 @@ namespace foro2
             {
                 numero =sqlreader.GetInt32(0); 
             }
+            //agregue estas lineas
+            sqlreader.Close();
+            sqlCnn.Close();
+            sqlCmd.Dispose();
 
             return numero;
 
@@ -636,6 +766,10 @@ namespace foro2
                     suma += sqlreader2.GetInt32(0);
                 }
 
+                //agregue estas lineas!
+                sqlreader2.Close();
+                sqlCmd2.Dispose();
+                sqlCnn2.Close();
                 return suma;    
         }
 
@@ -732,6 +866,10 @@ namespace foro2
                 l.Add(sqlreader.GetString(1));
                 l.Add(sqlreader.GetInt32(2).ToString());
             }
+            //agregue estas lineas
+            sqlreader.Close();
+            sqlCnn.Close();
+            sqlCmd.Dispose();
             return l;
         }
 
