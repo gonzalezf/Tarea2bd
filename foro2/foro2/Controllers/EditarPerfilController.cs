@@ -12,7 +12,7 @@ namespace foro2.Controllers
     {
 
         //REVISADO
-        public ActionResult Index(string id, string id2, string id3)
+        public ActionResult Index(string id, string id2)
         {
 
             //obtener id_grupo del usuario!
@@ -28,6 +28,8 @@ namespace foro2.Controllers
             var id_grupo= sqlCmd0.ExecuteScalar();
             string string_id_grupo = "0"; //por defecto, siempre deberia cambiar
 
+            tablasforo modeloforo = new tablasforo();
+
             if (id_grupo != null) //esto siempre debiese cumplirse a menos de un error extraño
             {
                 string_id_grupo = id_grupo.ToString();
@@ -42,8 +44,8 @@ namespace foro2.Controllers
             var editarusuario = new ModeloEditarUsuario();
 
             ViewBag.id_usuario_editar = id;
-            ViewBag.avatar_url_editar = id2;
-            ViewBag.fecha_nacimiento_editar = id3;
+            ViewBag.avatar_url_editar = modeloforo.RetornarAvatarUrlUsuario(Int32.Parse(id));
+            ViewBag.fecha_nacimiento_editar = id2;
             sqlCmd0.Dispose();
             sqlCnn0.Close();
             return View(editarusuario);

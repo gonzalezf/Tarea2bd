@@ -3,104 +3,150 @@
     ViewBag.Title = "Perfil";
 }
 
-<h2>Perfil</h2> 
+
 
 <div class="InfoUsuario">
   
 
     
-    <ul>
 
+    <div id="verperfil-contenedor-foto-datos">
         @foreach (var usuario in ViewBag.InfoUsuario)
         {
-                if(int.Parse( (String) Session["GroupId"]) == 1 || int.Parse(@usuario.id_usuario) == int.Parse( (String) Session["UserId"]))
-                {
-                    <a href="/EditarPerfil/Index/@usuario.id_usuario/@usuario.avatar_url/@usuario.fecha_nacimiento" > Editar Perfil</a>
-                }
-                
-                
-                @ViewBag.UrlUsuario
-                <li>
-                    <img src="@usuario.avatar_url" alt="@usuario.nombre" width="120" height="120">
-                </li>
-         
-                        <li>
-                     Grupo Usuario:  @usuario.id_grupo
-                        </li>
-                     
-                        <li>
-                           Nombre Usuario:  @usuario.nombre
-                        </li>
-                <li>
-                 Cantidad de comentarios:    @usuario.cantidad_comentarios
-                </li>
-                <li>
-                   Avatar Url:  @usuario.avatar_url
-                </li>
-                <li>
-                  Fecha de nacimiento:   @usuario.fecha_nacimiento
-                </li>
-                <li>
-                Sexo:     @usuario.sexo
-                </li>
-                <li>
-                   Fecha de registro:  @usuario.fecha_registro
-                </li>
-               
-     
 
+                                   
+
+                    <h2>Perfil</h2>
+               
+
+             
+                    if (int.Parse((String)Session["GroupId"]) == 1 || int.Parse(@usuario.id_usuario) == int.Parse((String)Session["UserId"]))
+                    {
+                    <a href="/EditarPerfil/Index/@usuario.id_usuario/@usuario.fecha_nacimiento" class="btn  btn-primary btn-large"><i class="icon-white icon-user"></i> Editar Perfil</a><br />
+
+                    }
+               
+
+       
+
+
+
+
+
+            <div id="verperfil-foto">
+                @ViewBag.UrlUsuario
+
+                <img src="@usuario.avatar_url" alt="@usuario.nombre" class="img-thumbnail" width="200" height="200">
+
+
+
+            </div>
+
+            <div id="verperfil-datos">
+                <address>
+
+                    <strong> Nombre Usuario:  @usuario.nombre </strong><br />
+                    Grupo Usuario:  @usuario.id_grupo<br />
+
+
+                    Cantidad de comentarios:    @usuario.cantidad_comentarios<br />
+
+                    Avatar Url:  @usuario.avatar_url<br />
+
+                    Fecha de nacimiento:   @usuario.fecha_nacimiento<br />
+
+                    Sexo:     @usuario.sexo<br />
+
+                    Fecha de registro:  @usuario.fecha_registro<br />
+
+                </address>
+
+            </div>
 
         }
 
-   
-    </ul>
+    </div>
 
+    
+    <br />
+    <br />
+    <br />
+    <table class="table table-hover">
 
-    <ul>
-
+        <thead >
+            ULTIMOS 5 TEMAS
+        </thead>
+        <tbody>
         @foreach (var tema in ViewBag.Ultimos5TemasCreados)
         {
+            <tr>
+                    <td>
+                        Nombre:  @tema.nombre
 
-            <li>
-                Ultimos 5 Temas Creados
-            </li>
+                    </td>
+              
+                  <td>
+                      Descripcion:  @tema.descripcion
 
-
-            <li>
-                Nombre:  @tema.nombre
-            </li>
-
-            <li>
-                Descripcion:  @tema.descripcion
-            </li>
-            <li>
-                Mensaje:    @tema.mensaje
-            </li>
-
-        }
+                  
+                  </td>
+               
+         
+                    <td>
+                        Mensaje:    @tema.mensaje
+                    </td>
 
 
-    </ul>
 
-
-    <ul>
-
-        @foreach (var comentario in ViewBag.Ultimos5Comentarios)
-        {
-
-            <li>
-                Ultimos 5 Comentarios
-            </li>
-
-
-            <li>
-                Mensaje:  @comentario.mensaje
-            </li>
+            </tr>
 
         }
 
+    </tbody>
+    </table>
 
-    </ul>
+    <br />
+    <br />
+    <br />
+
+
+
+
+
+    <table class="table table-hover">
+        <thead>
+
+          Ultimos 5 Comentarios
+        </thead>
+
+        <tbody>
+            
+            @foreach (var comentario in ViewBag.Ultimos5Comentarios)
+            {
+                <tr>
+                    <td>
+
+                        Mensaje:  @comentario.mensaje
+                    </td>
+
+
+                </tr>
+
+
+
+
+
+
+            }
+
+
+            
+
+        </tbody>
+
+    </table>
+
+ 
 
 
 

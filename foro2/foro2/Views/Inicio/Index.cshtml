@@ -2,8 +2,9 @@
     ViewBag.Title = "Inicio";
 }
 
-<h2>¡Bienvenido a nuestro foro!</h2>
 
+<!-- 
+<i class="fa fa-user fa-3x"> </i> --> 
 <div class="botoninicio">
 
     @{
@@ -27,7 +28,9 @@
     al ViewBag.ListaCategoriasPublicasYPrivadas. HACER!!-->
 <!-- Versión compilada y comprimida del CSS de Bootstrap -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//style.css">
 
+<link rel="stylesheet" href="http://dev.izar.us/~alex/fa/css/font-awesome.min.css">
 <!-- Tema opcional -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
 
@@ -53,43 +56,132 @@
 </script>
 
 
+
+<link rel="stylesheet" href="/style.css">
 <div class="ListadoCategoriasPublicas"> <!--OJO! Hacer que solo se vean las publicas-->
+    <br />
+    <br />
 
 
-   
-    
-Nombre Categoria | Descripcion | Cantidad de temas | Total de mensajes | Ultimo Comentado
 
-    @foreach (var categoria in ViewBag.ListaCategoriasPublicas)
-    {
-        <table class="table table-striped">
-    
-        <tr>
-            <td>
-                <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>
-            </td>
-            <td>
-                @categoria.descripcion
-            </td>
-        <td>
-            @categoria.cantidad_temas
-        </td>
-         <td>
-             @categoria.cantidad_mensajes
-         </td>
-
-             <td>
-                 @categoria.ultimo_tema - @categoria.ultimo_mensaje - by: @categoria.id_ultimo_usuario
-                 <a class="confirmareliminarcategoria" href="/EliminarCategoria/Index/@categoria.nombre"> Eliminar </a> 
-        </td>
- 
-
-        </tr>
-       
-     
-        </table>       
+    @{
         
-    } 
+        if (String.Compare((String)@ViewBag.registro_exitoso, "exitoso") == 0 && (String.Compare((String)Session["LoggedIn"], "Yes") != 0))
+        {
+            
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Registro Exitoso!</strong> Ahora inicia sesion y disfruta de ForoGamerZ
+    </div>
+
+        }
+        if (String.Compare((String)@ViewBag.registro_exitoso, "exitoso") != 0 && (String.Compare((String)Session["LoggedIn"], "Yes") != 0))
+        
+        {
+                <div class="alert alert-warning fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Bienvenido!</strong> ForoGamerZ tiene el placer de darte la bienvenida a este nuevo sitio. No olvides
+        registrarte y disfrutar de las sorpresas que hemos preparado para ti. Comenta y crea nuevos temas, prontamente se vienen
+        muchos premios!
+    </div>
+        }
+       
+    if((String.Compare((String)Session["LoggedIn"], "Yes") == 0))
+    {
+       <div class="alert alert-info fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           <strong>Estimado Usuario: ForoGamerZ </strong> por motivos de inaguracion, este mes regala
+           muchos premios! No olvides participar por una <strong>XBOX ONE</strong>  y un set de juegos de XBOX <strong> ORIGINALES </strong> 
+           escribiendo a <strong>yoquieroganar@forogamerz.cl</strong> y diciendonos cual es tu anecdota mas graciosa! 
+
+    </div>        
+        
+    }        
+        
+
+    }
 
 
+       
+    <table  class="table table-hover">
+        <thead>
+            <tr>
+
+                <td>
+
+                    <span class="glyphicon glyphicon-list">  </span>
+                <strong>Categoria</strong> </td>
+                <td>
+                    <strong> Descripcion </strong>
+                </td>
+                <td>
+
+                    <strong>N° de temas</strong>
+
+                </td>
+
+                <td>
+
+                    <strong>N° de Mensajes</strong>
+
+                </td>
+
+                <td>
+
+                    <strong>Ultimo Tema Comentado</strong>
+                </td>
+                <td></td>
+            </tr>
+
+
+        </thead>
+ 
+        <tbody>
+            @foreach (var categoria in ViewBag.ListaCategorias)
+            {
+
+
+                <tr>
+                    <td>
+                      
+
+                        <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>
+                    </td>
+                    <td>
+                        @categoria.descripcion
+                    </td>
+                    <td>
+                        @categoria.cantidad_temas
+                    </td>
+                    <td>
+                        @categoria.cantidad_mensajes
+                    </td>
+
+                    <td>
+                        @categoria.ultimo_tema - @categoria.ultimo_mensaje - Escrito por: <a href="/VerPerfil/Index/@categoria.id_ultimo_usuario" >@categoria.nombre_usuario</a>
+                       
+
+                    </td>
+
+                    <td>
+                   
+                        <a class="confirmareliminarcategoria"  href="/EliminarCategoria/Index/@categoria.nombre"><span class="glyphicon glyphicon-trash">  </span> </a>
+                        
+                       
+                    </td>
+
+
+
+                </tr>
+
+
+            }
+
+
+        </tbody>
+       
+
+    </table>
+
+    
 </div>
