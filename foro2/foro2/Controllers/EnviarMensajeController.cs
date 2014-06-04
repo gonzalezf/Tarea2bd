@@ -22,7 +22,6 @@ namespace foro2.Controllers
         [HttpPost] //este metodo recibe informacion, por eso va el httppost
         public ActionResult Index(EnviarMensaje m)
         {
-            ViewBag.holi = "holaaa";
             ViewBag.probandopara = m.para;
             ViewBag.probandoasunto = m.asunto;
             ViewBag.probandomensaje = m.mensaje;
