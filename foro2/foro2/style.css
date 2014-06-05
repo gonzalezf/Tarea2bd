@@ -2,7 +2,16 @@
 
 }
 
-
+#contenedor-temas-titulo{
+    width:100%;
+}
+#boton-creartema{
+    float:right;
+}
+#titulo-categoria{
+    float:left;
+    font-size:medium;
+}
 #ejemplo{
     background: linear-gradient(to bottom, rgba(235,233,249,1) 0%, rgba(206,199,236,1) 51%, rgba(193,191,234,1) 100%);
     color:black;

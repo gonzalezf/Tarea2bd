@@ -22,36 +22,89 @@
     </script>
 
 
+<br />
+<br />
+
+<div id="contenedor-temas-titulo" >
+    <div id="titulo-categoria">
+      <span>Categoria: @ViewBag.TemaSeleccionado  </span>   
+    </div>
+
+    <div id="boton-creartema">
 
 
-    <h3> Tema: @ViewBag.TemaSeleccionado </h3>
-
-    <a href="/CrearTema/Index/@ViewBag.TemaSeleccionado"> Crear Nuevo Tema </a>
-    <div class="ListaTemas">
-
-        Nombre Tema | Autor | Descripcion  | Cantidad Comentarios | ¿Eliminar?
-
-
-        
-        <ul>
-            @foreach (var tema in ViewBag.ListaTemas)
-            {
-
-                <li>
-<!--                      <a href="/Comentar/Index/@tema.nombre">@tema.nombre </a>-->
-                    <a href="/MostrarComentarios/Index/@tema.nombre">@tema.nombre </a>
-                    @tema.id_usuario
-                    @tema.descripcion
-                    @tema.cantidad_mensajes
-                    <a class="confirmareliminacion " href="/EliminarTema/Index/@tema.nombre/@ViewBag.TemaSeleccionado"> Eliminar </a>
-
-                </li>
-
-
-            }
-        </ul>
+        <a href="/CrearTema/Index/@ViewBag.TemaSeleccionado" class="btn  btn-primary btn-large"><i class="icon-white icon-user"></i> Crear Nuevo Tema</a><br />
 
     </div>
+
+</div>
+<br />
+    <div class="ListaTemas">
+        <table align="center" class="table table-hover">
+            <thead>
+                <tr>
+                    <td>
+                        Nombre Tema
+                    </td>
+                    <td>
+                        Autor
+                    </td>
+                    <td>
+                        Descripcion
+                    </td>
+                    <td>
+                        Cantidad Comentarios
+                    </td>
+                    <td>
+
+                    </td>
+
+                </tr>
+           
+
+
+
+            </thead>
+      
+            <tbody>
+                @foreach (var tema in ViewBag.ListaTemas)
+                {
+
+                 <tr>
+                     <td>
+                         <a href="/MostrarComentarios/Index/@tema.nombre" class="btn  btn-link">@tema.nombre </a>
+                     </td>
+                     <td>
+                         @tema.id_usuario
+                     </td>
+                 
+
+                     <td>
+                         @tema.descripcion
+
+                     </td>
+
+                     <td>
+                         @tema.cantidad_mensajes
+
+                     </td>
+
+                     <td>
+                         <a class="confirmareliminacion  btn btn-link" href="/EliminarTema/Index/@tema.nombre/@ViewBag.TemaSeleccionado"> Eliminar </a>
+
+                     </td>
+                 </tr>               
+
+
+                }
+
+
+            </tbody>
+
+            
+          
+           </table>
+</div>
 
 
 
