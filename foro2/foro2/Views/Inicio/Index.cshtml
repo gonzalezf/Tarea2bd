@@ -164,9 +164,13 @@
                     </td>
 
                     <td>
+                        @{
+                        if (String.Compare((String)Session["GroupId"], "1") == 0)
+                        {
                    
                         <a class="confirmareliminarcategoria"  href="/EliminarCategoria/Index/@categoria.nombre"><span class="glyphicon glyphicon-trash">  </span> </a>
-                        
+                        }
+                        }
                        
                     </td>
 
