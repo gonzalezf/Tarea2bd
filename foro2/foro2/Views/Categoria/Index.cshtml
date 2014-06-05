@@ -92,7 +92,16 @@
                      </td>
 
                      <td>
-                         <a class="confirmareliminacion  btn btn-link" href="/EliminarTema/Index/@tema.nombre/@ViewBag.TemaSeleccionado"> Eliminar </a>
+
+                    @{
+
+                    if (String.Compare((String)Session["GroupId"], "1") == 0)
+                    {
+                        
+                         <a class="confirmareliminacion  btn btn-link" href="/EliminarTema/Index/@tema.nombre/@ViewBag.TemaSeleccionado"> <i class="fa fa-trash-o"></i></a> 
+                    }
+                    }
+
 
                      </td>
                  </tr>               

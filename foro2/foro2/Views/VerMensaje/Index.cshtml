@@ -3,8 +3,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Mensaje</h2>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="jquery-1.9.1.min.js"></script>
+<script src="jquery.validate.js"></script>
+<script src="/formulario.js"></script>
+<link href="/style.css" rel="stylesheet">
+<script src="/validator.js"></script>
+<h1 class="text-center">Ver mensaje</h1>
 
 <p>De: @ViewBag.NombreRemitente</p>
 <p>Fecha: @ViewBag.Fecha</p>
@@ -14,13 +19,18 @@
 <form method="POST">
     <h2>Responder a @ViewBag.NombreRemitente</h2>
     
-    <label for="asunto">Asunto: </label>
-    <input type="text" name="asunto" value="" /> <!--En value debe ir el VIEW DATA-->
-    <br />
+    <div class="form-group">
+        <label for="asunto">Asunto: </label>
+        <input class="form-control" maxlength="60" type="text" name="asunto" value="" placeholder="Ingrese un asunto..." required />
+        <div class="error">@ViewBag.Error[0]</div>
+    </div>
 
-    <label for="mensaje">Mensaje: </label>
-    <textarea id="private_message" cols="100" rows="10" name="mensaje"> </textarea> <!--En value debe ir el VIEW DATA-->
-    <br />
-    <input type="submit" value="Enviar" />
+    <div class="form-group">
+        <label for="mensaje">Mensaje: </label>
+        <textarea class="form-control" maxlength="350" cols="100" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required> </textarea>
+        <div class="error">@ViewBag.Error[1]</div>
+    </div>
+    <input class="btn btn-lg btn-primary" type="submit" value="Enviar" />
+    <h1>@ViewBag.Error[2]</h1>
 </form>
 

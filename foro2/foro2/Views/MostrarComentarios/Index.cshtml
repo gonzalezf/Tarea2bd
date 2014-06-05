@@ -79,14 +79,21 @@
                     </td>
 
                     <td>
+                        @{
+                        if (String.Compare((String)Session["GroupId"], "1") == 0)
+                        {
 
-                        <a class="confirmareliminarcomentario btn btn-link" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
-
+                        <a class="confirmareliminarcomentario btn btn-link" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> <span class="glyphicon glyphicon-trash">  </span> </a>
+                        }
+                        }
                     </td>
                     <td>
-
-                        <a class="confirmareditarcomentario btn btn-link"  href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
-
+                        @{
+                        if (String.Compare((String)Session["GroupId"], "1") == 0)
+                        {
+                        <a class="confirmareditarcomentario btn btn-link"  href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> <i class="fa fa-pencil"></i>  </a>
+                        }
+                        }
                     </td>
                 </tr>
 
