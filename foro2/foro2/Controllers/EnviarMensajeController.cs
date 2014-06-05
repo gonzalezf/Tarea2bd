@@ -22,7 +22,6 @@ namespace foro2.Controllers
         [HttpPost] //este metodo recibe informacion, por eso va el httppost
         public ActionResult Index(EnviarMensaje m)
         {
-            ViewBag.holi = "holaaa";
             ViewBag.probandopara = m.para;
             ViewBag.probandoasunto = m.asunto;
             ViewBag.probandomensaje = m.mensaje;
@@ -55,7 +54,7 @@ namespace foro2.Controllers
 
             string fecha_envio = DateTime.Now.ToString("dd/MM/yyyy");
             tf.Conectar();
-            if(tf.EjecutarSql("INSERT INTO mensaje_privado VALUES('"+int.Parse((String) Session["UserId"])+"', '"+id_buzon.ToString()+"', 'False', '"+m.mensaje+"', '"+fecha_envio+"')") <= 0)
+            if(tf.EjecutarSql("INSERT INTO mensaje_privado VALUES('"+int.Parse((String) Session["UserId"])+"', '"+id_buzon.ToString()+"', 'False', '"+m.mensaje+"', '"+fecha_envio+"', '"+m.asunto+"')") <= 0)
             {
                 ViewBag.Error = "Error al ejecutar query!";
             }

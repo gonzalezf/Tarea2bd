@@ -12,17 +12,9 @@ namespace foro2.Models
         public string mensaje {get;set;}
         public EnviarMensaje()
         {
-
+            para = string.Empty;
+            asunto = string.Empty;
             mensaje = string.Empty;
-        }
-
-        /*
-        public EnviarMensaje(string p, string a, string m)
-        {
-            para = p;
-            asunto = a;
-            mensaje = m;
-        }*/
-        
+        }        
     }
 }
