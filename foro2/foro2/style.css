@@ -8,6 +8,10 @@
 #boton-creartema{
     float:right;
 }
+
+#peligro{
+    color:red;
+}
 #titulo-categoria{
     float:left;
     font-size:medium;

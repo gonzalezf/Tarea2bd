@@ -1,0 +1,8 @@
+//por favor, cuando el problema este resuelto, borrelo de este documento.
+
+Se cae la pagina cuando no estoy logueado y intento ver un perfil. eso no debe pasar
+
+
+Revisar permisos de administrador, moderador y publico (que el eliminar solo lo vean algunos) //->eso lo hago yo
+
+¿que usuarios pueden editar el grupo al que pertenecen? //arreglar en editar perfil

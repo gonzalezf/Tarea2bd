@@ -4,55 +4,61 @@
 
 <h2>@ViewBag.EditarUsuarioError</h2>
 
-<form method="POST">
+<form data-toggle="validator" role="form"  method="POST">
 
 
 
     @{
-        if (int.Parse(@ViewBag.id_grupo_encontrado) == 1 || int.Parse(@ViewBag.id_usuario_editar) == int.Parse((String)Session["UserId"]))
+        if (int.Parse(@ViewBag.id_grupo_encontrado) == 1 )
         {
-          <label for="id_grupo_string ">Grupo: </label>
-          <input type="text" name="id_grupo_string" value="@ViewBag.id_grupo_encontrado" /> <!--cuando quieras hacer esto, el nombre del input
-                                                                                          debe ir si o si en el modelo q estas ocupando, en
-                                                                                          este caso es ModeloEditarUsuario y debe tener el nombre
-                                                                                          tal cual, de lo contrario no funcionara-->
+             <div class="form-group">
+                 <label class="control-label" for="id_grupo_string ">Grupo Usuario: </label>
+                 <input class="form-control" pattern="^([0-9]){1}$"  type="text" name="id_grupo_string" value="@ViewBag.id_grupo_encontrado" required />
+                 <span class="help-block with-errors" id="peligro"> 1 = Administrador , 2 = Moderador, 3 = Usuario Normal. <br />
+                 Si cambia este digito, quedara sin privilegios de administrador.
+                 </span>
+
+                 </div>
+        
+            <!--cuando quieras hacer esto, el nombre del input
+            debe ir si o si en el modelo q estas ocupando, en
+            este caso es ModeloEditarUsuario y debe tener el nombre
+            tal cual, de lo contrario no funcionara-->
         }
     }
 
 
-
-  
-    <br />
-    <br />
-    <br />
-
     <input type="hidden" name="id_usuario_string" value="@ViewBag.id_usuario_editar" />
-    <br />
-    <br />
-    <br />
-    <label for="editarcontrasenna">Nueva Contraseña </label>
-    <input type="password" name="editarcontrasenna" value="" />
-    <br />
-    <br />
-    <br />
-    <label for="editarrepetircontrasenna">Repetir  Contraseña </label>
-    <input type="password" name="editarrepetircontrasenna" value="" />
-    <br />
-    <br />
-    <br />
 
-    <label for="editarfechanacimiento">Fecha Nacimiento: </label>
-    <input type="text" name="editarfechanacimiento" value="@ViewBag.fecha_nacimiento_editar" />
-    <br />
-    <br />
-    <br />
-    <label for="editaravatarurl">Nuevo Avatar Url </label>
-    <input type="text" name="editaravatarurl" value="@ViewBag.avatar_url_editar" />
-    <br />
-    <br />
-    <br />
+    <div class="form-group">
+        <label class="control-label" for="editarcontrasenna">Nueva Contraseña </label>
+        <input class="form-control" data-toggle="validator" data-minlength="6" id="inputpassword" type="password" placeholder="Contrasenna" name="editarcontrasenna" value="" required />
+        <span class="help-block">6 caracteres minimo </span>
+
+     </div>
 
 
+    <div class="form-group">
+        <label class="control-label" for="editarrepetircontrasenna">Repetir  Contraseña </label>
+        <input data-toggle="validator" class="form-control" data-minlength="6" data-match="#inputpassword" data-match-error="Whoops!. Las contrasennas no coinciden" placeholder="Repetir contrasenna" type="password" name="editarrepetircontrasenna" value="" required />
+        <div class="help-block with-errors"></div>
 
-    <input type="submit" value=" Editar Perfil" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="editarfechanacimiento">Fecha Nacimiento: </label>
+        <input type="date" class="form-control" name="editarfechanacimiento" value="@ViewBag.fecha_nacimiento_editar" required />
+
+    
+    </div>
+
+        <div class="form-group">
+            <label class="control-label" for="editaravatarurl">Nuevo Avatar Url </label>
+            <input class="form-control" type="url" name="editaravatarurl" value="@ViewBag.avatar_url_editar" required />
+            <p class="help-block">Ingresar url de foto de la forma http://....</p>
+
+        </div>
+
+
+    <button type="submit" class="btn btn-primary"> Editar Perfil </button>
 </form>
