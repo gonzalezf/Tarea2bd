@@ -1,45 +1,52 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    if(ViewBag.Error != "")
-    {
-        <p>NOT FOUND</p>
-        <p>@ViewBag.Error</p>
-    }
+﻿@{
+    ViewBag.Title = "Bandeja De Entrada";
 }
 
-<h2>Buzon de entrada</h2>
+<link href="/style.css" rel="stylesheet">
 
-<p>Mensajes: @ViewBag.TotalMessages</p>
-<p>No Leidos: @ViewBag.TotalUnreadMessages</p>
-
-@Html.ActionLink("Redactar Mensaje", "Index", "EnviarMensaje");
+<h2>Bandeja de entrada</h2>
+<div class= "inbox_stats">
+    <div class="inbox_stats_text">Mensajes: @ViewBag.TotalMessages</div>
+    <div class="inbox_stats_text">No Leidos: @ViewBag.TotalUnreadMessages</div>
+    </div>
+<div class="clearfix"></div>
 
 @if(ViewBag.Mensajes.Length > 0)
 {
-<table>
-    <tr>
-        <th>Autor</th>
-        <th>Asunto</th>
-        <th>Fecha</th>
-        <th>Leido</th>
-    </tr>
-
-    @foreach(var msg in ViewBag.Mensajes)
-    {
+<div class="container">
+    <table>
         <tr>
-            <td>@Html.ActionLink((String)@msg.nombre_remitente, "Index", "VerPerfil", new { msg.id_remitente }, null)</td>
-            <td>@Html.ActionLink((String)msg.asunto, "Index", "VerMensaje", new { msg.id_mensaje }, null)</td>
-            <td>@msg.fecha_envio</td>
-            <td>@msg.leido</td>
+            <th class="table_autor">Autor</th>
+            <th class="table_asunto">Asunto</th>
+            <th class="table_fecha">Fecha</th>
         </tr>
-    }
 
-</table>
+        @foreach(var msg in ViewBag.Mensajes)
+        {
+            var classname = "";
+            if(!msg.leido)
+            {
+                classname = "column_not_read";
+            }
+            else
+            {
+                classname = "column_read";
+            }
+            <tr class="@classname">
+                <td class="table_autor">@Html.ActionLink((String)@msg.nombre_remitente, "Index", "VerPerfil", new { msg.id_remitente }, null)</td>
+                <td class="table_asunto">@Html.ActionLink((String)msg.asunto, "Index", "VerMensaje", new { msg.id_mensaje }, null)</td>
+                <td class="table_fecha">@msg.fecha_envio</td>
+            </tr>
+        }
+
+    </table>
+</div>
 }
 else
 {
-    <h1>No hay mensajes</h1>
+    <h1 class="text-center">No hay mensajes</h1>
 }
+@Html.ActionLink("Nuevo Mensaje", "Index", "EnviarMensaje", null, new { @class = "redactar_mensaje_boton btn btn-lg btn-primary" });
+<div class="clearfix"></div>
 
 

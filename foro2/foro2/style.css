@@ -50,7 +50,65 @@
 
 }
 
-/*Lo saque de internet*/
+/*Para la bandeja de entrada*/
+.inbox_stats
+{
+    float:left;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #808080;
+    
+}
+.inbox_stats_text
+{
+    margin:0px 0px 0px 0px;
+    color: #ffffff;
+    text-align:center;
+    width:250px;
+}
+
+table
+{
+    margin-bottom:30px;
+    margin-top:30px;
+}
+
+tr
+{
+    max-width:1800px;
+}
+
+td,th{
+    border:1px solid black;
+}
+
+th{
+    text-align:center;
+}
+
+.table_autor
+{
+    width:120px;
+    text-align:center;
+}
+.table_asunto
+{
+    width:300px;
+}
+.table_fecha
+{
+    width: 100px;
+    text-align: center;
+}
+.column_not_read{
+    font-weight: 700;
+}
+
+.column_read{
+
+}
+
+/*Para el Login*/
 .form-signin
 {
     max-width: 330px;
