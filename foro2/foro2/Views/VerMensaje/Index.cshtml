@@ -16,21 +16,25 @@
 <p>Mensaje:</p>
 <p>@ViewBag.Mensaje</p>
 
-<form method="POST">
+<form data-toggle="validator" role="form" method="POST">
     <h2>Responder a @ViewBag.NombreRemitente</h2>
     
     <div class="form-group">
-        <label for="asunto">Asunto: </label>
+        <label class="control-label" for="asunto">Asunto: </label>
         <input class="form-control" maxlength="60" type="text" name="asunto" value="" placeholder="Ingrese un asunto..." required />
         <div class="error">@ViewBag.Error[0]</div>
+        <div class="help-block with-errors"></div>
     </div>
 
     <div class="form-group">
-        <label for="mensaje">Mensaje: </label>
-        <textarea class="form-control" maxlength="350" cols="100" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required> </textarea>
+        <label class="control-label" for="mensaje">Mensaje: </label>
+        <textarea class="form-control" maxlength="350" data-minlength="1" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required> </textarea>
         <div class="error">@ViewBag.Error[1]</div>
+
+        <span class="help-block">Entre 1 - 350 caracteres </span>
+
     </div>
-    <input class="btn btn-lg btn-primary" type="submit" value="Enviar" />
+    <button type="submit" class="btn btn-primary"> Enviar </button>
     <h1>@ViewBag.Error[2]</h1>
 </form>
 

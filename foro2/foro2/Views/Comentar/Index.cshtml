@@ -12,19 +12,21 @@
 
 
 
-<form method="POST">
-   
-    
+<form data-toggle="validator" role="form" method="POST">
 
     <input type="hidden" name="id_tema_string" value="@ViewBag.temaenseleccion" />
+    <div class="form-group">
 
-    <label for="comentario">Comentario </label>
-    
+        <label class="control-label" for="comentario">Comentario </label>
 
-    <textarea name="comentario" cols="100" rows="4"></textarea>
-    <br />
-    <br />
-    <br />
- 
-        <input type="submit" value=" Enviar Comentario" />
+
+        <textarea name="comentario" data-toggle="validator" data-minlength="1" class="form-control" placeholder="Escribe tu comentario" rows="4" required></textarea>
+        <div class="help-block with-errors"></div>
+
+     </div>
+
+
+   
+    <button type="submit" class="btn btn-success"> Enviar Comentario </button>
+
 </form>

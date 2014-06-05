@@ -44,7 +44,12 @@
 }
 else
 {
-    <h1 class="text-center">No hay mensajes</h1>
+    
+        <div class="alert alert-info fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>No hay mensajes</strong> Ahora inicia sesion y disfruta de ForoGamerZ
+    </div>
+
 }
 @Html.ActionLink("Nuevo Mensaje", "Index", "EnviarMensaje", null, new { @class = "redactar_mensaje_boton btn btn-lg btn-primary" });
 <div class="clearfix"></div>

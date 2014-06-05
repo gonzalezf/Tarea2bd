@@ -9,33 +9,50 @@
 <h2>   @ViewBag.ErrorCrearTema</h2> <!--Aqui se indican los errores que existieron-->
 
 
-<form method="POST">
-    
-    <input type="hidden" name="id_categoria_string" value="@ViewBag.seleccion"/>
-    <br/>
-
-    <label for="nombre">Nombre Tema : </label>
-    <input type="text" name="nombre" value="" /> <!--En value debe ir el VIEW DATA-->
-    <br />
-    <br />
-    <br />
-    <label for="descripcion"> Descripcion: </label>
-    <textarea name="descripcion" cols="60" rows="2">Escribe una breve descripcion</textarea>
-    <br />
-    <br />
-    <br />
-    <label for="temapublico">Publico? </label>
-    <input type="checkbox" name="publico" value="1"> Tema Publico
-     <br />
-    <br />
-    <br />
-    <label for="mensaje"> Mensaje: </label>
-    <textarea name="mensaje" cols="60" rows="6">Escribe aqui tu mensaje !</textarea>
-    <br />
-    <br />
-    <br />
 
 
+
+
+<form data-toggle="validator" role="form" method="POST">
+
+    <input type="hidden" name="id_categoria_string" value="@ViewBag.seleccion" />
+   
+    <div class="form-group">
+        <label class="control-label" for="nombre">Nombre Tema : </label>
+        <input data-toggle="validator" class="form-control" pattern="^([_A-z0-9 ]){3,}$" maxlength="30" type="text" name="nombre" placeholder="Ingresa un tema" required value="" /> <!--En value debe ir el VIEW DATA-->
+        <span class="help-block with-errors"> Máximo 30 caracteres </span>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label" for="descripcion"> </label>
+        <textarea data-toggle="validator" placeholder="Descripcion del tema" data-minlegth="1" class="form-control" name="descripcion" required rows="3"></textarea>
+        <div class="help-block with-errors"></div>
+    </div>
+   
+  
+        
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="publico" value="1">
+                Tema Publico?
+            </label>
+     
+        </div>
+  
  
-    <input type="submit" value=" Crear Tema" />
+
+    <div class="form-group">
+        <label class="control-label" for="mensaje"> Mensaje: </label> <br />
+        <textarea data-toggle="validator" class="form-control" name="mensaje" data-minlegth="1" placeholder="Escribe aqui tu mensaje" rows="6" required></textarea>
+        <div class="help-block with-errors"></div>
+
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success"> Crear Tema</button>
+
+    </div>
+
+
 </form>

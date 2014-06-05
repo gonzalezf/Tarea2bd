@@ -15,22 +15,32 @@
 <script src="/validator.js"></script>
 
 <h1 class="text-center">Redactar nuevo mensaje</h1>
-<form method="POST">
+<form data-toggle="validator" role="form" method="POST">
     <div class="form-group">
-        <label for="para">Destinatario: </label>
+        <label class="control-label" for="para">Destinatario: </label>
         <input class="form-control" pattern="^([_A-z0-9]){3,}$" maxlength="20" type="text" name="para" value="" placeholder="Ingrese destinatario..." required />
         <div class="error">@ViewBag.Error[0]</div>
+        <div class="help-block with-errors"></div>
     </div>
     <div class="form-group">
-        <label for="asunto">Asunto: </label>
+        <label class="control-label" for="asunto">Asunto: </label>
         <input class="form-control"  maxlength="60" type="text" name="asunto" value="" placeholder="Ingrese un asunto..." required />
         <div class="error">@ViewBag.Error[1]</div>
+
     </div>
     <div class="form-group">
-        <label for="mensaje">Mensaje: </label>
-        <textarea class="form-control" maxlength="350" cols="100" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required> </textarea>
-        <div class="error">@ViewBag.Error[2]</div>
+        <label class="control-label" for="mensaje">Mensaje: </label>
+        <textarea class="form-control" maxlength="350" data-minlength="1" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required> </textarea>
+
+        <span class="help-block">Entre 1 - 350 caracteres </span>
+ 
+          <div class="error">@ViewBag.Error[2]</div>
+      
     </div>
-    <input class="btn btn-lg btn-primary" type="submit" value="Enviar" />
-    <h1>@ViewBag.Error[3]</h1>
+    <div>
+
+        <input class="btn btn-lg btn-primary" type="submit" value="Enviar" />
+        <h1>@ViewBag.Error[3]</h1>
+    </div>
+
 </form>

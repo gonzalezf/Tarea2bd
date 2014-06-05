@@ -103,14 +103,15 @@
 
 
        
-    <table  class="table table-hover">
+    <table class="table table-hover" >
         <thead>
             <tr>
 
                 <td>
 
                     <span class="glyphicon glyphicon-list">  </span>
-                <strong>Categoria</strong> </td>
+                    <strong>Categoria</strong>
+                </td>
                 <td>
                     <strong> Descripcion </strong>
                 </td>
@@ -135,7 +136,7 @@
 
 
         </thead>
- 
+
         <tbody>
             @foreach (var categoria in ViewBag.ListaCategorias)
             {
@@ -143,7 +144,7 @@
 
                 <tr>
                     <td>
-                      
+
 
                         <a href="/Categoria/Index/@categoria.nombre">@categoria.nombre </a>
                     </td>
@@ -158,20 +159,20 @@
                     </td>
 
                     <td>
-                        @categoria.ultimo_tema - @categoria.ultimo_mensaje - Escrito por: <a href="/VerPerfil/Index/@categoria.id_ultimo_usuario" >@categoria.nombre_usuario</a>
-                       
+                        @categoria.ultimo_tema - @categoria.ultimo_mensaje - Escrito por: <a href="/VerPerfil/Index/@categoria.id_ultimo_usuario">@categoria.nombre_usuario</a>
+
 
                     </td>
 
                     <td>
                         @{
-                        if (String.Compare((String)Session["GroupId"], "1") == 0)
-                        {
-                   
-                        <a class="confirmareliminarcategoria"  href="/EliminarCategoria/Index/@categoria.nombre"><span class="glyphicon glyphicon-trash">  </span> </a>
+                if (String.Compare((String)Session["GroupId"], "1") == 0)
+                {
+
+                    <a class="confirmareliminarcategoria" href="/EliminarCategoria/Index/@categoria.nombre"><span class="glyphicon glyphicon-trash">  </span> </a>
+                }
                         }
-                        }
-                       
+
                     </td>
 
 
@@ -183,9 +184,12 @@
 
 
         </tbody>
-       
+
 
     </table>
+
+
+
 
     
 </div>

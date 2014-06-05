@@ -9,21 +9,23 @@
 
 
 
-<form method="POST">
-
-
-
+<form data-toggle="validator" role="form" method="POST">
     <input type="hidden" name="id_tema_string" value="@ViewBag.TemaAModificar" />
 
     <input type="hidden" name="id_comentario_string" value="@ViewBag.id_comentario_seleccionado" />
 
-    <label for="comentarioeditado">Comentario </label>
+    <div class="form-group">
+        <label class="control-label" for="comentarioeditado">Comentario </label>
 
 
-    <textarea name="comentarioeditado" cols="100" rows="4">@ViewBag.mensajeanterior</textarea>
-    <br />
-    <br />
-    <br />
+        <textarea class="form-control" data-minlength="1"  name="comentarioeditado"  rows="4" required>@ViewBag.mensajeanterior</textarea>
+        <div class="help-block with-errors"></div>
+    </div>
 
-    <input type="submit" value=" Editar Comentario" />
+
+
+
+    <button type="submit" class="btn btn-warning"> Enviar Comentario </button>
+
+
 </form>
