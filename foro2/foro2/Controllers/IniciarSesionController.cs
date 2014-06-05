@@ -33,30 +33,43 @@ namespace foro2.Controllers
 
             List<String> l = ManipularDatos.LogIn(usuario.nombre, usuario.contrasenna);
             //si valor recibe un valor mayor a 1, significa que existe un usuario con ese nombre y esa contrasenna. ejecutarsql retorna el numero de filas afectadas por la query.
-            
-            
-            int valor = int.Parse(l[0]);
-            if (valor == -1)
+
+            if (l.Count <= 0)
             {
-                ViewBag.ErrorIniciarSesion = "Nickname o contrasenna incorrecta";
+                ViewBag.ErrorIniciarSesion = "Nickname o contraseña incorrecta";
                 ManipularDatos.Desconectar();
                 Session["LoggedIn"] = "No";
                 ManipularDatos.Desconectar(); //AGREGUE ESTA LINEA
+                usuario.nombre = null;
+                usuario.contrasenna = null;
                 return View(usuario);
             }
             else
             {
-                ViewBag.ErrorIniciarSesion = "Ha iniciado sesion";
-                ManipularDatos.Desconectar();
-                Session["LoggedIn"] = "Yes";
-                Session["UserId"] = valor.ToString();
-                Session["UserName"] = usuario.nombre;
-                Session["ImageURL"] = l[1];
-                Session["GroupId"] = l[2];
-                ManipularDatos.Desconectar(); //Agregue esta linea
-                return Redirect("/Inicio/Index");
+                int valor = int.Parse(l[0]);
+                if (valor == -1)
+                {
+                    ViewBag.ErrorIniciarSesion = "Nickname o contraseña incorrecta";
+                    ManipularDatos.Desconectar();
+                    Session["LoggedIn"] = "No";
+                    ManipularDatos.Desconectar(); //AGREGUE ESTA LINEA
+                    usuario.nombre = null;
+                    usuario.contrasenna = null;
+                    return View(usuario);
+                }
+                else
+                {
+                    ViewBag.ErrorIniciarSesion = "Ha iniciado sesion";
+                    ManipularDatos.Desconectar();
+                    Session["LoggedIn"] = "Yes";
+                    Session["UserId"] = valor.ToString();
+                    Session["UserName"] = usuario.nombre;
+                    Session["ImageURL"] = l[1];
+                    Session["GroupId"] = l[2];
+                    ManipularDatos.Desconectar(); //Agregue esta linea
+                    return Redirect("/Inicio/Index");
+                }
             }
-
         }
 	}
 }
