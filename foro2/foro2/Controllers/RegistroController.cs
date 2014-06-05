@@ -43,7 +43,9 @@ namespace foro2.Controllers
                 //return RedirectToRoute("/Inicio/Index");  <!ARREEGLAR ESTO! Lograr que redireccione bien!
                 ManipularDatos.Desconectar();
               //  return View(usuario);
-                return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Inicio", action = "Index" }));
+
+                ViewBag.registro_exitoso = "Se registro exitosamente!";
+                return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Inicio", action = "Index", id=id_usuario }));
 
             }
             else

@@ -25,24 +25,49 @@ namespace foro2.Controllers
     {
         //
         // GET: /Inicio/
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
 
-
+            
             tablasforo listadecategorias = new tablasforo();
             foro2.tablasforo.ColumnaCategorias2[] registros = null; // solo categorias publicas
-            foro2.tablasforo.ColumnaCategorias2[] registrosdetodaslascategorias = null; //categorias publicas y privadas
-            registros =  listadecategorias.RetornarCategoriasPublicas(); //tenemos listado de categorias..!
-            registrosdetodaslascategorias = listadecategorias.RetornarTodasLasCategorias(); //tenemos listado de categorias..!
-                 
-            ViewBag.ListaCategoriasPublicas = registros; // Este viewbag toma un arreglo el cual es imprimido 
-            ViewBag.ListaCategoriasPublicasYPrivadas = registrosdetodaslascategorias; //se ocupara al iniciar sesion! //INVOCAR SI SE INICIA SESION!
+
+
+
+            if (String.Compare((String)Session["LoggedIn"], "Yes") == 0)
+            {
+                registros = listadecategorias.RetornarTodasLasCategorias(); //tenemos listado de categorias..!
+                ViewBag.ListaCategorias = registros; //se ocupara al iniciar sesion! //INVOCAR SI SE INICIA SESION!
+                if (String.Compare((String)id, "1") == 0)
+                {
+                    ViewBag.registro_exitoso = "exitoso"; //se ocupara al iniciar sesion! //INVOCAR SI SE INICIA SESION!
+
+                }
+
+                return View();
+            }
+
+            else
+            {
+                registros = listadecategorias.RetornarCategoriasPublicas(); //tenemos listado de categorias..!
+
+                ViewBag.ListaCategorias = registros; // Este viewbag toma un arreglo el cual es imprimido 
+
+                if (String.Compare((String)id, "1") == 0)
+                {
+                    ViewBag.registro_exitoso = "exitoso"; //se ocupara al iniciar sesion! //INVOCAR SI SE INICIA SESION!
+
+                }
+                return View();
             
-        
-            return View();
-            
+
+            }
 
 
         }
+
+
+
+        
 	}
 }

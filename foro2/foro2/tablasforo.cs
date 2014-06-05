@@ -27,7 +27,7 @@ namespace foro2
         {
             public string nombre;
             public string descripcion;
-       
+
         }
 
 
@@ -43,7 +43,7 @@ namespace foro2
         public class ColumnaComentarios
         {
             public string id_usuario; //ojo! parece q debe ser int!
-            public string mensaje; 
+            public string mensaje;
         }
         /*
         public void RetornarCategorias()
@@ -73,26 +73,27 @@ namespace foro2
             public int id_ultimo_usuario;
             public string ultimo_mensaje;
             public string ultimo_tema;
+            public string nombre_usuario;
         }
 
-        
+
         public ColumnaCategorias2[] RetornarCategoriasPublicas()
         {
             ColumnaCategorias2[] registros = null; // solo categorias publicas
             var list = new List<ColumnaCategorias2>();
             string connectionString = null;
             SqlConnection sqlCnn;
-           
+
             SqlCommand sqlCmd;
             string sql = null;
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
-           
+
             sql = "select nombre, descripcion, id_categoria from categoria where publico = 'True'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
-    
+
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
 
@@ -100,7 +101,7 @@ namespace foro2
             {
 
                 int numero = sqlreader.GetInt32(2);
-        
+
                 int valor2 = RetornarCantidadMensajes(numero);
 
                 int valor_cantidad_temas = RetornarCantidadTemas(numero);
@@ -109,21 +110,21 @@ namespace foro2
                 int id_ultimo_usuario_obtenido = registros2[0].id_ultimo_usuario;
                 string ultimo_tema_obtenido = registros2[0].ultimo_tema;
                 string ultimo_mensaje_obtenido = registros2[0].ultimo_mensaje;
-            
-     
 
-                list.Add(new ColumnaCategorias2 { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor_cantidad_temas, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido }); //revisar si funciona el Get String
+
+
+                list.Add(new ColumnaCategorias2 { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor_cantidad_temas, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido, nombre_usuario = RetornarNombreUsuario2(id_ultimo_usuario_obtenido) }); //revisar si funciona el Get String
 
 
             }
 
             registros = list.ToArray();
-            
-             
-             sqlreader.Close();
-             sqlCmd.Dispose();
-             sqlCnn.Close();
-          
+
+
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+
             return registros;
 
 
@@ -179,7 +180,7 @@ namespace foro2
             sqlCmd = new SqlCommand(sql, sqlCnn);
             List<String> list = new List<String>();
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
-            if(sqlreader.Read())
+            if (sqlreader.Read())
             {
                 list.Add(sqlreader.GetInt32(0).ToString());
                 list.Add(sqlreader.GetInt32(1).ToString());
@@ -192,7 +193,7 @@ namespace foro2
 
             return list;
         }
-        
+
         public List<ModeloPM> RetornarMensajesPrivados(String inboxid)
         {
             string connectionString = null;
@@ -254,7 +255,7 @@ namespace foro2
 
 
 
-                list.Add(new ColumnaCategorias2 { nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor_cantidad_temas, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido }); //revisar si funciona el Get String
+                list.Add(new ColumnaCategorias2 { nombre_usuario = RetornarNombreUsuario2(id_ultimo_usuario_obtenido), nombre = sqlreader.GetString(0), descripcion = sqlreader.GetString(1), id_categoria = sqlreader.GetInt32(2), cantidad_temas = valor_cantidad_temas, cantidad_mensajes = valor2, id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido }); //revisar si funciona el Get String
 
 
             }
@@ -263,7 +264,7 @@ namespace foro2
             sqlreader.Close();
             sqlCmd.Dispose();
             sqlCnn.Close();
-          
+
             return registros;
 
 
@@ -279,12 +280,12 @@ namespace foro2
             var list = new List<ModeloTema>();
             SqlCommand sqlCmd;
             SqlCommand sqlCmd0;
-            string sql0 = null; 
+            string sql0 = null;
             string sql = null;
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
-            
-            sql0 = "select id_categoria from categoria where nombre ='"+nombrecategoria+"'";
+
+            sql0 = "select id_categoria from categoria where nombre ='" + nombrecategoria + "'";
             sqlCnn0 = new SqlConnection(connectionString);
             sqlCnn0.Open();
             sqlCmd0 = new SqlCommand(sql0, sqlCnn0);
@@ -297,7 +298,7 @@ namespace foro2
 
             //OJO! CON EL USUARIO! Hay que retornar el nombre usuario, no el id_usuario.
 
-            sql = "select nombre, id_usuario, descripcion, id_tema from tema where id_categoria = '"+string_id_categoria+"'"; //queremos obtener el id de la categoria
+            sql = "select nombre, id_usuario, descripcion, id_tema from tema where id_categoria = '" + string_id_categoria + "'"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -339,7 +340,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "SELECT id_usuario FROM usuario WHERE nombre ='" + usuario +"'";
+            sql = "SELECT id_usuario FROM usuario WHERE nombre ='" + usuario + "'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -355,7 +356,7 @@ namespace foro2
             sqlCmd.Dispose();
             sqlCnn.Close();
             return entero;
-     
+
         }
 
 
@@ -364,7 +365,7 @@ namespace foro2
 
             string connectionString = null;
             SqlConnection sqlCnn;
- 
+
 
             SqlCommand sqlCmd;
 
@@ -402,7 +403,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "select  nombre  from usuario where id_usuario = '" + idusuario + "'"; 
+            sql = "select  nombre  from usuario where id_usuario = '" + idusuario + "'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -529,7 +530,7 @@ namespace foro2
 
             while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
-            //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
+                //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
                 list.Add(new ColumnaInfoUsuario2 { id_grupo = sqlreader.GetInt32(0), nombre = sqlreader.GetString(1), cantidad_comentarios = sqlreader.GetInt32(2), avatar_url = sqlreader.GetString(3), fecha_nacimiento = sqlreader.GetString(4), sexo = sqlreader.GetString(5), fecha_registro = sqlreader.GetString(6), id_usuario = idusuario }); //revisar si funciona el Get String
 
 
@@ -555,12 +556,12 @@ namespace foro2
             public string nombre; //ojo! parece q debe ser int!
             public string descripcion;
             public string mensaje;
-    
+
         }
 
         public ColumnaUltimos5Temas[] RetornarUltimos5TemasCreados(string idusuario)
         {
-            
+
             ColumnaUltimos5Temas[] registros = null; // solo categorias publicas
             string connectionString = null;
             SqlConnection sqlCnn;
@@ -572,7 +573,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "select TOP 5 * from tema where id_usuario = '"+idusuario+"' order by id_tema DESC"; //queremos obtener el id de la categoria
+            sql = "select TOP 5 * from tema where id_usuario = '" + idusuario + "' order by id_tema DESC"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -585,7 +586,7 @@ namespace foro2
             while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
                 //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
-                list.Add(new ColumnaUltimos5Temas { id_tema = sqlreader.GetInt32(0), id_categoria = sqlreader.GetInt32(1), id_usuario = Int32.Parse(idusuario),nombre= sqlreader.GetString(3),descripcion= sqlreader.GetString(4),mensaje=sqlreader.GetString(5)}); //revisar si funciona el Get String
+                list.Add(new ColumnaUltimos5Temas { id_tema = sqlreader.GetInt32(0), id_categoria = sqlreader.GetInt32(1), id_usuario = Int32.Parse(idusuario), nombre = sqlreader.GetString(3), descripcion = sqlreader.GetString(4), mensaje = sqlreader.GetString(5) }); //revisar si funciona el Get String
 
 
             }
@@ -607,7 +608,7 @@ namespace foro2
             public int id_tema;
             public int id_usuario;
             public string mensaje;
- 
+
         }
 
 
@@ -625,7 +626,7 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-            sql = "select TOP 5 * from comentario where id_usuario = '"+idusuario+"' order by id_comentario DESC"; //queremos obtener el id de la categoria
+            sql = "select TOP 5 * from comentario where id_usuario = '" + idusuario + "' order by id_comentario DESC"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -638,7 +639,7 @@ namespace foro2
             while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
                 //    ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
-                list.Add(new ColumnaUltimos5Comentarios { id_comentario = sqlreader.GetInt32(0),id_tema = sqlreader.GetInt32(1), id_usuario = Int32.Parse(idusuario), mensaje = sqlreader.GetString(3) }); //revisar si funciona el Get String
+                list.Add(new ColumnaUltimos5Comentarios { id_comentario = sqlreader.GetInt32(0), id_tema = sqlreader.GetInt32(1), id_usuario = Int32.Parse(idusuario), mensaje = sqlreader.GetString(3) }); //revisar si funciona el Get String
 
 
             }
@@ -658,16 +659,16 @@ namespace foro2
 
             string connectionString = null;
             SqlConnection sqlCnn;
-           
+
 
             SqlCommand sqlCmd;
-           
+
             string sql = null;
-           
+
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-    
+
 
             sql = "select COUNT(id_tema) from tema  where id_categoria = '" + id_categoria + "'"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
@@ -677,9 +678,9 @@ namespace foro2
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
 
             int numero = -1;
-            while(sqlreader.Read())
+            while (sqlreader.Read())
             {
-                numero =sqlreader.GetInt32(0); 
+                numero = sqlreader.GetInt32(0);
             }
             //agregue estas lineas
             sqlreader.Close();
@@ -691,8 +692,8 @@ namespace foro2
 
         }
 
-       
-        public List<UltimoMensaje> RetornarUltimoMensaje(int id_categoria) 
+
+        public List<UltimoMensaje> RetornarUltimoMensaje(int id_categoria)
         {
             UltimoMensaje[] registros = null; // solo categorias publicas
             var list = new List<UltimoMensaje>();
@@ -709,7 +710,7 @@ namespace foro2
 
 
 
-            sql = "SELECT TOP 1 c.id_comentario, t.* FROM (SELECT co.id_comentario, co.id_tema FROM comentario co) c,(SELECT cat.id_categoria FROM categoria cat) ca,tema t WHERE c.id_tema = t.id_tema AND t.id_categoria = ca.id_categoria AND ca.id_categoria = '"+id_categoria+"'  ORDER BY c.id_comentario DESC;"; //queremos obtener el id de la categoria
+            sql = "SELECT TOP 1 c.id_comentario, t.* FROM (SELECT co.id_comentario, co.id_tema FROM comentario co) c,(SELECT cat.id_categoria FROM categoria cat) ca,tema t WHERE c.id_tema = t.id_tema AND t.id_categoria = ca.id_categoria AND ca.id_categoria = '" + id_categoria + "'  ORDER BY c.id_comentario DESC;"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -719,13 +720,13 @@ namespace foro2
             string ultimo_tema_obtenido = null;
             string ultimo_mensaje_obtenido = null;
 
-             while (sqlreader.Read())
-                {
-                    id_ultimo_usuario_obtenido = sqlreader.GetInt32(3);
-                    ultimo_tema_obtenido = sqlreader.GetString(4);
-                    ultimo_mensaje_obtenido = sqlreader.GetString(6);
-                }
-            list.Add(new UltimoMensaje{id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema=ultimo_tema_obtenido,ultimo_mensaje = ultimo_mensaje_obtenido});
+            while (sqlreader.Read())
+            {
+                id_ultimo_usuario_obtenido = sqlreader.GetInt32(3);
+                ultimo_tema_obtenido = sqlreader.GetString(4);
+                ultimo_mensaje_obtenido = sqlreader.GetString(6);
+            }
+            list.Add(new UltimoMensaje { id_ultimo_usuario = id_ultimo_usuario_obtenido, ultimo_tema = ultimo_tema_obtenido, ultimo_mensaje = ultimo_mensaje_obtenido });
             registros = list.ToArray();
             sqlCmd.Dispose();
             sqlCnn.Close();
@@ -745,32 +746,32 @@ namespace foro2
 
             connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-           SqlConnection sqlCnn2;
+            SqlConnection sqlCnn2;
 
 
-                SqlCommand sqlCmd2;
+            SqlCommand sqlCmd2;
 
-                string sql2 = null;
+            string sql2 = null;
 
 
 
-                sql2 = "select COUNT(id_comentario) from comentario  where id_tema = '" + id_tema+"'"; //queremos obtener el id de la categoria
-                sqlCnn2 = new SqlConnection(connectionString);
-                sqlCnn2.Open();
-                sqlCmd2 = new SqlCommand(sql2, sqlCnn2);
-                int suma = 0;
-                SqlDataReader  sqlreader2 = sqlCmd2.ExecuteReader();
+            sql2 = "select COUNT(id_comentario) from comentario  where id_tema = '" + id_tema + "'"; //queremos obtener el id de la categoria
+            sqlCnn2 = new SqlConnection(connectionString);
+            sqlCnn2.Open();
+            sqlCmd2 = new SqlCommand(sql2, sqlCnn2);
+            int suma = 0;
+            SqlDataReader sqlreader2 = sqlCmd2.ExecuteReader();
 
-                while (sqlreader2.Read())
-                {
-                    suma += sqlreader2.GetInt32(0);
-                }
+            while (sqlreader2.Read())
+            {
+                suma += sqlreader2.GetInt32(0);
+            }
 
-                //agregue estas lineas!
-                sqlreader2.Close();
-                sqlCmd2.Dispose();
-                sqlCnn2.Close();
-                return suma;    
+            //agregue estas lineas!
+            sqlreader2.Close();
+            sqlCmd2.Dispose();
+            sqlCnn2.Close();
+            return suma;
         }
 
 
@@ -810,23 +811,27 @@ namespace foro2
                 string sql2 = null;
 
 
-
-                sql2 = "select COUNT(id_comentario) from comentario  where id_tema = '" + sqlreader.GetValue(0)+ "'"; //queremos obtener el id de la categoria
-                sqlCnn2 = new SqlConnection(connectionString);
-                sqlCnn2.Open();
-                sqlCmd2 = new SqlCommand(sql2, sqlCnn2);
-
-                sqlreader2= sqlCmd2.ExecuteReader();
-                while(sqlreader2.Read())
+                if (sqlreader.GetValue(0) is int)
                 {
-                    suma += sqlreader2.GetInt32(0);
+                    sql2 = "select COUNT(id_comentario) from comentario  where id_tema = '" + sqlreader.GetValue(0) + "'"; //queremos obtener el id de la categoria
+                    sqlCnn2 = new SqlConnection(connectionString);
+                    sqlCnn2.Open();
+                    sqlCmd2 = new SqlCommand(sql2, sqlCnn2);
+
+                    sqlreader2 = sqlCmd2.ExecuteReader();
+                    while (sqlreader2.Read())
+                    {
+                        suma += sqlreader2.GetInt32(0);
+                    }
+                    sqlreader2.Close();
+
                 }
 
 
 
             }
             sqlreader.Close();
-            sqlreader2.Close();
+
             sqlCnn.Close();
             sqlCnn.Close();
             sqlCmd.Dispose();
@@ -835,7 +840,7 @@ namespace foro2
 
 
 
-         
+
 
         }
 
@@ -860,7 +865,7 @@ namespace foro2
             sqlCmd = new SqlCommand(sql, sqlCnn);
             SqlDataReader sqlreader = sqlCmd.ExecuteReader();
             List<String> l = new List<String>();
-            if(sqlreader.Read())
+            if (sqlreader.Read())
             {
                 l.Add(sqlreader.GetInt32(0).ToString());
                 l.Add(sqlreader.GetString(1));
@@ -907,9 +912,9 @@ namespace foro2
                 string_id_tema = id_tema.ToString();
             } //ya obtuvimos la id tema... ahora obtener lo demas
 
-           
 
-            sql = "select  id_usuario, mensaje, id_comentario from comentario where id_tema = '" + string_id_tema + "'"; 
+
+            sql = "select  id_usuario, mensaje, id_comentario from comentario where id_tema = '" + string_id_tema + "'";
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);
@@ -921,7 +926,7 @@ namespace foro2
 
             while (sqlreader.Read()) //guardamos en una lista el nombre y descripcion de todas las categorias publicas, luego se pasan a un arreglo y ese arreglo a un viewbag
             {
-               // ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
+                // ViewBag.Categoria = sqlreader.GetValue(0); Comente esta linea en la revision.
                 string nombre_usuario_obtenido = RetornarNombreUsuario2(sqlreader.GetInt32(0));
                 string avatar_url_obtenido = RetornarAvatarUrlUsuario(sqlreader.GetInt32(0));
                 list.Add(new ColumnaComentarios2 { id_usuario = sqlreader.GetInt32(0), mensaje = sqlreader.GetString(1), id_comentario = sqlreader.GetInt32(2), nombre_usuario = nombre_usuario_obtenido, avatar_url = avatar_url_obtenido }); //revisar si funciona el Get String
@@ -943,45 +948,45 @@ namespace foro2
 
         public int EjecutarSql(String Query) // funcion para ejecutar todas nuestras querys...
         {
-            SqlCommand MiComando = new SqlCommand(Query,this.MiConexion); //recibe cadena de texto
+            SqlCommand MiComando = new SqlCommand(Query, this.MiConexion); //recibe cadena de texto
 
             int FilasAfectadas = MiComando.ExecuteNonQuery(); // se ejecuta la query. Retorna un valor entero
-/*
-            if (FilasAfectadas > 0) //se realizo exitosamente
-            {
-                //ver como mandar mensaje al usuario!
-                //MessageBox.Show("")......
-            }
-            else
-            {
-                //ver como mandar mensaje al usuario...
-                //error!
+            /*
+                        if (FilasAfectadas > 0) //se realizo exitosamente
+                        {
+                            //ver como mandar mensaje al usuario!
+                            //MessageBox.Show("")......
+                        }
+                        else
+                        {
+                            //ver como mandar mensaje al usuario...
+                            //error!
 
-            }*/
+                        }*/
             return FilasAfectadas;
         }
 
 
 
-            /*public void ActualizarGrid(DataGridView dg, String Query){
-             this.Conectar(); //se conecta a la base de datos..
-             System.Data.DataSet MiDataSet = new System.Data.DataSet(); // crear data set
+        /*public void ActualizarGrid(DataGridView dg, String Query){
+         this.Conectar(); //se conecta a la base de datos..
+         System.Data.DataSet MiDataSet = new System.Data.DataSet(); // crear data set
              
-             SqlDataAdapter MiDataAdapter = new SqlDataAdapter(Query,MiConexion); //crear adaptador de datos
+         SqlDataAdapter MiDataAdapter = new SqlDataAdapter(Query,MiConexion); //crear adaptador de datos
              
             
-             * 
-             * 
+         * 
+         * 
              
-             //Llenar el data set, solo se puede hacer a traves de un data adapter
-             *
-             MiDataAdapter.Fill(MiDataSet,"alumno");
-             dg.DataSource = MiDataSet;
-             dg.DataMember = "alumno"; //llenar el valor adecuado a las propiedades del DataGrid
+         //Llenar el data set, solo se puede hacer a traves de un data adapter
+         *
+         MiDataAdapter.Fill(MiDataSet,"alumno");
+         dg.DataSource = MiDataSet;
+         dg.DataMember = "alumno"; //llenar el valor adecuado a las propiedades del DataGrid
            
-             this.Desconectar(); //desconectarse de la bd.
-             }*/
-        
+         this.Desconectar(); //desconectarse de la bd.
+         }*/
+
 
     }
 }
