@@ -38,42 +38,66 @@
 
 <div class="MostrarComentarios">
     <!--OJO! Hacer que solo se vean las publicas-->
-    Id_usuario (debe ir su foto) | Mensaje  |Eliminar  (solo valido para algunos)
-    <table >
+     <a href="/Comentar/Index/@ViewBag.TemadelComentario" class="btn btn-primary" >Responder Tema </a>
 
-        @foreach (var comentario in ViewBag.ListaComentarios)
-        {
-            
+    <table align="center" class="table table-hover">
+        
+        <thead>
+
             <tr>
-
                 <td>
 
-                    <img src="@comentario.avatar_url" alt="@comentario.nombre_usuario" width="82" height="82">
-
-                    <a href="/VerPerfil/Index/@comentario.id_usuario"> @comentario.nombre_usuario </a>
-
-                </td>
-
-                <td>
-                    @comentario.mensaje
-                </td>
-
-                <td>
-
-                    <a class="confirmareliminarcomentario" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
-
+                    <span>Usuario:</span> 
                 </td>
                 <td>
 
-                    <a class="confirmareditarcomentario" href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
+                    <span>Mensaje</span>
+                </td>
+                <td>
+
 
                 </td>
+
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var comentario in ViewBag.ListaComentarios)
+            {
 
-        }
+                <tr>
 
-        <tr> <a href="/Comentar/Index/@ViewBag.TemadelComentario">Responder Tema </a></tr>
-   
+                    <td>
+
+                        <img src="@comentario.avatar_url" alt="@comentario.nombre_usuario" width="82" height="82">
+
+                        <a href="/VerPerfil/Index/@comentario.id_usuario "class=" btn btn-link "> @comentario.nombre_usuario </a>
+
+                    </td>
+
+                    <td>
+                        @comentario.mensaje
+                    </td>
+
+                    <td>
+
+                        <a class="confirmareliminarcomentario btn btn-link" href="/EliminarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Eliminar </a>
+
+                    </td>
+                    <td>
+
+                        <a class="confirmareditarcomentario btn btn-link"  href="/EditarComentario/Index/@comentario.id_comentario/@ViewBag.TemadelComentario"> Editar </a>
+
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+
+        </tbody>
+
 
 
     </table>

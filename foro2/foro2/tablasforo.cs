@@ -314,7 +314,7 @@ namespace foro2
 
                 int cantidad_mensajes_por_tema = RetornarCantidadMensajesPorTema(valor_id_tema);
 
-                list.Add(new ModeloTema { nombre = sqlreader.GetString(0), id_usuario = sqlreader.GetInt32(1), descripcion = sqlreader.GetString(2), id_tema = sqlreader.GetInt32(3), cantidad_mensajes = cantidad_mensajes_por_tema });
+                list.Add(new ModeloTema { nombre = sqlreader.GetString(0),id_usuario_string=RetornarNombreUsuario2(sqlreader.GetInt32(1)), id_usuario = sqlreader.GetInt32(1), descripcion = sqlreader.GetString(2), id_tema = sqlreader.GetInt32(3), cantidad_mensajes = cantidad_mensajes_por_tema });
 
 
             }
