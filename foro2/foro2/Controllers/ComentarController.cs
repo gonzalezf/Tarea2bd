@@ -75,7 +75,7 @@ namespace foro2.Controllers
             ManipularDatos.Desconectar();
             sqlCmd0.Dispose();
             sqlCnn0.Close();
-            return View(coment);
+            return Redirect("/");
         }
 
 	}

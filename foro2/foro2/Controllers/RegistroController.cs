@@ -35,10 +35,12 @@ namespace foro2.Controllers
             string fecha_registro = DateTime.Now.ToString("dd/MM/yyyy");
             if (String.Compare(usuario.contrasenna, usuario.repetircontrasenna) == 0)
             {
+                if(ManipularDatos.ObtenerIdUsuario(usuario.nombre) != -1)
+                {
+                    ViewBag.ErrorRegistro = "El usuario ya existe";
+                    return View(usuario);
+                }
                 ManipularDatos.EjecutarSql("INSERT INTO usuario VALUES(" + 1 + ",'" + usuario.nombre + "','" + usuario.contrasenna + "','" + cantidadcomentarios + "','" + usuario.avatarurl + "','" + usuario.fechadenacimiento + "','" + usuario.sexo + "','" + fecha_registro + "')");
-
-
-
                 int id_usuario = ManipularDatos.RetornarIdUsuario(usuario.nombre);
                 ManipularDatos.EjecutarSql("INSERT INTO buzon_entrada VALUES(" + id_usuario+ ","+0+","+0+ ")");
 
