@@ -57,9 +57,12 @@ namespace foro2.Controllers
             //ESTOS DATOS DEBEN SER REEMPLAZADOS!!!
             int id_usuario = 1; //gonzalez_f
         //    int id_categoria = 1; //categoria pokemon
-            ViewBag.ErrorCrearTema = "Booleano publico ---> " + tema.publico;
+            ViewBag.ErrorCrearTema0 = "El booleano publico 0: " + tema.publico2;
+
+            ViewBag.ErrorCrearTema = "El tema publico 2 es :O!!!!! ->>>>: " + tema.publico;
             ViewBag.CategoriaMensaje = "Mensaje del tema " + tema.mensaje;
-          
+
+            ViewBag.Nuevo = "Nuevo o" + tema.publico2;
             /*
             if (tema.publico == True) //Hay que ver como obtener si fue chequeado el radio button de publico.
                 {
