@@ -10,31 +10,40 @@
 <link href="/style.css" rel="stylesheet">
 <script src="/validator.js"></script>
 <h1 class="text-center">Ver mensaje</h1>
+<div class="form-group">
+    <div style="max-width:300px;font-weight:bold;">Autor:</div>
+    <div class="form-control" style="width: 600px;max-width:300px;background-color:#d4d0d0">@ViewBag.NombreRemitente</div>
+    <div style="max-width:300px;font-weight:bold;">Fecha de envío:</div>
+    <div class="form-control" style="width: 600px;max-width:300px;background-color:#d4d0d0"><p>Fecha: @ViewBag.Fecha</p></div>
+</div>
 
-<p>De: @ViewBag.NombreRemitente</p>
-<p>Fecha: @ViewBag.Fecha</p>
-<p>Mensaje:</p>
-<p>@ViewBag.Mensaje</p>
+<div class="form-group">
+    <p style="text-align:center;max-width:600px;font-weight:bold;">Mensaje</p>
+    <div class="form-control" style="width: 600px;max-width:600px;background-color:#d4d0d0;margin-bottom:3px;">@ViewBag.Asunto</div>
+    <div class="form-control" style="width: 600px;max-width:600px;height:300px;background-color:#d4d0d0">@ViewBag.Mensaje</div>
+</div>
 
 <form data-toggle="validator" role="form" method="POST">
     <h2>Responder a @ViewBag.NombreRemitente</h2>
-    
+
+    <input type="hidden" value="@ViewBag.IdRemitente" />
     <div class="form-group">
         <label class="control-label" for="asunto">Asunto: </label>
-        <input class="form-control" maxlength="60" type="text" name="asunto" value="" placeholder="Ingrese un asunto..." required />
+        <input class="form-control" maxlength="60" type="text" name="asunto" value="RE: @ViewBag.Asunto" placeholder="Ingrese un asunto..." required />
         <div class="error">@ViewBag.Error[0]</div>
         <div class="help-block with-errors"></div>
     </div>
 
     <div class="form-group">
         <label class="control-label" for="mensaje">Mensaje: </label>
-        <textarea class="form-control" maxlength="350" data-minlength="1" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required> </textarea>
+        <textarea class="form-control" maxlength="350" data-minlength="1" rows="10" name="mensaje" placeholder="Ingrese un mensaje" required style="max-width:600px"> </textarea>
         <div class="error">@ViewBag.Error[1]</div>
 
         <span class="help-block">Entre 1 - 350 caracteres </span>
 
     </div>
     <button type="submit" class="btn btn-primary"> Enviar </button>
+    @Html.ActionLink("Volver", "Index", "Inbox", null, new { @class = "redactar_mensaje_boton btn btn-primary" });
     <h1>@ViewBag.Error[2]</h1>
 </form>
 

@@ -14,30 +14,30 @@
 @if(ViewBag.Mensajes.Length > 0)
 {
 <div class="container">
-    <table>
-        <tr>
-            <th class="table_autor">Autor</th>
-            <th class="table_asunto">Asunto</th>
-            <th class="table_fecha">Fecha</th>
+    <table class="betable">
+        <tr class="betr">
+            <th class="table_autor beth">Autor</th>
+            <th class="table_asunto beth">Asunto</th>
+            <th class="table_fecha beth">Fecha</th>
         </tr>
 
-        @foreach(var msg in ViewBag.Mensajes)
-        {
-            var classname = "";
-            if(!msg.leido)
-            {
-                classname = "column_not_read";
-            }
-            else
-            {
-                classname = "column_read";
-            }
-            <tr class="@classname">
-                <td class="table_autor">@Html.ActionLink((String)@msg.nombre_remitente, "Index", "VerPerfil", new { msg.id_remitente }, null)</td>
-                <td class="table_asunto">@Html.ActionLink((String)msg.asunto, "Index", "VerMensaje", new { msg.id_mensaje }, null)</td>
-                <td class="table_fecha">@msg.fecha_envio</td>
-            </tr>
-        }
+        @foreach (var msg in ViewBag.Mensajes)
+{
+    var classname = "";
+    if (!msg.leido)
+    {
+        classname = "column_not_read";
+    }
+    else
+    {
+        classname = "column_read";
+    }
+    <tr class="@classname betr">
+        <td class="table_autor betd">@Html.ActionLink((String)@msg.nombre_remitente, "Index", "VerPerfil", new { msg.id_remitente }, null)</td>
+        <td class="table_asunto betd">@Html.ActionLink((String)msg.asunto, "Index", "VerMensaje", new { msg.id_mensaje }, null)</td>
+        <td class="table_fecha betd">@msg.fecha_envio</td>
+    </tr>
+}
 
     </table>
 </div>
