@@ -60,6 +60,12 @@
                         { 
                             <!--<li>Html.ActionLink("Mi Perfil", "Index", "Perfil")</li>  -->
                             <li>@Html.ActionLink("Bandeja de Entrada", "Index", "Inbox")</li>
+                            if (Session["GroupId"].Equals("1"))
+                            {
+                             <li>@Html.ActionLink("CrearCategoria", "Index", "CrearCategoria")</li>
+
+                            }
+                        
                         }
                     }
                 </ul>

@@ -163,6 +163,7 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\CerrarSesionController.cs" />
     <Compile Include="Controllers\ComentarController.cs" />
+    <Compile Include="Controllers\CrearCategoriaController.cs" />
     <Compile Include="Controllers\CrearTemaController.cs" />
     <Compile Include="Controllers\EnviarMensajeController.cs" />
     <Compile Include="Controllers\InboxController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Controllers\prueba4Controller.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Controllers\VerMensajeController.cs" />
+    <Compile Include="ModeloCategoria.cs" />
     <Compile Include="Models\EnviarMensaje.cs" />
     <Compile Include="Models\ModeloPM.cs" />
     <Compile Include="Controllers\VerPerfilController.cs" />
@@ -336,6 +338,7 @@
     <Content Include="Views\EditarComentario\Index.cshtml" />
     <Content Include="Views\VerPerfil\Index.cshtml" />
     <Content Include="Views\EditarPerfil\Index.cshtml" />
+    <Content Include="Views\CrearCategoria\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CerrarSesion\" />

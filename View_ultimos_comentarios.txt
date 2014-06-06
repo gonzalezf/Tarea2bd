@@ -9,7 +9,7 @@ AS
 SELECT TOP(5) v.* FROM (SELECT t.id_tema, MAX(t.id_categoria) as id_categoria, MAX(t.id_usuario) as id_usuario, MAX(t.nombre) as nombre, MAX(CAST(t.descripcion AS varchar(100))) as descripcion, MAX(CAST(t.mensaje AS varchar(350))) as mensaje, MAX(CAST(publico as varchar(20))) as publico
 FROM (SELECT * FROM tema) t,
 (SELECT * FROM comentario) c
-WHERE t.id_tema = c.id_tema AND c.id_usuario = '2'
+WHERE t.id_tema = c.id_tema AND c.id_usuario = '1'
 GROUP BY t.id_tema) v
 ORDER BY v.id_tema DESC;
 
