@@ -3,18 +3,7 @@
     ViewBag.Title = "Nuevo Tema";
 }
 
-<h2>Crear Nuevo Tema</h2>
-
-
-<h2>  alo->  @ViewBag.ErrorCrearTema0</h2>
-<h2>  alo 2-> @ViewBag.ErrorCrearTema</h2> <!--Aqui se indican los errores que existieron-->
-<h2>  alo 3-> @ViewBag.CategoriaMensaje</h2> 
-<h2>
-  Nuevo .............  @ViewBag.Nuevo
-</h2>
-
-
-
+<h1 class="text-center">Nuevo Tema</h1>
 
 <form data-toggle="validator" role="form" method="POST">
 
@@ -35,21 +24,17 @@
     </div>
    
   
-        
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" checked="checked" name="publico2" value="valor">
-                Tema Publico?
-            </label>
-     
-        </div>
-
-
     <div class="form-group">
-        <label class="control-label" for="mensaje"> Mensaje: </label> <br />
-        <textarea data-toggle="validator" class="form-control" name="mensaje" data-minlegth="1" placeholder="Escribe aqui tu mensaje" rows="6" required></textarea>
-        <div class="help-block with-errors"></div>
+        <p>Acceso al tema: (Escriba publico o privado, cualquier otra opcion se asumirá como privada)</p>
+        <input class="form-control" maxlength="30" type="text" name="publico" placeholder="Ingresa un tema" required value="publico" />
 
+    </div>
+
+
+    <div class="form-group"> 
+        <label class="control-label" for="mensaje"> Mensaje: </label> <br />
+        <textarea data-toggle="validator" class="form-control" name="mensaje" data-minlegth="1" placeholder="Escribe aqui tu mensaje" rows="6" required style="max-width:600px;width:600px;height:300px;"></textarea>
+        <div class="help-block with-errors"></div>
     </div>
     <div>
         <button type="submit" class="btn btn-success"> Crear Tema</button>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using foro2.Models;
 using System.Data.SqlClient;
+using System.Web.Routing;
 
 namespace foro2.Controllers
 {
@@ -52,38 +53,28 @@ namespace foro2.Controllers
             tablasforo ManipularDatos = new tablasforo();
             ManipularDatos.Conectar();
           
-            
-            
             //ESTOS DATOS DEBEN SER REEMPLAZADOS!!!
             int id_usuario = int.Parse(Session["UserId"].ToString());
         //    int id_categoria = 1; //categoria pokemon
-            ViewBag.ErrorCrearTema0 = "El booleano publico 0: " + tema.publico2;
-
-            ViewBag.ErrorCrearTema = "El tema publico 2 es :O!!!!! ->>>>: " + tema.publico;
             ViewBag.CategoriaMensaje = "Mensaje del tema " + tema.mensaje;
 
-            ViewBag.Nuevo = "Nuevo o" + tema.publico2;
-            /*
-            if (tema.publico == True) //Hay que ver como obtener si fue chequeado el radio button de publico.
-                {
-                    String booleanopublico = "True";
-                }
-                else {
-                    String booleanopublico = "False";
-                }*/
-            
-            string booleanopublico = "True";
+            ViewBag.Nuevo = tema.publico;
+            string is_public = "False";
+            if (tema.publico.ToString().Equals("Publico", StringComparison.OrdinalIgnoreCase)) //Hay que ver como obtener si fue chequeado el radio button de publico.
+            {
+                 is_public = "True";
+            }
             //FIN DE DATOS QUE DEBEN SER REEMPLAZADOS!
 //            ManipularDatos.EjecutarSql("INSERT INTO tema VALUES('" + string_id_categoria + "'," + id_usuario + ",'" + tema.nombre + "','" + tema.descripcion + "','" + tema.mensaje + "','" + booleanopublico + "')");
 
-            ManipularDatos.EjecutarSql("INSERT INTO tema VALUES('"+string_id_categoria+ "'," + id_usuario + ",'" + tema.nombre + "','" + tema.descripcion + "','" + tema.mensaje + "','" + booleanopublico + "')");
+            ManipularDatos.EjecutarSql("INSERT INTO tema VALUES('" + string_id_categoria + "'," + id_usuario + ",'" + tema.nombre + "','" + tema.descripcion + "','" + tema.mensaje + "','" + is_public + "')");
             ManipularDatos.Desconectar();
           
             
             sqlCmd0.Dispose();
             sqlCnn0.Close();
-          
-            return View( tema);
+
+            return RedirectToAction("Index", new RouteValueDictionary(new { controller = "MostrarComentarios", action = "Index", id = tema.nombre }));
         }
 
         /*

@@ -26,13 +26,6 @@ namespace foro2.Controllers
             }
 
             ModeloCategoria categoria = new ModeloCategoria();
-
-          
-
-
-
-
-
             return View(categoria);
         }
 

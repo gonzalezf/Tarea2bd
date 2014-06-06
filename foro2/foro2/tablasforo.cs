@@ -284,7 +284,7 @@ namespace foro2
         }
 
 
-        public ModeloTema[] RetornarTemas(string nombrecategoria)
+        public ModeloTema[] RetornarTemas(string nombrecategoria, bool privados)
         {
             ModeloTema[] registros = null;
             string connectionString = null;
@@ -311,7 +311,10 @@ namespace foro2
 
             //OJO! CON EL USUARIO! Hay que retornar el nombre usuario, no el id_usuario.
 
-            sql = "select nombre, id_usuario, descripcion, id_tema from tema where id_categoria = '" + string_id_categoria + "'"; //queremos obtener el id de la categoria
+            if(privados)
+                sql = "select nombre, id_usuario, descripcion, id_tema from tema where id_categoria = '" + string_id_categoria + "'"; //queremos obtener el id de la categoria
+            else
+                sql = "select nombre, id_usuario, descripcion, id_tema from tema where id_categoria = '" + string_id_categoria + "' and publico = 'True'"; //queremos obtener el id de la categoria
             sqlCnn = new SqlConnection(connectionString);
             sqlCnn.Open();
             sqlCmd = new SqlCommand(sql, sqlCnn);

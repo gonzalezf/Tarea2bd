@@ -18,7 +18,7 @@ namespace foro2.Controllers
             string nombrecategoria = id; //nombre categoria recibe el nombre  de la categoria deseada, para buscar los temas mas adelante
             ModeloTema[] registros = null;
             tablasforo listadetemas = new tablasforo();
-            registros = listadetemas.RetornarTemas(nombrecategoria); //tenemos listado de temas
+            registros = listadetemas.RetornarTemas(nombrecategoria, tablasforo.IsLoggedIn(Session)); //tenemos listado de temas
            
 
             ViewBag.ListaTemas = registros; // Este viewbag toma un arreglo el cual es imprimido 

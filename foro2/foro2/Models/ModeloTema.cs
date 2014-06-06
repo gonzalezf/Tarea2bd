@@ -13,9 +13,7 @@ namespace foro2.Models
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public string mensaje { get; set; }
-        public bool publico { get; set; }
-        public bool publico2 { get; set; }
-        public string publico3 { get; set; }
+        public string publico { get; set; }
         public string id_usuario_string { get; set; }
         public int id_tema { get; set; }
         public int cantidad_mensajes { get; set; }
