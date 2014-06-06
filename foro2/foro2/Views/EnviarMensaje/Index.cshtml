@@ -39,7 +39,8 @@
     </div>
     <div>
 
-        <input class="btn btn-lg btn-primary" type="submit" value="Enviar" />
+        <input class="btn btn-primary" type="submit" value="Enviar" />
+        @Html.ActionLink("Volver", "Index", "Inbox", null, new { @class = "redactar_mensaje_boton btn btn-primary" });
         <h1>@ViewBag.Error[3]</h1>
     </div>
 

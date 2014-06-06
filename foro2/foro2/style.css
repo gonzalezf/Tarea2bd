@@ -71,22 +71,22 @@
     width:250px;
 }
 
-table
+.betable
 {
     margin-bottom:30px;
     margin-top:30px;
 }
 
-tr
+.betr
 {
     max-width:1800px;
 }
 
-td,th{
+.betd, .beth{
     border:1px solid black;
 }
 
-th{
+.beth{
     text-align:center;
 }
 

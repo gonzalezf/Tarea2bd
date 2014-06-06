@@ -55,7 +55,7 @@ namespace foro2.Controllers
             
             
             //ESTOS DATOS DEBEN SER REEMPLAZADOS!!!
-            int id_usuario = 1; //gonzalez_f
+            int id_usuario = int.Parse(Session["UserId"].ToString());
         //    int id_categoria = 1; //categoria pokemon
             ViewBag.ErrorCrearTema = "Booleano publico ---> " + tema.publico;
             ViewBag.CategoriaMensaje = "Mensaje del tema " + tema.mensaje;

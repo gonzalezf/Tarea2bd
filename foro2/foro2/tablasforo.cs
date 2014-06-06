@@ -11,6 +11,18 @@ namespace foro2
     {
         SqlConnection MiConexion;
 
+        public static bool IsLoggedIn(HttpSessionStateBase Session)
+        {
+            if(Session["LoggedIn"] == null)
+            {
+                return false;
+            }
+            if(Session["LoggedIn"].ToString().Equals("No"))
+            {
+                return false;
+            }
+            return true;
+        }
         public void Conectar()
         {
             MiConexion = new SqlConnection("Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework"); /* pide cada de conexion */
@@ -155,6 +167,7 @@ namespace foro2
                 list.Add(sqlreader.GetBoolean(4).ToString());
                 list.Add(sqlreader.GetString(5));
                 list.Add(sqlreader.GetString(6));
+                list.Add(sqlreader.GetString(7));
             }
 
             //agregue estas lineas de cierre
@@ -885,6 +898,33 @@ namespace foro2
             public string mensaje;
             public string nombre_usuario;
             public string avatar_url;
+        }
+
+        public String ObtenerMensajeDeTema(string nombretema)
+        {
+            string connectionString = null;
+            SqlConnection sqlCnn;
+
+            SqlCommand sqlCmd;
+            string sql = null;
+
+            connectionString = "Data Source=FELIPE\\SQLEXPRESS;Initial Catalog=XE;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+            sql = "SELECT mensaje FROM tema WHERE nombre ='" + nombretema + "'";
+            sqlCnn = new SqlConnection(connectionString);
+            sqlCnn.Open();
+            sqlCmd = new SqlCommand(sql, sqlCnn);
+            SqlDataReader sqlreader = sqlCmd.ExecuteReader();
+            string ret_val = "";
+            if (sqlreader.Read())
+            {
+                ret_val = sqlreader.GetString(0);
+
+            }
+            sqlreader.Close();
+            sqlCmd.Dispose();
+            sqlCnn.Close();
+            return ret_val;
         }
 
         public ColumnaComentarios2[] RetornarComentarios(string nombretema)

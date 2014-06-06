@@ -16,6 +16,10 @@ namespace foro2.Controllers
         // GET: /Registro/
         public ActionResult Index() //se utiliza al principio cuando aun no se ha enviado alguna informacion
         {
+            if (!tablasforo.IsLoggedIn(Session))
+            {
+                return Redirect("/");
+            }
             var usuario = new Usuario();
             return View(usuario);
         }

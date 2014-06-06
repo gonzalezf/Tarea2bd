@@ -14,6 +14,10 @@ namespace foro2.Controllers
         // GET: /Inbox/
         public ActionResult Index()
         {
+            if (!tablasforo.IsLoggedIn(Session))
+            {
+                return Redirect("/");
+            }
             tablasforo tf = new tablasforo();
 
             //Aca obtengo la informacion del inbox

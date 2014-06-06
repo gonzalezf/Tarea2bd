@@ -28,7 +28,8 @@ namespace foro2.Controllers
 
                 
 
-
+            //Falto el comentario que viene con el tema en si!
+            ViewBag.MensajeTema = listadecomentarios.ObtenerMensajeDeTema(id);
             ViewBag.ListaComentarios = registros; // Este viewbag toma un arreglo el cual es imprimido 
             return View();
         }

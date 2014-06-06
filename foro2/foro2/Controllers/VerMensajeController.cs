@@ -28,6 +28,7 @@ namespace foro2.Controllers
             ViewBag.Leido = l[4];
             ViewBag.Mensaje = l[5];
             ViewBag.Fecha = l[6];
+            ViewBag.Asunto = l[7];
             tf.Conectar();
             tf.EjecutarSql("UPDATE buzon_entrada SET mensajes_sin_leer =  (CASE WHEN ((SELECT mensaje_privado.leido FROM mensaje_privado WHERE mensaje_privado.id_mensaje = '"+l[1]+"') = 'False') THEN (mensajes_sin_leer - 1) ELSE (mensajes_sin_leer) END) WHERE id_buzon = '"+l[2]+"';UPDATE mensaje_privado SET leido = 'True' WHERE id_mensaje = '"+l[1]+"';");
             tf.Desconectar();
@@ -46,7 +47,7 @@ namespace foro2.Controllers
 
             tablasforo tf = new tablasforo();
 
-            int id_usuario = int.Parse(ViewBag.IdRemitente);
+            int id_usuario = int.Parse(m.para);
             if (id_usuario == -1)
             {
                 //No existe el usuario espeficiado, morir!
