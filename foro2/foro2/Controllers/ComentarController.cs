@@ -17,8 +17,10 @@ namespace foro2.Controllers
         //REVISADO!
         public ActionResult Index(string id)
         {
-
-            
+            if(!tablasforo.IsLoggedIn(Session))
+            {
+                return Redirect("/Registro/Index");
+            }
 
             var coment = new ModeloComentario();
             ViewBag.temaenseleccion= id;
@@ -42,7 +44,7 @@ namespace foro2.Controllers
             ViewBag.Comentario = coment.comentario;
 
      //       sql0 = "use XE select id_tema from tema where nombre ='" + comentario.id_tema_string+ "'";
-            sql0 = "use XE select id_tema from tema where nombre ='"+coment.id_tema_string+"'";
+            sql0 = "select id_tema from tema where nombre ='"+coment.id_tema_string+"'";
             sqlCnn0 = new SqlConnection(connectionString);
             sqlCnn0.Open();
             sqlCmd0 = new SqlCommand(sql0, sqlCnn0);
